@@ -1,0 +1,30 @@
+### Maven ###
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### Eclipse ###
+.metadata/
+.project
+.classpath
+.settings/
+
+### VS Code ###
+.vscode/
+
+### Logs ###
+*.log
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Spring Boot ###
+/logs/
+
+### Derby Database ###
+derby.log
+*.dat
+*.lck
+*.properties
+db/
+database/
