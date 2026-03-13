@@ -25,6 +25,5 @@ Thumbs.db
 derby.log
 *.dat
 *.lck
-*.properties
 db/
 database/
