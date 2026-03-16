@@ -14,6 +14,10 @@ public class GestorBD {
     @PersistenceContext
     private EntityManager entityManager;
     
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+    
     // Buscar por ID
 	public <E> E select(Class<E> entityClass, Object id) {
 	    return entityManager.find(entityClass, id);

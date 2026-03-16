@@ -10,9 +10,10 @@ public abstract class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "login", nullable = false)
+	protected int id;
+	@Column(name = "login", unique = true, nullable = false)
 	protected String login;
-	@Column(name = "password", unique = true, nullable = false)
+	@Column(name = "password", nullable = false)
 	protected String password;
 	@Column(name = "nombre", nullable = false)
 	protected String nombre;

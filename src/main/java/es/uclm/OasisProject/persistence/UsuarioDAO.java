@@ -9,5 +9,15 @@ public class UsuarioDAO extends EntityDAO<Usuario> {
     public UsuarioDAO() {
         super(Usuario.class);
     }
+    
+    
+    public Usuario findByLogin(String login) {
+        return gestorBD.getEntityManager()
+            .createQuery("SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class)
+            .setParameter("login", login)
+            .getResultStream()
+            .findFirst()
+            .orElse(null);
+    }
 
 }
