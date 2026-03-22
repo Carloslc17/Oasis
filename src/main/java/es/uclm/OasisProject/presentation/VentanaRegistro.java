@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import es.uclm.OasisProject.domain.controllers.GestorUsuarios;
 import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
+import es.uclm.OasisProject.domain.entities.Usuario;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 
@@ -50,5 +53,40 @@ public class VentanaRegistro {
 	    boolean Exito = gestorUsuarios.registrarInquilino(inq.getLogin(), inq.getPass(), inq.getNombre(), inq.getApellidos(), inq.getDireccion());
 	    model.addAttribute("Exito", Exito);
 	    return "ResultadoRegistro"; // HTML 
+	    
+    }
+    
+    // Formulario para iniciar sesion
+	    
+	@GetMapping("/login")
+	public String MostrarFormularioLogin(Model model) {
+		return "Inicio_Sesion"; // HTML
+	
+	}
+	
+	// Iniciar sesion
+	
+	@PostMapping("/login")
+	public String Iniciar_Sesion(String login, String password, Model model, HttpSession Session) {
+		
+		
+		Usuario usuario = gestorUsuarios.login(login, password);
+		
+		if(usuario != null) {
+			Session.setAttribute("usuario", usuario);
+		
+		
+			if(usuario instanceof Propietario) {
+				return "homePropietario"; // HTML, pagina principal de propietario
+			} else if(usuario instanceof Inquilino) {
+				return "homeInquilino"; // HTML, pagina principal de inquilino
+			}
+		
+		}
+		
+		model.addAttribute("error", true);
+		return "Inicio_Sesion";
+		
+		
 	}
 }

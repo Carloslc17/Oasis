@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>Registro Propietario</title>
 
-    <!-- Reutiliza el estilo común -->
     <link rel="stylesheet" href="/css/formulario.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Registro de Propietario</h1>
+        <h1>Nuevo propietario</h1>
         <hr class="line">
 
         <form th:action="@{/propietario}" th:object="${usuario}" method="post" class="form">
@@ -32,9 +31,20 @@
             <button type="submit">Registrar</button>
         </form>
 		
-		<a th:href="@{/}">
-		    <button type="button">Volver</button>
-		</a>
+		<!--Navegacion-->
+		<div class="links">
+			
+			<!--Volver-->
+			<a th:href="@{/}">
+			    <button type="button">Volver</button>
+			</a>
+			
+			<!-- Iniciar Sesion -->
+		    <p>
+			   ¿Ya tienes cuenta?
+			   <a th:href="@{/login}">Iniciar sesion</a>
+			</p>
+		</div>
 		
     </div>
 </body>
