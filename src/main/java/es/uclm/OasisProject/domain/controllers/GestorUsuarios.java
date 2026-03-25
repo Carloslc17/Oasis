@@ -15,7 +15,7 @@ public class GestorUsuarios {
     private static final Logger log = LoggerFactory.getLogger(GestorUsuarios.class);
     private static final String USER_EXISTS = "El usuario ya existe: {}";
     private static final String USER_NOT_FOUND = "Usuario {} no encontrado";
-    private static final String CONTRASENA_INCORRECTA = "Contraseña incorrecta";
+    private static final String CONTRASENA_INCORRECTA = "Contrasena incorrecta";
 
     @Autowired
     private UsuarioDAO usuarioDAO;
@@ -60,6 +60,7 @@ public class GestorUsuarios {
     
     public Usuario login(String login, String pass) {
     	
+    	
     	Usuario usuario = usuarioDAO.findByLogin(login);
     	
     	// Usuario no existe
@@ -70,7 +71,7 @@ public class GestorUsuarios {
     	}
     	
     	// Contraseña incorrecta
-    	if(!usuario.getPass().equals(pass)) {
+    	if(!usuario.getPassword().equals(pass)) {
     		
     		log.warn(CONTRASENA_INCORRECTA);
     		return null;

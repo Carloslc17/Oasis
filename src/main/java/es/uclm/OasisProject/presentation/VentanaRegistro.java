@@ -35,7 +35,7 @@ public class VentanaRegistro {
 	// Registrar propietario
 	@PostMapping("/propietario")
     public String RegistrarPropietario(@ModelAttribute Propietario prop, Model model) {
-        boolean Exito = gestorUsuarios.registrarPropietario(prop.getLogin(), prop.getPass(), prop.getNombre(), prop.getApellidos(), prop.getDireccion());
+        boolean Exito = gestorUsuarios.registrarPropietario(prop.getLogin(), prop.getPassword(), prop.getNombre(), prop.getApellidos(), prop.getDireccion());
         model.addAttribute("Exito", Exito);
         return "ResultadoRegistro"; // HTML 
     }
@@ -50,7 +50,7 @@ public class VentanaRegistro {
 	// Registrar inquilino
     @PostMapping("/inquilino")
 	public String RegistrarInquilino(@ModelAttribute Inquilino inq, Model model) {
-	    boolean Exito = gestorUsuarios.registrarInquilino(inq.getLogin(), inq.getPass(), inq.getNombre(), inq.getApellidos(), inq.getDireccion());
+	    boolean Exito = gestorUsuarios.registrarInquilino(inq.getLogin(), inq.getPassword(), inq.getNombre(), inq.getApellidos(), inq.getDireccion());
 	    model.addAttribute("Exito", Exito);
 	    return "ResultadoRegistro"; // HTML 
 	    

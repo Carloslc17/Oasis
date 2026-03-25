@@ -36,7 +36,7 @@ public abstract class Usuario {
 		return this.login;
 	}
 	
-	public String getPass() {
+	public String getPassword() {
 		return this.password;
 	}
 	
@@ -56,7 +56,7 @@ public abstract class Usuario {
 		this.login = login;
 	}
 
-	public void setPass(String pass) {
+	public void setPassword(String pass) {
 		this.password = pass;
 	}
 
