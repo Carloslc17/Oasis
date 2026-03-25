@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado Registro</title>
+
+   
+    <link rel="stylesheet" href="/css/resultado.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 th:text="${Exito} ? '¡Registro exitoso!' : 'Error al registrar'"></h1>
+        <hr class="line">
+        <a th:href="@{/}">Volver al inicio</a>
+    </div>
+</body>
+</html>

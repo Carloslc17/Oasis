@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Propietario</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Nuevo propietario</h1>
+        <hr class="line">
+
+        <form th:action="@{/propietario}" th:object="${usuario}" method="post" class="form">
+            <label for="_Login">Login:</label>
+            <input type="text" th:field="*{login}" id="Login" required>
+
+            <label for="_Pass">Contraseña:</label>
+            <input type="password" th:field="*{pass}" id="Pass" required>
+
+            <label for="Nombre">Nombre:</label>
+            <input type="text" th:field="*{nombre}" id="Nombre" required>
+
+            <label for="Apellidos">Apellidos:</label>
+            <input type="text" th:field="*{apellidos}" id="Apellidos" required>
+
+            <label for="Direccion">Dirección:</label>
+            <input type="text" th:field="*{direccion}" id="Direccion" required>
+
+            <button type="submit">Registrar</button>
+        </form>
+		
+		<!--Navegacion-->
+		<div class="links">
+			
+			<!--Volver-->
+			<a th:href="@{/}">
+			    <button type="button">Volver</button>
+			</a>
+			
+			<!-- Iniciar Sesion -->
+		    <p>
+			   ¿Ya tienes cuenta?
+			   <a th:href="@{/login}">Iniciar sesion</a>
+			</p>
+		</div>
+		
+    </div>
+</body>
+</html>
