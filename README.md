@@ -5,6 +5,7 @@ Proyecto Oasis. Asignatura Ingenieria del software 2. Este proyecto es una aplic
 
 ## Estructura del Proyecto
 
+```sh
 ├───src
 │   ├───main
 │   │   ├───java
@@ -25,6 +26,8 @@ Proyecto Oasis. Asignatura Ingenieria del software 2. Este proyecto es una aplic
 │           └───es
 │               └───uclm
 │                   └───OasisProject
+
+```
 
 ## Instalación
 1. Clona el repositorio:
