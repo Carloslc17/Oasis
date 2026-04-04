@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro inmueble</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+	
+	<!-- Barra superior -->
+	<header class="topbar">
+		<span class="empresa">Oasis</span>
+	</header>
+		
+    <div class="container">
+        <h1>Registrar inmueble</h1>
+        <hr class="line">
+
+        <form th:action="@{/registrarInmueble}" th:object="${inmueble}" method="post" class="form">
+            <label for="_Direccion">Direccion del inmueble:</label>
+            <input type="text" th:field="*{direccion}" id="Direccion" required>
+
+            <label for="_Precio_Noche">Precio por noche:</label>
+            <input type="text" th:field="*{precio_noche}" id="Precio_noche" required>
+
+            <button type="submit">Registrar</button>
+        </form>
+		
+		<!--Navegacion-->
+		    <div class="links">
+					
+			<!--Volver-->
+			<a th:href="@{/}">
+			 	<button type="button">Volver</button>
+			</a>
+			
+		</div>
+		
+    </div>
+</body>
+</html>

@@ -10,7 +10,6 @@ import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
 import es.uclm.OasisProject.domain.entities.Usuario;
 import jakarta.servlet.http.HttpSession;
-
 import org.springframework.ui.Model;
 
 
