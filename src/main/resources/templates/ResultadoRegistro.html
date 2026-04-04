@@ -9,10 +9,16 @@
 </head>
 
 <body>
+	
+	<!-- Barra superior -->
+	<header class="topbar">
+		<span class="empresa">Oasis</span>
+	</header>
+		
     <div class="container">
         <h1 th:text="${Exito} ? '¡Registro exitoso!' : 'Error al registrar'"></h1>
         <hr class="line">
-        <a th:href="@{/}">Volver al inicio</a>
+        <a th:href="@{/login}">Iniciar Sesion</a>
     </div>
 </body>
 </html>
