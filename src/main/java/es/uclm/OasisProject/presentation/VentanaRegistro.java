@@ -76,9 +76,9 @@ public class VentanaRegistro {
 		
 		
 			if(usuario instanceof Propietario) {
-				return "homePropietario"; // HTML, pagina principal de propietario
+				return "redirect:/homePropietario"; // HTML, pagina principal de propietario
 			} else if(usuario instanceof Inquilino) {
-				return "homeInquilino"; // HTML, pagina principal de inquilino
+				return "redirect:/homeInquilino"; // HTML, pagina principal de inquilino
 			}
 		
 		}
@@ -86,6 +86,20 @@ public class VentanaRegistro {
 		model.addAttribute("error", true);
 		return "Inicio_Sesion";
 		
-		
+		}
+	
+	@GetMapping("/homePropietario")
+	public String homePropietario() {
+		return "HomePropietario";
 	}
+		    
+	@GetMapping("/homeInquilino")
+	public String homeInquilino() {
+		return "HomeInquilino";
+	}
+		
+		
+	
+	
+	
 }
