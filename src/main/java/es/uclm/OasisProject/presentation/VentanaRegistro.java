@@ -88,10 +88,14 @@ public class VentanaRegistro {
 		
 		}
 	
+	// Pagina principal propietario
+	
 	@GetMapping("/homePropietario")
 	public String homePropietario() {
 		return "HomePropietario";
 	}
+	
+	// Pagina principal inquilino
 		    
 	@GetMapping("/homeInquilino")
 	public String homeInquilino() {

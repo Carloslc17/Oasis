@@ -15,6 +15,9 @@ public class VentanaAltaInmuebles {
 	@Autowired
 	private GestorInmuebles gestorInmuebles;
 	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
 	// Formulario para registrar inmueble
 	@GetMapping("registrarInmueble")
 	public String MostrarFormularioInmueble(Model model) {
@@ -28,9 +31,9 @@ public class VentanaAltaInmuebles {
 	public String RegistrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
 		String login = principal.getName();
-		UsuarioDAO propietarioDAO = new UsuarioDAO();
+		// UsuarioDAO propietarioDAO = new UsuarioDAO();
 		
-		Propietario propietario = (Propietario) propietarioDAO.findByLogin(login);
+		Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
 		inmueble.setOwner(propietario);
 		
 		boolean Exito = gestorInmuebles.registrarInmueble(inmueble.getDireccion(), inmueble.getPrecio_noche(), inmueble.getOwner().getId());
