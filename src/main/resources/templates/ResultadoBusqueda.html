@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de búsqueda</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Resultados de la búsqueda</h1>
+        <hr class="line">
+
+        <!-- Sin resultados -->
+        <div th:if="${#lists.isEmpty(resultados)}">
+            <p>No se han encontrado inmuebles disponibles para las fechas indicadas.</p>
+        </div>
+
+        <!-- Con resultados -->
+        <div th:if="${!#lists.isEmpty(resultados)}">
+            <ul class="lista-resultados">
+                <li th:each="inmueble : ${resultados}" class="resultado">
+                    <p>
+                        <strong>Dirección:</strong>
+                        <span th:text="${inmueble.direccion}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Precio base:</strong>
+                        <span th:text="${inmueble.precio_noche}"></span> € / noche
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <!-- Volver -->
+			<a th:href="@{/busqueda}">
+                <button type="button">Nueva búsqueda</button>
+            </a>
+
+           
+
+        </div>
+
+    </div>
+
+</body>
+</html>
