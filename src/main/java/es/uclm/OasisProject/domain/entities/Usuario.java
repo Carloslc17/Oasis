@@ -32,6 +32,10 @@ public abstract class Usuario {
 	
 	public Usuario() {}
 	
+	public int getId() {
+		return this.id;
+	}
+	
 	public String getLogin() {
 		return this.login;
 	}

@@ -10,7 +10,6 @@ import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
 import es.uclm.OasisProject.domain.entities.Usuario;
 import jakarta.servlet.http.HttpSession;
-
 import org.springframework.ui.Model;
 
 
@@ -77,9 +76,9 @@ public class VentanaRegistro {
 		
 		
 			if(usuario instanceof Propietario) {
-				return "homePropietario"; // HTML, pagina principal de propietario
+				return "redirect:/homePropietario"; // HTML, pagina principal de propietario
 			} else if(usuario instanceof Inquilino) {
-				return "homeInquilino"; // HTML, pagina principal de inquilino
+				return "redirect:/homeInquilino"; // HTML, pagina principal de inquilino
 			}
 		
 		}
@@ -87,6 +86,24 @@ public class VentanaRegistro {
 		model.addAttribute("error", true);
 		return "Inicio_Sesion";
 		
-		
+		}
+	
+	// Pagina principal propietario
+	
+	@GetMapping("/homePropietario")
+	public String homePropietario() {
+		return "HomePropietario";
 	}
+	
+	// Pagina principal inquilino
+		    
+	@GetMapping("/homeInquilino")
+	public String homeInquilino() {
+		return "HomeInquilino";
+	}
+		
+		
+	
+	
+	
 }

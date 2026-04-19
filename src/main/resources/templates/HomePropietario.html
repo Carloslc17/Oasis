@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Propietario</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Bienvenido, Propietario</h1>
+        <hr class="line">
+
+        <!-- Mensaje -->
+        <p style="text-align:center; margin-bottom:20px;">
+            Gestiona tus propiedades fácilmente
+        </p>
+
+        <!-- Acciones principales -->
+        <div class="form">
+
+            <!-- Crear inmueble -->
+            <a th:href="@{/registrarInmueble}">
+                <button type="button">➕ Añadir inmueble</button>
+            </a>
+
+            <!-- Ver mis inmuebles -->
+            <a th:href="@{/misInmuebles}">
+                <button type="button">🏠 Ver mis inmuebles</button>
+            </a>
+
+            <!-- Ver reservas (futuro) -->
+            <a th:href="@{/reservas}">
+                <button type="button">📅 Ver reservas</button>
+            </a>
+
+        </div>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <!-- Logout -->
+            <a th:href="@{/logout}">
+                <button type="button">Cerrar sesion</button>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

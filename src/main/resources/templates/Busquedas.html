@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda de inmuebles</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Buscar inmuebles</h1>
+        <hr class="line">
+
+        <form th:action="@{/buscarInmuebles}" method="post" class="form">
+            <input type="date" name="fechaInicio" id="FechaInicio" required>
+
+            <label for="FechaFin">Fecha fin:</label>
+            <input type="date" name="fechaFin" id="FechaFin" required>
+
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- Navegación -->
+        <div class="links">
+
+			<!--Volver-->
+			<a th:href="@{/homeInquilino}">
+				<button type="button">Volver</button>
+			</a>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Inquilino</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Bienvenido, Inquilino</h1>
+        <hr class="line">
+
+        <!-- Mensaje -->
+        <p style="text-align:center; margin-bottom:20px;">
+            Encuentra tu próximo alojamiento
+        </p>
+
+        <!-- Acciones principales -->
+        <div class="form">
+
+            <!-- Buscar viviendas -->
+            <a th:href="@{/busqueda}">
+                <button type="button">🔍 Buscar alojamientos</button>
+            </a>
+
+            <!-- Ver favoritos -->
+            <a th:href="@{/favoritos}">
+                <button type="button">❤️ Mis favoritos</button>
+            </a>
+
+            <!-- Ver reservas -->
+            <a th:href="@{/misReservas}">
+                <button type="button">📅 Mis reservas</button>
+            </a>
+
+        </div>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <!-- Logout -->
+            <a th:href="@{/logout}">
+                <button type="button">Cerrar sesión</button>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
