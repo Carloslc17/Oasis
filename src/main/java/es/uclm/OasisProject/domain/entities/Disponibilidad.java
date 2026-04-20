@@ -8,9 +8,9 @@ public class Disponibilidad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "fecha_inicio", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date fechaInicio;
-	@Column(name = "fecha_fin", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date fechaFin;
 	@Column(name = "precio", nullable = false)
 	private double precio;
