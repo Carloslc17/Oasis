@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -22,14 +21,14 @@
         <p>
             El inmueble en
             <strong th:text="${direccion}"></strong>
-            se ha registrado correctamente.}">
+            se ha registrado correctamente.
         </p>
     </div>
 
     <!-- Error -->
-    <div th:if="${❌ Se ha producido un error al registrar el inmueble.}">
-        </p>
-    </div>
+	<div th:if="${!exito}">
+	    <p>❌ Se ha producido un error al registrar el inmueble.</p>
+	</div>
 
     <div class="links">
         <a th:href="@{/homePropietario}">

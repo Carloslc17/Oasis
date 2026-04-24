@@ -48,6 +48,14 @@ public class Reserva {
         Date hoy = new Date();
         return fechaInicio.before(hoy) && fechaFin.after(hoy);
     }
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 
 	public Date getFechaInicio() {
@@ -64,6 +72,39 @@ public class Reserva {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+
+	public PoliticaCancelacion getPoliticaCancelacion() {
+		return politicaCancelacion;
+	}
+
+	public void setPoliticaCancelacion(PoliticaCancelacion politicaCancelacion) {
+		this.politicaCancelacion = politicaCancelacion;
+	}
+
+	public Pago getPago() {
+		return pago;
+	}
+
+	public void setPago(Pago pago) {
+		this.pago = pago;
+	}
+
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
+	}
+
+	public Inmueble getInmueble() {
+		return inmueble;
+	}
+
+	public void setInmueble(Inmueble inmueble) {
+		this.inmueble = inmueble;
 	}
 
 }

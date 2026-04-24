@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservar inmueble</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Reservar inmueble</h1>
+        <hr class="line">
+
+        <!-- Formulario de reserva -->
+        <form th:action="@{/reservarInmueble}"
+              thype="hidden" name="idInmueble" th:value="${inmueble.id}">
+
+            <label>Dirección del inmueble:</label>
+            <input type="text" th:value="${inmueble.direccion}" readonly>
+
+            <label for="fechaInicio">Fecha inicio:</label>
+            <input type="date" th:field="*{fechaInicio}" id="fechaInicio" required>
+
+            <label for="fechaFin">Fecha fin:</label>
+            <input type="date" th:field="*{fechaFin}" id="fechaFin" required>
+
+            <label for="politica">Política de cancelación:</label>
+            <select th:field="*{politicaCancelacion}" id="politica" required>
+                <option value="REEMBOLSABLE">Reembolsable</option>
+                <option value="NO_REEMBOLSABLE">No reembolsable</option>
+                <option value="REEMBOLSABLE_50_PER">Reembolsable 50 </option>
+            </select>
+
+            <button type="submit">Solicitar reserva</button>
+        </form>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <!-- Volver -->
+			<a th:href="@{/buscarInmuebles}">
+				<button type="button">Volver</button>
+			</a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

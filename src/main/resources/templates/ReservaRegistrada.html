@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserva registrada</title>
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
+
+<div class="container">
+    <h1>Solicitud de reserva</h1>
+    <hr class="line">
+
+    <!-- Éxito -->
+    <div th:if="${Exito}">
+        <p>
+            La solicitud de reserva se ha realizado correctamente.
+        </p>
+        <p>
+            Fechas:
+            <strong th:text="${reserva.fechaInicio}"></strong>
+            -
+            <strong th:text="${reserva.fechaFin}"></strong>
+        </p>
+    </div>
+
+    <!-- Error -->
+    <div th:if="${Exito == false}">
+        <p>
+            ❌ Se ha producido un error al realizar la solicitud de reserva.
+        </p>
+    </div>
+
+    <!-- Navegación -->
+    <div class="links">
+		<a th:href="@{/homePropietario}">
+			<button type="button">Inicio</button>
+		</a>
+
+    </div>
+</div>
+
+</body>
+</html>
