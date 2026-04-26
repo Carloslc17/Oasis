@@ -1,6 +1,7 @@
 package es.uclm.OasisProject.domain.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
@@ -19,6 +20,8 @@ public class GestorUsuarios {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
+    @Autowired
+    private PasswordEncoder encoder;
     
     //---------------------
     // REGISTRO
@@ -32,7 +35,7 @@ public class GestorUsuarios {
             return false;
         }
 
-        Propietario propietario = new Propietario(login, pass, nombre, apellidos, direccion);
+        Propietario propietario = new Propietario(login, encoder.encode(pass), nombre, apellidos, direccion);
 
         usuarioDAO.insert(propietario);
 
@@ -47,7 +50,7 @@ public class GestorUsuarios {
             return false;
         }
 
-        Inquilino inquilino = new Inquilino(login, pass, nombre, apellidos, direccion);
+        Inquilino inquilino = new Inquilino(login, encoder.encode(pass), nombre, apellidos, direccion);
 
         usuarioDAO.insert(inquilino);
 
