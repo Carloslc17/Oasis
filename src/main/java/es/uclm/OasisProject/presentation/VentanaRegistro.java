@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import es.uclm.OasisProject.domain.controllers.GestorUsuarios;
 import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
-import es.uclm.OasisProject.domain.entities.Usuario;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 
@@ -19,7 +17,7 @@ public class VentanaRegistro {
 	@Autowired
 	private GestorUsuarios gestorUsuarios;
 
-	@GetMapping("/")
+	@GetMapping("/registro")
 	public String MostrarRegistro() {
 		return "SeleccionUsuario";
 	}
@@ -55,38 +53,11 @@ public class VentanaRegistro {
 	    
     }
     
-    // Formulario para iniciar sesion
-	    
-	@GetMapping("/login")
-	public String MostrarFormularioLogin(Model model) {
-		return "Inicio_Sesion"; // HTML
-	
-	}
-	
-	// Iniciar sesion
-	
-	@PostMapping("/login")
-	public String Iniciar_Sesion(String login, String password, Model model, HttpSession Session) {
-		
-		
-		Usuario usuario = gestorUsuarios.login(login, password);
-		
-		if(usuario != null) {
-			Session.setAttribute("usuario", usuario);
-		
-		
-			if(usuario instanceof Propietario) {
-				return "redirect:/homePropietario"; // HTML, pagina principal de propietario
-			} else if(usuario instanceof Inquilino) {
-				return "redirect:/homeInquilino"; // HTML, pagina principal de inquilino
-			}
-		
-		}
-		
-		model.addAttribute("error", true);
-		return "Inicio_Sesion";
-		
-		}
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "Inicio_Sesion"; 
+    }
+    
 	
 	// Pagina principal propietario
 	
