@@ -14,22 +14,22 @@
 </header>
 
 <div class="container">
-    <h1>Registro de inmueble</h1>
-    <hr class="line">
-
-    <!-- Éxito -->
-    <div th:if="${exito}">
-        <p>
-            El inmueble en
-            <strong th:text="${direccion}"></strong>
-            se ha registrado correctamente.}">
-        </p>
-    </div>
-
-    <!-- Error -->
-    <div th:if="${❌ Se ha producido un error al registrar el inmueble.}">
-        </p>
-    </div>
+	    <h1>Registro de inmueble</h1>
+	    <hr class="line">
+	
+		<div th:if="${Exito}">
+		    <p>
+		        El inmueble en
+		        <strong th:text="${inmueble.direccion}"></strong>
+		        se ha registrado correctamente.
+		    </p>
+		</div>
+	
+		<div th:if="${!Exito}">
+		    <p style="color:red;">
+		        Se ha producido un error al registrar el inmueble.
+		    </p>
+		</div>
 
     <div class="links">
         <a th:href="@{/homePropietario}">
