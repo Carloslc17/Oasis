@@ -21,24 +21,22 @@ public class GestorInmuebles {
 	@Autowired 
 	private UsuarioDAO propietarioDAO;
 	
-	public boolean registrarInmueble(String direccion, String precio_noche, int id_Propietario) {
+	
+	
+	public boolean registrarInmueble(Inmueble inmueble) {
 		
-		Propietario propietario;
-		if (propietarioDAO.select(id_Propietario) == null) {
-			log.warn("El propietario asociado al inmueble no existe:");
-			return false;
-		} else {
-			propietario = (Propietario) propietarioDAO.select(id_Propietario);
-		}
-			
-		Inmueble inmueble = new Inmueble();
-        inmueble.setDireccion(direccion);
-        inmueble.setPrecio_noche(precio_noche);
-        inmueble.setOwner(propietario);
-        
-        inmuebleDAO.insert(inmueble);
-        
-        return true;
+		Propietario propietario = (Propietario) propietarioDAO.select(inmueble.getOwner().getId());
+
+		// Comprobar existencia del propietario
+	    if (propietario == null) {
+	        log.warn("El propietario no existe");
+	        return false;
+	    }
+
+	    inmueble.setOwner(propietario);
+	    inmuebleDAO.insert(inmueble);
+
+	    return true;
 
 	}
 

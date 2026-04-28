@@ -31,13 +31,13 @@ public class VentanaAltaInmuebles {
 	public String RegistrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
 		String login = principal.getName();
-		// UsuarioDAO propietarioDAO = new UsuarioDAO();
-		
-		Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
-		inmueble.setOwner(propietario);
-		
-		boolean Exito = gestorInmuebles.registrarInmueble(inmueble.getDireccion(), inmueble.getPrecio_noche(), inmueble.getOwner().getId());
-		model.addAttribute("Exito", Exito);
+
+	    Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
+	    inmueble.setOwner(propietario);
+
+	    boolean exito = gestorInmuebles.registrarInmueble(inmueble);
+
+	    model.addAttribute("Exito", exito);
 		return "InmuebleRegistrado"; // HTML
 	}
 

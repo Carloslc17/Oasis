@@ -3,6 +3,7 @@ package es.uclm.OasisProject.domain.entities;
 import java.util.Date;
 import jakarta.persistence.*;
 
+@Entity
 public class Disponibilidad {
 	
 	@Id
