@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis inmuebles</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+        <h1>Mis inmuebles</h1>
+        <hr class="line">
+
+        <!-- Sin inmuebles -->
+        <div th:if="${#lists.isEmpty(inmuebles)}">
+            <p>No tienes inmuebles registrados.</p>
+        </div>
+
+        <!-- Con inmuebles -->
+        <div th:if="${!#lists.isEmpty(inmuebles)}">
+            <ul class="lista-resultados">
+
+                <li th:each="inmueble : ${inmuebles}" class="resultado">
+
+                    <p>
+                        <strong>Dirección:</strong>
+                        <span th:text="${inmueble.direccion}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Precio base:</strong>
+                        <span th:text="${inmueble.precio_noche}"></span> € / noche
+                    </p>
+
+                    <!-- Acciones -->
+                    <div class="acciones">
+
+                        <!-- Añadir disponibilidad -->
+                        <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
+                            <button type="button">Añadir disponibilidad</button>
+                        </a>
+
+                        <!-- Ver reservas -->
+                        <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
+                            <button type="button">Ver reservas</button>
+                        </a>
+
+                    </div>
+
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <a th:href="@{/homePropietario}">
+                <button type="button">Volver</button>
+            </a>
+
+            <a th:href="@{/registrarInmueble}">
+                <button type="button">Registrar nuevo inmueble</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

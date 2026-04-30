@@ -1,6 +1,8 @@
 package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +41,18 @@ public class VentanaAltaInmuebles {
 
 	    model.addAttribute("Exito", exito);
 		return "InmuebleRegistrado"; // HTML
+	}
+	
+	@GetMapping("/misInmuebles")
+	public String misInmuebles(Model model, Principal principal) {
+
+	    String login = principal.getName();
+
+	    List<Inmueble> inmuebles = gestorInmuebles.obtenerInmuebles(login);
+
+	    model.addAttribute("inmuebles", inmuebles);
+
+	    return "Inmuebles";
 	}
 
 }

@@ -1,5 +1,8 @@
 package es.uclm.OasisProject.domain.controllers;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import es.uclm.OasisProject.domain.entities.Inmueble;
 import es.uclm.OasisProject.domain.entities.Propietario;
+import es.uclm.OasisProject.domain.entities.Usuario;
 import es.uclm.OasisProject.persistence.InmuebleDAO;
 import es.uclm.OasisProject.persistence.UsuarioDAO;
 
@@ -38,6 +42,25 @@ public class GestorInmuebles {
 
 	    return true;
 
+	}
+	
+	public List<Inmueble> obtenerInmuebles(String login) {
+
+	    Usuario usuario = propietarioDAO.findByLogin(login);
+
+	    if (usuario == null) {
+	        log.warn("Usuario no encontrado");
+	        return Collections.emptyList();
+	    }
+
+	    if (!(usuario instanceof Propietario)) {
+	        log.warn("El usuario no es propietario");
+	        return Collections.emptyList();
+	    }
+
+	    Propietario propietario = (Propietario) usuario;
+
+	    return inmuebleDAO.findByPropietario(propietario);
 	}
 
 }
