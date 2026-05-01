@@ -40,9 +40,10 @@ public class VentanaAltaInmuebles {
 	    boolean exito = gestorInmuebles.registrarInmueble(inmueble);
 
 	    model.addAttribute("Exito", exito);
-		return "InmuebleRegistrado"; // HTML
+		return "redirect:/misInmuebles"; // HTML
 	}
 	
+	// Pagina para que el propietario pueda ver sus inmuebles
 	@GetMapping("/misInmuebles")
 	public String misInmuebles(Model model, Principal principal) {
 
@@ -54,5 +55,27 @@ public class VentanaAltaInmuebles {
 
 	    return "Inmuebles";
 	}
+	
+	// Formulario para anadir disponibilidad al inmueble
+	@GetMapping("/anadirDisponibilidad/{id}")
+	public String mostrarFormularioDisponibilidad(@PathVariable int id, Model model) {
 
+	    model.addAttribute("disponibilidad", new Disponibilidad());
+	    model.addAttribute("idInmueble", id);
+
+	    return "FormularioDisponibilidad";
+	}
+	
+	// Anadir disponibilidad
+	@PostMapping("/anadirDisponibilidad")
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, Model model) {
+
+	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
+
+	    model.addAttribute("Exito", exito);
+
+	    return "redirect:/misInmuebles";
+
+	}
+	
 }

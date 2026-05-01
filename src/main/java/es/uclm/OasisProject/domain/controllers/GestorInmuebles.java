@@ -2,15 +2,15 @@ package es.uclm.OasisProject.domain.controllers;
 
 import java.util.Collections;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import es.uclm.OasisProject.domain.entities.Disponibilidad;
 import es.uclm.OasisProject.domain.entities.Inmueble;
 import es.uclm.OasisProject.domain.entities.Propietario;
 import es.uclm.OasisProject.domain.entities.Usuario;
+import es.uclm.OasisProject.persistence.DisponibilidadDAO;
 import es.uclm.OasisProject.persistence.InmuebleDAO;
 import es.uclm.OasisProject.persistence.UsuarioDAO;
 
@@ -25,7 +25,10 @@ public class GestorInmuebles {
 	@Autowired 
 	private UsuarioDAO propietarioDAO;
 	
+	@Autowired
+	private DisponibilidadDAO disponibilidadDAO;
 	
+	// Registar nuevo inmueble en el sistema
 	
 	public boolean registrarInmueble(Inmueble inmueble) {
 		
@@ -44,6 +47,8 @@ public class GestorInmuebles {
 
 	}
 	
+	// Obtener todos los inmuebles de un propietario
+	
 	public List<Inmueble> obtenerInmuebles(String login) {
 
 	    Usuario usuario = propietarioDAO.findByLogin(login);
@@ -61,6 +66,24 @@ public class GestorInmuebles {
 	    Propietario propietario = (Propietario) usuario;
 
 	    return inmuebleDAO.findByPropietario(propietario);
+	}
+	
+	// Añadir disponibilidad a inmueble
+	
+	public boolean anadirDisponibilidad(Disponibilidad disp, int idInmueble) {
+
+	    Inmueble inmueble = inmuebleDAO.select(idInmueble);
+
+	    if (inmueble == null) {
+	        log.warn("El inmueble no existe");
+	        return false;
+	    }
+
+	    disp.setInmueble(inmueble);
+
+	    disponibilidadDAO.insert(disp);
+
+	    return true;
 	}
 
 }
