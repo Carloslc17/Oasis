@@ -1,6 +1,6 @@
 package es.uclm.OasisProject.persistence;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import es.uclm.OasisProject.domain.entities.Inmueble;
@@ -15,7 +15,7 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
 	}
 	
 
-	public List<Inmueble> findDisponibles(Date fechaInicio, Date fechaFin) {
+	public List<Inmueble> findDisponibles(LocalDate fechaInicio, LocalDate fechaFin) {
         return gestorBD.getEntityManager()
             .createQuery(
                 "SELECT DISTINCT i " +
