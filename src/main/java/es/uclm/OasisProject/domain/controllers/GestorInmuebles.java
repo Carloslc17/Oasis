@@ -80,6 +80,7 @@ public class GestorInmuebles {
 	    }
 
 	    disp.setInmueble(inmueble);
+	    inmueble.getDisponibilidades().add(disp);
 
 	    disponibilidadDAO.insert(disp);
 

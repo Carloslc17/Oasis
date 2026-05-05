@@ -62,5 +62,13 @@ public class Inmueble {
 	public void setOwner(Propietario owner) {
 		this.Owner = owner;
 	}
+	
+	public List<Disponibilidad> getDisponibilidades() {
+		return disponibilidades;
+	}
+
+	public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
+		this.disponibilidades = disponibilidades;
+	}
 
 }

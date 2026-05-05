@@ -30,9 +30,13 @@ public class VentanaBusqueda {
 	
 
     @PostMapping("/buscarInmuebles")
-    public String buscarInmuebles(@RequestParam LocalDate fechaInicio, @RequestParam LocalDate fechaFin, Model model) {
+    public String buscarInmuebles(@RequestParam LocalDate fechaInicio,
+                                 @RequestParam LocalDate fechaFin,
+                                 @RequestParam(required = false) Boolean directa,
+                                 @RequestParam(required = false) String politica,
+                                 Model model) {
 
-        List<Inmueble> resultados = gestorBusquedas.buscarInmuebles(fechaInicio, fechaFin);
+        List<Inmueble> resultados = gestorBusquedas.buscarInmuebles(fechaInicio, fechaFin, directa, politica);
 
         model.addAttribute("resultados", resultados);
         return "ResultadosBusqueda";

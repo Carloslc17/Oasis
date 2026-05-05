@@ -68,8 +68,11 @@ public class VentanaAltaInmuebles {
 	
 	// Anadir disponibilidad
 	@PostMapping("/anadirDisponibilidad")
-	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, Model model) {
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam String politica, Model model) {
 
+		PoliticaCancelacion pol = PoliticaCancelacion.valueOf(politica);
+        disponibilidad.setPoliticaCancelacion(pol);
+		
 	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
 
 	    model.addAttribute("Exito", exito);
