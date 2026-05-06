@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -37,6 +36,12 @@
                         <strong>Precio base:</strong>
                         <span th:text="${inmueble.precio_noche}"></span> € / noche
                     </p>
+					
+					<form th:action="@{/anadirFavorito}" method="post">
+					     <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
+					     <button type="submit">Añadir a favoritos</button>
+					</form>
+					   
                 </li>
             </ul>
         </div>

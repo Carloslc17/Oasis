@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -24,6 +23,21 @@
 
             <label for="FechaFin">Fecha fin:</label>
             <input type="date" name="fechaFin" id="FechaFin" required>
+			
+			<!-- Reserva inmediata -->
+			<label>
+				<input type="checkbox" name="directa">
+				Solo reserva inmediata
+			</label>
+
+			<!-- Política de cancelación -->
+			<label>Política de cancelación:</label>
+			<select name="politica">
+				<option value="">Cualquiera</option>
+				<option value="REEMBOLSABLE">Reembolsable</option>
+				<option value="REEMBOLSABLE_50_PER">Reembolsable a medias</option>
+				<option value="NO_REEMBOLSABLE">No reembolsable</option>
+			</select>
 
             <button type="submit">Buscar</button>
         </form>

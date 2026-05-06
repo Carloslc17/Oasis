@@ -26,5 +26,9 @@ public class Inquilino extends Usuario{
 	public void setListaDeseos(List<Inmueble> listaDeseos) {
 		this.listaDeseos = listaDeseos;
 	}
+	
+	public void addListaDeseos(Inmueble inmueble) {
+		this.listaDeseos.add(inmueble);
+	}
 
 }

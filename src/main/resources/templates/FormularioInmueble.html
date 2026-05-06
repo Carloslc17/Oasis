@@ -23,7 +23,7 @@
             <input type="text" th:field="*{direccion}" id="Direccion" required>
 
             <label for="_Precio_Noche">Precio por noche:</label>
-            <input type="text" th:field="*{precio_noche}" id="Precio_noche" required>
+            <input type="number" step="0.01" th:field="*{precio_noche}" id="Precio_noche" required>
 
             <button type="submit">Registrar</button>
         </form>
