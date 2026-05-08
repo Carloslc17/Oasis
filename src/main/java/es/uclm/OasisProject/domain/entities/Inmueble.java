@@ -1,10 +1,10 @@
 package es.uclm.OasisProject.domain.entities;
 
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
 @Table (name = "INMUEBLE")
-
 public class Inmueble {
 	
 	@Id
@@ -13,13 +13,16 @@ public class Inmueble {
 	@Column(name = "direccion", nullable = false)
 	private String direccion;
 	@Column(name = "precio_noche", nullable = false)
-	private String precio_noche;
+	private double precio_noche;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_propietario", nullable = false)
 	private Propietario Owner;
+	
+	@OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL)
+	private List<Disponibilidad> disponibilidades;
 
-	public Inmueble(String direccion, String precio_noche) {
+	public Inmueble(String direccion, double precio_noche) {
 		// TODO Auto-generated constructor stub
 		this.direccion = direccion;
 		this.precio_noche = precio_noche;
@@ -44,11 +47,11 @@ public class Inmueble {
 		this.direccion = direccion;
 	}
 
-	public String getPrecio_noche() {
+	public double getPrecio_noche() {
 		return precio_noche;
 	}
 
-	public void setPrecio_noche(String precio_noche) {
+	public void setPrecio_noche(double precio_noche) {
 		this.precio_noche = precio_noche;
 	}
 	
@@ -58,6 +61,14 @@ public class Inmueble {
 	
 	public void setOwner(Propietario owner) {
 		this.Owner = owner;
+	}
+	
+	public List<Disponibilidad> getDisponibilidades() {
+		return disponibilidades;
+	}
+
+	public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
+		this.disponibilidades = disponibilidades;
 	}
 
 }

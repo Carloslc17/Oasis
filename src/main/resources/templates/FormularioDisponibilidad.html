@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir disponibilidad</title>
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
+
+<div class="container">
+    <h1>Añadir disponibilidad</h1>
+    <hr class="line">
+
+    <form th:action="@{/anadirDisponibilidad}" method="post" class="form">
+
+        <input type="hidden" name="idInmueble" th:value="${idInmueble}">
+
+        <label>Fecha inicio:</label>
+        <input type="date" name="fechaInicio" required>
+
+        <label>Fecha fin:</label>
+        <input type="date" name="fechaFin" required>
+
+        <!-- Precio -->
+        <label>Precio:</label>
+        <input type="number" step="0.01" name="precio" required>
+
+        <!-- Reserva directa -->
+        <label>
+            <input type="checkbox" name="directa">
+            Reserva inmediata
+        </label>
+
+        <!-- Política -->
+        <label>Política de cancelación:</label>
+        <select name="politica">
+            <option value="REEMBOLSABLE">Flexible</option>
+            <option value="REEMBOLSABLE_50_PER">Moderada</option>
+            <option value="NO_REEMBOLSABLE">Estricta</option>
+        </select>
+
+        <button type="submit">Guardar disponibilidad</button>
+
+    </form>
+
+    <!-- Navegación -->
+    <div class="links">
+
+        <a th:href="@{/misInmuebles}">
+            <button type="button">Volver</button>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,17 +1,18 @@
 package es.uclm.OasisProject.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.persistence.*;
 
+@Entity
 public class Disponibilidad {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Temporal(TemporalType.DATE)
-	private Date fechaInicio;
-	@Temporal(TemporalType.DATE)
-	private Date fechaFin;
+	@Column(name = "fecha_inicio", nullable = false)
+	private LocalDate fechaInicio;
+	@Column(name = "fecha_fin", nullable = false)
+	private LocalDate fechaFin;
 	@Column(name = "precio", nullable = false)
 	private double precio;
 	@Column(name = "directa", nullable = false)
@@ -25,7 +26,7 @@ public class Disponibilidad {
 	private Inmueble inmueble;
 	
 
-	public Disponibilidad(Date fechaInicio, Date fechaFin, double precio, boolean directa) {
+	public Disponibilidad(LocalDate fechaInicio, LocalDate fechaFin, double precio, boolean directa) {
 		// TODO Auto-generated constructor stub
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -44,19 +45,19 @@ public class Disponibilidad {
 		this.id = id;
 	}
 
-	public Date getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public LocalDate getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

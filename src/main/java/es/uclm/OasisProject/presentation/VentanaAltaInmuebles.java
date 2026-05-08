@@ -1,6 +1,8 @@
 package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +33,52 @@ public class VentanaAltaInmuebles {
 	public String RegistrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
 		String login = principal.getName();
-		// UsuarioDAO propietarioDAO = new UsuarioDAO();
-		
-		Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
-		inmueble.setOwner(propietario);
-		
-		boolean Exito = gestorInmuebles.registrarInmueble(inmueble.getDireccion(), inmueble.getPrecio_noche(), inmueble.getOwner().getId());
-		model.addAttribute("Exito", Exito);
-		return "InmuebleRegistrado"; // HTML
-	}
 
+	    Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
+	    inmueble.setOwner(propietario);
+
+	    boolean exito = gestorInmuebles.registrarInmueble(inmueble);
+
+	    model.addAttribute("Exito", exito);
+		return "redirect:/misInmuebles"; // HTML
+	}
+	
+	// Pagina para que el propietario pueda ver sus inmuebles
+	@GetMapping("/misInmuebles")
+	public String misInmuebles(Model model, Principal principal) {
+
+	    String login = principal.getName();
+
+	    List<Inmueble> inmuebles = gestorInmuebles.obtenerInmuebles(login);
+
+	    model.addAttribute("inmuebles", inmuebles);
+
+	    return "Inmuebles";
+	}
+	
+	// Formulario para anadir disponibilidad al inmueble
+	@GetMapping("/anadirDisponibilidad/{id}")
+	public String mostrarFormularioDisponibilidad(@PathVariable int id, Model model) {
+
+	    model.addAttribute("disponibilidad", new Disponibilidad());
+	    model.addAttribute("idInmueble", id);
+
+	    return "FormularioDisponibilidad";
+	}
+	
+	// Anadir disponibilidad
+	@PostMapping("/anadirDisponibilidad")
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam String politica, Model model) {
+
+		PoliticaCancelacion pol = PoliticaCancelacion.valueOf(politica);
+        disponibilidad.setPoliticaCancelacion(pol);
+		
+	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
+
+	    model.addAttribute("Exito", exito);
+
+	    return "redirect:/misInmuebles";
+
+	}
+	
 }

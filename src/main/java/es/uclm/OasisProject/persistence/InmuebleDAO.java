@@ -1,9 +1,10 @@
 package es.uclm.OasisProject.persistence;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import es.uclm.OasisProject.domain.entities.Inmueble;
+import es.uclm.OasisProject.domain.entities.Propietario;
 
 @Repository
 public class InmuebleDAO extends EntityDAO<Inmueble>{
@@ -14,7 +15,7 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
 	}
 	
 
-	public List<Inmueble> findDisponibles(Date fechaInicio, Date fechaFin) {
+	public List<Inmueble> findDisponibles(LocalDate fechaInicio, LocalDate fechaFin) {
         return gestorBD.getEntityManager()
             .createQuery(
                 "SELECT DISTINCT i " +
@@ -27,6 +28,16 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
             .setParameter("fin", fechaFin)
             .getResultList();
     }
+	
+	public List<Inmueble> findByPropietario(Propietario propietario) {
+	    return gestorBD.getEntityManager()
+	        .createQuery(
+	            "SELECT i FROM Inmueble i WHERE i.Owner = :prop",
+	            Inmueble.class
+	        )
+	        .setParameter("prop", propietario)
+	        .getResultList();
+	}
 
 
 }
