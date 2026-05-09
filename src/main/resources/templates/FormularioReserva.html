@@ -15,39 +15,53 @@
     </header>
 
     <div class="container">
-        <h1>Reservar inmueble</h1>
+
+        <h1>Confirmar reserva</h1>
         <hr class="line">
 
-        <!-- Formulario de reserva -->
-        <form th:action="@{/reservarInmueble}"
-              thype="hidden" name="idInmueble" th:value="${inmueble.id}">
+        <form th:action="@{/reservarInmueble}" method="post" class="form">
 
-            <label>Dirección del inmueble:</label>
-            <input type="text" th:value="${inmueble.direccion}" readonly>
+            <!-- ID disponibilidad -->
+            <input type="hidden" name="idDisponibilidad" th:value="${disponibilidad.id}">
 
-            <label for="fechaInicio">Fecha inicio:</label>
-            <input type="date" th:field="*{fechaInicio}" id="fechaInicio" required>
+            <!-- Dirección -->
+            <label>Dirección:</label>
+            <input type="text" th:value="${disponibilidad.inmueble.direccion}" readonly>
 
-            <label for="fechaFin">Fecha fin:</label>
-            <input type="date" th:field="*{fechaFin}" id="fechaFin" required>
+            <!-- Fecha inicio -->
+            <label>Fecha inicio:</label>
+            <input type="text" th:value="${disponibilidad.fechaInicio}" readonly>
 
-            <label for="politica">Política de cancelación:</label>
-            <select th:field="*{politicaCancelacion}" id="politica" required>
-                <option value="REEMBOLSABLE">Reembolsable</option>
-                <option value="NO_REEMBOLSABLE">No reembolsable</option>
-                <option value="REEMBOLSABLE_50_PER">Reembolsable 50 </option>
-            </select>
+            <!-- Fecha fin -->
+            <label>Fecha fin:</label>
+            <input type="text" th:value="${disponibilidad.fechaFin}" readonly>
 
-            <button type="submit">Solicitar reserva</button>
+            <!-- Precio -->
+            <label>Precio:</label>
+            <input type="text"
+                   th:value="${disponibilidad.precio}"
+                   readonly>
+
+            <!-- Reserva inmediata -->
+            <label>Reserva inmediata:</label>
+            <input type="text" th:value="${disponibilidad.directa ? 'Sí' : 'No'}" readonly>
+
+            <!-- Política -->
+            <label>Política cancelación:</label>
+            <input type="text" th:value="${disponibilidad.politicaCancelacion}" readonly>
+
+            <button type="submit">
+                Confirmar reserva
+            </button>
+
         </form>
 
         <!-- Navegación -->
         <div class="links">
 
-            <!-- Volver -->
-			<a th:href="@{/buscarInmuebles}">
-				<button type="button">Volver</button>
-			</a>
+            <a th:href="@{/busqueda}">
+                <button type="button"> Volver </button>
+            </a>
 
         </div>
 

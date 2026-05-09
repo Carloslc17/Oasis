@@ -1,6 +1,6 @@
 package es.uclm.OasisProject.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.persistence.*;
 
 
@@ -12,9 +12,9 @@ public class Reserva {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Temporal(TemporalType.DATE)
-	private Date fechaInicio;
+	private LocalDate fechaInicio;
 	@Temporal(TemporalType.DATE)
-	private Date fechaFin;
+	private LocalDate fechaFin;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "politica_cancelacion", nullable = false)
 	private PoliticaCancelacion politicaCancelacion;
@@ -31,7 +31,7 @@ public class Reserva {
 	private Inmueble inmueble;
 	
 
-	public Reserva(Date fechaInicio, Date fechaFin) {
+	public Reserva(LocalDate fechaInicio, LocalDate fechaFin) {
 		// TODO Auto-generated constructor stub
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -45,8 +45,8 @@ public class Reserva {
     }
 
     public boolean isActiva() {
-        Date hoy = new Date();
-        return fechaInicio.before(hoy) && fechaFin.after(hoy);
+        LocalDate hoy = LocalDate.now();
+        return !hoy.isBefore(fechaInicio) && !hoy.isAfter(fechaFin);
     }
     
     public int getId() {
@@ -58,19 +58,19 @@ public class Reserva {
 	}
 
 
-	public Date getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public LocalDate getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

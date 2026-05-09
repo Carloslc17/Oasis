@@ -1,7 +1,5 @@
 package es.uclm.OasisProject.domain.controllers;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,51 +17,56 @@ public class GestorReservas {
     private ReservaDAO reservaDAO;
 
     @Autowired
-    private InmuebleDAO inmuebleDAO;
-
-    @Autowired
     private UsuarioDAO usuarioDAO;
     
-    public boolean crearSolicitud(int idInquilino, int idInmueble, Date fechaInicio, 
-    		                      Date fechaFin, PoliticaCancelacion politica) {
+    @Autowired 
+    private DisponibilidadDAO disponibilidadDAO;
+    
+    @Autowired
+    private SolicitudReservaDAO solicitudDAO;
+    
+    public boolean crearReserva(int idInquilino, int idDisponibilidad) {
     	
-
-    	if (fechaInicio.after(fechaFin)) {
-            log.warn("Fechas inválidas: inicio posterior a fin");
-            return false;
-        }
+    	Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
     	
-
-    	Inmueble inmueble = inmuebleDAO.select(idInmueble);
-        if (inmueble == null) {
-            log.warn("El inmueble no existe");
-            return false;
-        }
+    	if (disp == null) {
+    		log.warn("Disponibilidad no encontrada");
+    		return false;
+    	}
+    	
+    	Usuario usuario = usuarioDAO.select(idInquilino);
+    	
+    	if (!(usuario instanceof Inquilino)) {
+    	    return false;
+    	}
+    	
+    	Inquilino inquilino = (Inquilino) usuario;
+    	
+    	if(disp.isDirecta()) {
+    	
+	    	Reserva reserva = new Reserva();
+	    	reserva.setFechaInicio(disp.getFechaInicio());
+	    	reserva.setFechaFin(disp.getFechaFin());
+	    	reserva.setInquilino(inquilino);
+	    	reserva.setInmueble(disp.getInmueble());
+	    	reserva.setPoliticaCancelacion(disp.getPoliticaCancelacion());
+	    	reservaDAO.insert(reserva);
+	        
+	        return true;
         
+    	} else {
+    		
+    		SolicitudReserva solicitud = new SolicitudReserva();
+    		solicitud.setFechaInicio(disp.getFechaInicio());
+    		solicitud.setFechaFin(disp.getFechaFin());
+    		solicitud.setPoliticaCancelacion(disp.getPoliticaCancelacion());
+    		solicitud.setInquilino(inquilino);
+    		solicitud.setInmueble(disp.getInmueble());
+    		solicitudDAO.insert(solicitud);
 
-        Usuario usuario = usuarioDAO.select(idInquilino);
-        if (!(usuario instanceof Inquilino)) {
-            log.warn("El inquilino no existe");
-            return false;
-        }
-        
-        Inquilino inquilino = (Inquilino) usuario;
-
-
-        SolicitudReserva solicitud = new SolicitudReserva();
-        solicitud.setFechaInicio(fechaInicio);
-        solicitud.setFechaFin(fechaFin);
-        solicitud.setPoliticaCancelacion(politica);
-        solicitud.setInquilino(inquilino);
-        solicitud.setInmueble(inmueble);
-
-        reservaDAO.insert(solicitud);
-        
-
-        log.info("Solicitud de reserva creada");
-
-        
-        return true;
+    		return true;
+    		
+    	}
 
     	
     }
