@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Seleccionar Usuario</title>
-
-    
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
-	
-	<!-- Barra superior -->
-	<header class="topbar">
-    	<span class="empresa">Oasis</span>
-	</header>
-		
+
+    <!-- Carrusel de fondo -->
+    <div class="slideshow-bg">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
     <div class="container">
         <h1>Registrarse como:</h1>
         <hr class="line">
         <a th:href="@{/propietario}">Propietario</a><br>
         <a th:href="@{/inquilino}">Inquilino</a>
     </div>
+
 </body>
 </html>
