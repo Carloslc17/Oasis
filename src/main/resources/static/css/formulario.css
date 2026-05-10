@@ -3,33 +3,34 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
-    background-image: url('/img/oasis-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
 }
 
-body::before {
+/* ── Fondo estático (páginas interiores) ── */
+body.fondo-estatico {
+    background-image: url('/img/oasis-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+body.fondo-estatico::before {
     content: '';
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.38);
+    inset: 0;
+    background: rgba(0,0,0,0.30);
     z-index: 0;
     pointer-events: none;
 }
 
-/* Carrusel (solo en login/registro) */
+/* ── Carrusel (login / registro) ── */
 .slideshow-bg {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     z-index: 0;
 }
 .slide {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     background-size: cover;
     background-position: center;
     opacity: 0;
@@ -39,19 +40,19 @@ body::before {
 .slideshow-bg::after {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.38);
+    inset: 0;
+    background: rgba(0,0,0,0.35);
     z-index: 1;
 }
 
+/* ── Topbar ── */
 .topbar {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 70px;
-    background-color: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: white;
     padding: 0 28px;
     font-size: 26px;
@@ -63,29 +64,34 @@ body::before {
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
+/* ── Centrado de página ── */
 .page-wrapper {
     position: relative;
     z-index: 5;
+    width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
+    padding: 90px 16px 24px;
 }
 
+/* ── Card ── */
 .container {
-    background-color: rgba(255,255,255,0.90);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
     padding: 2.5rem 2.8rem;
     border-radius: 20px;
     text-align: center;
-    width: 420px;
-    border: 1px solid rgba(255,255,255,0.6);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
 
-h1 { font-size: 1.6rem; margin-bottom: 0.8rem; color: #3d2b1f; letter-spacing: 0.5px; }
+h1 { font-size: 1.6rem; margin-bottom: 0.8rem; color: #fff; letter-spacing: 0.5px; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
 
 .line {
     width: 100%; height: 2px;
@@ -94,26 +100,30 @@ h1 { font-size: 1.6rem; margin-bottom: 0.8rem; color: #3d2b1f; letter-spacing: 0
     border: none; border-radius: 2px;
 }
 
-.form { display: flex; flex-direction: column; align-items: stretch; gap: 0.5rem; }
+/* ── Formulario ── */
+.form { display: flex; flex-direction: column; gap: 0.5rem; }
 
-label { text-align: left; font-weight: 600; font-size: 0.85rem; color: #4a3728; }
+label { text-align: left; font-weight: 600; font-size: 0.85rem; color: rgba(255,255,255,0.90); }
 
 input[type="text"], input[type="password"], input[type="date"],
 input[type="number"], select {
     padding: 0.65rem 0.9rem;
     border-radius: 10px;
-    border: 1.5px solid #e2c9b8;
-    background-color: #fffaf7;
-    color: #3d2b1f;
+    border: 1.5px solid rgba(255,255,255,0.30);
+    background: rgba(255,255,255,0.20);
+    color: #fff;
     font-size: 0.92rem;
     outline: none;
     transition: border 0.25s ease;
     width: 100%;
 }
-input:focus, select:focus { border-color: #c9714a; background-color: #fff; }
+input::placeholder { color: rgba(255,255,255,0.60); }
+input:focus, select:focus { border-color: #e8a87c; background: rgba(255,255,255,0.28); }
+select option { background: #3d2b1f; color: #fff; }
 
+/* ── Botones ── */
 button, input[type="submit"] {
-    background-color: #e8a87c;
+    background: #e8a87c;
     color: #3d1f0d;
     border: none;
     border-radius: 12px;
@@ -125,29 +135,32 @@ button, input[type="submit"] {
     margin-top: 0.4rem;
     width: 100%;
 }
-button:hover, input[type="submit"]:hover { background-color: #d4855a; transform: scale(1.03); }
+button:hover, input[type="submit"]:hover { background: #d4855a; transform: scale(1.03); }
 
+/* ── Links ── */
 .links { margin-top: 1.2rem; }
 
 a {
     display: inline-block;
     text-decoration: none;
-    color: #3d2b1f;
-    background-color: #f3d5be;
+    color: #3d1f0d;
+    background: #e8a87c;
     padding: 0.65rem 1.6rem;
     border-radius: 12px;
     margin: 0.3rem 0;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.88rem;
     transition: all 0.25s ease;
 }
-a:hover { background-color: #e8a87c; }
+a:hover { background: #d4855a; }
 
-p a { background: none; padding: 0; color: #c9714a; font-weight: 600; text-decoration: underline; }
-p a:hover { background: none; color: #a0532c; }
+p { color: rgba(255,255,255,0.85); font-size: 0.88rem; margin-top: 0.8rem; }
+p a { background: none; padding: 0; color: #e8a87c; font-weight: 600; text-decoration: underline; }
+p a:hover { background: none; color: #f4c09a; }
 
-input[type="checkbox"] { width: auto; accent-color: #c9714a; }
+input[type="checkbox"] { width: auto; accent-color: #e8a87c; }
+label:has(input[type="checkbox"]) { color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; }
 
 @media (max-width: 480px) {
-    .container { width: 90%; padding: 2rem 1.5rem; }
+    .container { padding: 2rem 1.4rem; }
 }
