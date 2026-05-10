@@ -25,7 +25,8 @@ public class SecurityConfig {
                     "/registro",
                     "/propietario",
                     "/inquilino",
-                    "/css/**"
+                    "/css/**",
+                    "/img/**"
                 ).permitAll()
 
                 // SOLO PROPIETARIOS
