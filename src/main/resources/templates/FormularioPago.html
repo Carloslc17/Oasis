@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Completar pago</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
+
+<div class="container">
+
+    <h1>Completar pago</h1>
+    <hr class="line">
+
+    <form th:action="@{/completarPago}" th:object="${pago}" method="post" class="form">
+
+      
+        <input type="hidden" name="idDisponibilidad" th:value="${disponibilidad.id}">
+
+        <label>Inmueble:</label>
+        <input type="text" th:value="${disponibilidad.inmueble.direccion}" readonly>
+
+        <label>Importe:</label>
+        <input type="text" th:value="${disponibilidad.precio}" readonly>
+
+        <label for="metodoPago">
+            Método de pago:
+        </label>
+
+        <select th:field="*{metodoPago}" id="metodoPago" required>
+
+            <option value="TARJETA_CREDITO"> Tarjeta Credito </option>
+
+            <option value="PAYPAL"> PayPal </option>
+
+            <option value="TARJETA_DEBITO"> Tarjeta Debito </option>
+
+        </select>
+
+        <button type="submit"> Pagar </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
