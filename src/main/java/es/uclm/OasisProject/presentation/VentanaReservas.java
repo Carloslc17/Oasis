@@ -44,8 +44,14 @@ public class VentanaReservas {
         String login = principal.getName();
 
         Inquilino inquilino = (Inquilino) usuarioDAO.findByLogin(login);
-        gestorReservas.crearReserva(inquilino.getId(), idDisponibilidad);
-
+        Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
+        
+        if(disponibilidad.isDirecta()) {
+        	return "redirect:/completarPago?idDisponibilidad="+ idDisponibilidad;
+        } else { 
+        	gestorReservas.crearSolicitud(inquilino.getId(), idDisponibilidad);
+        }
+        
         return "redirect:/buscarInmuebles";
     }
 

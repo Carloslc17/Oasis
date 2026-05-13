@@ -32,34 +32,14 @@ public class GestorPagos {
 	@Autowired 
 	private UsuarioDAO usuarioDAO;
 	
+	@Autowired
+	private GestorReservas gestorReservas;
+	
 	
 	public boolean realizarPago(int idInquilino, int idDisponibilidad, MetodoPago metodoPago) {
-		
-		// Buscar disponibilidad
-        Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
-        
-        if (disponibilidad == null) {
-            log.warn("La disponibilidad no existe");
-            return false;
-        }
-        
-        // Buscar usuario
-	    Usuario usuario = usuarioDAO.select(idInquilino);
-	
-	    if (!(usuario instanceof Inquilino)) {
-	        log.warn("El usuario no es inquilino");
-	        return false;
-	    }
-	
-	    Inquilino inquilino = (Inquilino) usuario;
 	    
-	    Reserva reserva = new Reserva();
-	    reserva.setFechaInicio(disponibilidad.getFechaInicio());
-    	reserva.setFechaFin(disponibilidad.getFechaFin());
-    	reserva.setInquilino(inquilino);
-    	reserva.setInmueble(disponibilidad.getInmueble());
-    	reserva.setPoliticaCancelacion(disponibilidad.getPoliticaCancelacion());
-    	reservaDAO.insert(reserva);
+		// Crear reserva
+	    Reserva reserva = gestorReservas.crearReserva(idInquilino, idDisponibilidad);
 		
     	Pago pago = new Pago();
     	
