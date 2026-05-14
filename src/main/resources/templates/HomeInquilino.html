@@ -46,10 +46,9 @@
         <!-- Navegación -->
         <div class="links">
 
-            <!-- Logout -->
-            <a th:href="@{/logout}">
-                <button type="button">Cerrar sesión</button>
-            </a>
+			<form th:action="@{/logout}" method="post">
+			    <button type="submit">Cerrar sesion</button>
+			</form>
 
         </div>
     </div>
