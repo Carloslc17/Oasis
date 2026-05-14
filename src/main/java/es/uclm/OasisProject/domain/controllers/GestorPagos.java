@@ -24,15 +24,6 @@ public class GestorPagos {
 	private PagoDAO pagoDAO;
 	
 	@Autowired
-	private ReservaDAO reservaDAO;
-	
-	@Autowired
-	private DisponibilidadDAO disponibilidadDAO;
-	
-	@Autowired 
-	private UsuarioDAO usuarioDAO;
-	
-	@Autowired
 	private GestorReservas gestorReservas;
 	
 	

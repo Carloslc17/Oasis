@@ -52,7 +52,7 @@ public class VentanaReservas {
         	gestorReservas.crearSolicitud(inquilino.getId(), idDisponibilidad);
         }
         
-        return "redirect:/buscarInmuebles";
+        return "redirect:/homeInquilino";
     }
 
 
