@@ -2,14 +2,12 @@ package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import es.uclm.OasisProject.domain.controllers.GestorInmuebles;
 import es.uclm.OasisProject.domain.entities.*;
-import es.uclm.OasisProject.persistence.UsuarioDAO;
 
 @Controller
 public class VentanaAltaInmuebles {
@@ -17,27 +15,21 @@ public class VentanaAltaInmuebles {
 	@Autowired
 	private GestorInmuebles gestorInmuebles;
 	
-	@Autowired
-	private UsuarioDAO usuarioDAO;
-	
 	// Formulario para registrar inmueble
-	@GetMapping("registrarInmueble")
-	public String MostrarFormularioInmueble(Model model) {
+	@GetMapping("/registrarInmueble")
+	public String mostrarFormularioInmueble(Model model) {
 		model.addAttribute("inmueble", new Inmueble());
 		return "FormularioInmueble"; // HTML
 	}
 	
 	
 	// Registrar inmueble
-	@PostMapping("registrarInmueble")
-	public String RegistrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
+	@PostMapping("/registrarInmueble")
+	public String registrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
 		String login = principal.getName();
 
-	    Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
-	    inmueble.setOwner(propietario);
-
-	    boolean exito = gestorInmuebles.registrarInmueble(inmueble);
+	    boolean exito = gestorInmuebles.registrarInmueble(inmueble, login);
 
 	    model.addAttribute("Exito", exito);
 		return "redirect:/misInmuebles"; // HTML
@@ -68,13 +60,11 @@ public class VentanaAltaInmuebles {
 	
 	// Anadir disponibilidad
 	@PostMapping("/anadirDisponibilidad")
-	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam String politica, Model model) {
-
-		PoliticaCancelacion pol = PoliticaCancelacion.valueOf(politica);
-        disponibilidad.setPoliticaCancelacion(pol);
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam PoliticaCancelacion politica, Model model) {
 		
 	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
 
+	    // Flash attribute aqui
 	    model.addAttribute("Exito", exito);
 
 	    return "redirect:/misInmuebles";

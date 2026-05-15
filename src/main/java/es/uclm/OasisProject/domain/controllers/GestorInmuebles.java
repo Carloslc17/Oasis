@@ -23,22 +23,28 @@ public class GestorInmuebles {
 	private InmuebleDAO inmuebleDAO;
 	
 	@Autowired 
-	private UsuarioDAO propietarioDAO;
+	private UsuarioDAO usuarioDAO;
 	
 	@Autowired
 	private DisponibilidadDAO disponibilidadDAO;
 	
 	// Registar nuevo inmueble en el sistema
 	
-	public boolean registrarInmueble(Inmueble inmueble) {
+	public boolean registrarInmueble(Inmueble inmueble, String login) {
 		
-		Propietario propietario = (Propietario) propietarioDAO.select(inmueble.getOwner().getId());
-
-		// Comprobar existencia del propietario
-	    if (propietario == null) {
-	        log.warn("El propietario no existe");
+		Usuario usuario = usuarioDAO.findByLogin(login);
+		
+		if (usuario == null) {
+	        log.warn("Usuario no encontrado");
 	        return false;
 	    }
+		
+		if (!(usuario instanceof Propietario)) {
+			log.warn("El usuario no es propietario");
+			return false;
+		}
+		
+	    Propietario propietario = (Propietario) usuario;
 
 	    inmueble.setOwner(propietario);
 	    inmuebleDAO.insert(inmueble);
@@ -52,7 +58,7 @@ public class GestorInmuebles {
 	
 	public List<Inmueble> obtenerInmuebles(String login) {
 
-	    Usuario usuario = propietarioDAO.findByLogin(login);
+	    Usuario usuario = usuarioDAO.findByLogin(login);
 
 	    if (usuario == null) {
 	        log.warn("Usuario no encontrado");
