@@ -42,6 +42,7 @@ public class GestorInmuebles {
 
 	    inmueble.setOwner(propietario);
 	    inmuebleDAO.insert(inmueble);
+	    log.info("Inmueble insertado correctamente en la BD. Propietario: {} ", propietario.getLogin());
 
 	    return true;
 
@@ -83,6 +84,7 @@ public class GestorInmuebles {
 	    inmueble.getDisponibilidades().add(disp);
 
 	    disponibilidadDAO.insert(disp);
+	    log.info("Disponibilidad establecida correctamente. Inmueble: {}", inmueble.getId());
 
 	    return true;
 	}

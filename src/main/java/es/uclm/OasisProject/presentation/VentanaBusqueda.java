@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.uclm.OasisProject.domain.controllers.GestorBusquedas;
 import es.uclm.OasisProject.domain.entities.Inmueble;
+import es.uclm.OasisProject.domain.entities.PoliticaCancelacion;
 import es.uclm.OasisProject.persistence.InmuebleDAO;
 
 @Controller
@@ -33,7 +34,7 @@ public class VentanaBusqueda {
     public String buscarInmuebles(@RequestParam LocalDate fechaInicio,
                                  @RequestParam LocalDate fechaFin,
                                  @RequestParam(required = false) Boolean directa,
-                                 @RequestParam(required = false) String politica,
+                                 @RequestParam(required = false) PoliticaCancelacion politica,
                                  Model model) {
 
         List<Inmueble> resultados = gestorBusquedas.buscarInmuebles(fechaInicio, fechaFin, directa, politica);

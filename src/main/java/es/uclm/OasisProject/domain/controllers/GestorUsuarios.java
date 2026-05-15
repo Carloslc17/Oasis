@@ -28,6 +28,7 @@ public class GestorUsuarios {
     //---------------------
 
     // Registrar propietario
+    
     public boolean registrarPropietario(String login, String pass, String nombre, String apellidos, String direccion) {
 
         if (usuarioDAO.findByLogin(login) != null) {
@@ -43,6 +44,7 @@ public class GestorUsuarios {
     }
 
     // Registrar inquilino
+    
     public boolean registrarInquilino(String login, String pass, String nombre, String apellidos, String direccion) {
 
         if (usuarioDAO.findByLogin(login) != null) {
@@ -56,33 +58,4 @@ public class GestorUsuarios {
 
         return true;
     }
-    
-    //---------------------
-    // INICIAR SESION
-    //---------------------
-    
-    public Usuario login(String login, String pass) {
-    	
-    	
-    	Usuario usuario = usuarioDAO.findByLogin(login);
-    	
-    	// Usuario no existe
-    	if(usuario == null) {
-    		
-    		log.warn(USER_NOT_FOUND,login);
-    		return null;
-    	}
-    	
-    	// Contraseña incorrecta
-    	if(!usuario.getPassword().equals(pass)) {
-    		
-    		log.warn(CONTRASENA_INCORRECTA);
-    		return null;
-    		
-    	}
-    	
-    	return usuario;
-    }
-    
-    
 }
