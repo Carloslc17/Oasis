@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Seleccionar Usuario</title>
-
-    
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
-	
-	<!-- Barra superior -->
-	<header class="topbar">
-    	<span class="empresa">Oasis</span>
-	</header>
-		
-    <div class="container">
-        <h1>Registrarse como:</h1>
-        <hr class="line">
-        <a th:href="@{/propietario}">Propietario</a><br>
-        <a th:href="@{/inquilino}">Inquilino</a>
+    <div class="slideshow-bg">
+        <div class="slide" style="background-image: url('/img/casa1.avif');"></div>
+        <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+        <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
     </div>
+    <header class="topbar">Oasis</header>
+    <div class="page-wrapper">
+        <div class="container">
+            <h1>Registrarse como:</h1>
+            <hr class="line">
+            <a th:href="@{/propietario}">Propietario</a><br>
+            <a th:href="@{/inquilino}">Inquilino</a>
+        </div>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+        slides[current].classList.add('active');
+        setInterval(function() {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+    </script>
 </body>
 </html>
