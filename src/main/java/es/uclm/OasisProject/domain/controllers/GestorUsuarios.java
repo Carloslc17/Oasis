@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.Propietario;
-import es.uclm.OasisProject.domain.entities.Usuario;
 import es.uclm.OasisProject.persistence.UsuarioDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +14,6 @@ public class GestorUsuarios {
 
     private static final Logger log = LoggerFactory.getLogger(GestorUsuarios.class);
     private static final String USER_EXISTS = "El usuario ya existe: {}";
-    private static final String USER_NOT_FOUND = "Usuario {} no encontrado";
-    private static final String CONTRASENA_INCORRECTA = "Contrasena incorrecta";
 
     @Autowired
     private UsuarioDAO usuarioDAO;
