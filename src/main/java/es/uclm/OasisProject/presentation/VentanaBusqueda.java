@@ -57,7 +57,7 @@ public class VentanaBusqueda {
             redirectAttributes.addFlashAttribute("error", "No se pudo añadir");
         }
 
-        return "redirect:/buscarInmuebles";
+        return "redirect:/homeInquilino";
     }
 
 

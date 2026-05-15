@@ -62,16 +62,14 @@ public class GestorBusquedas {
 		inquilino.addListaDeseos(inmueble);
 		usuarioDAO.update(inquilino);
 		
-		return true;
-		
-		
+		return true;		
 		
 	}
 	
 	private boolean cumpleFiltros(Disponibilidad disp, LocalDate inicio, LocalDate fin, Boolean directa, String politica) {
 
 			// FILTRO FECHAS
-			boolean fechas = !disp.getFechaInicio().isAfter(inicio) && !disp.getFechaFin().isBefore(fin);
+		 	boolean fechas = !disp.getFechaInicio().isAfter(fin) && !disp.getFechaFin().isBefore(inicio);
 			
 			if (!fechas) return false;
 			

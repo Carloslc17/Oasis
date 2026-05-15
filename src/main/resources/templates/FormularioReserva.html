@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservar inmueble</title>
+
+    <link rel="stylesheet" href="/css/formulario.css">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <span class="empresa">Oasis</span>
+    </header>
+
+    <div class="container">
+
+        <h1>Confirmar reserva</h1>
+        <hr class="line">
+
+        <form th:action="@{/reservarInmueble}" method="post" class="form">
+
+            <!-- ID disponibilidad -->
+            <input type="hidden" name="idDisponibilidad" th:value="${disponibilidad.id}">
+
+            <!-- Dirección -->
+            <label>Dirección:</label>
+            <input type="text" th:value="${disponibilidad.inmueble.direccion}" readonly>
+
+            <!-- Fecha inicio -->
+            <label>Fecha inicio:</label>
+            <input type="text" th:value="${disponibilidad.fechaInicio}" readonly>
+
+            <!-- Fecha fin -->
+            <label>Fecha fin:</label>
+            <input type="text" th:value="${disponibilidad.fechaFin}" readonly>
+
+            <!-- Precio -->
+            <label>Precio:</label>
+            <input type="text"
+                   th:value="${disponibilidad.precio}"
+                   readonly>
+
+            <!-- Reserva inmediata -->
+            <label>Reserva inmediata:</label>
+            <input type="text" th:value="${disponibilidad.directa ? 'Sí' : 'No'}" readonly>
+
+            <!-- Política -->
+            <label>Política cancelación:</label>
+            <input type="text" th:value="${disponibilidad.politicaCancelacion}" readonly>
+
+            <button type="submit">
+                Confirmar reserva
+            </button>
+
+        </form>
+
+        <!-- Navegación -->
+        <div class="links">
+
+            <a th:href="@{/busqueda}">
+                <button type="button"> Volver </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

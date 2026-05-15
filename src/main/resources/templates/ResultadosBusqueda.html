@@ -26,23 +26,49 @@
         <!-- Con resultados -->
         <div th:if="${!#lists.isEmpty(resultados)}">
             <ul class="lista-resultados">
-                <li th:each="inmueble : ${resultados}" class="resultado">
-                    <p>
-                        <strong>Dirección:</strong>
-                        <span th:text="${inmueble.direccion}"></span>
-                    </p>
+				<li th:each="inmueble : ${resultados}" class="resultado">
 
-                    <p>
-                        <strong>Precio base:</strong>
-                        <span th:text="${inmueble.precio_noche}"></span> € / noche
-                    </p>
-					
-					<form th:action="@{/anadirFavorito}" method="post">
-					     <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
-					     <button type="submit">Añadir a favoritos</button>
-					</form>
-					   
-                </li>
+				    <p>
+				        <strong>Dirección:</strong>
+				        <span th:text="${inmueble.direccion}"></span>
+				    </p>
+
+				    <p>
+				        <strong>Precio base:</strong>
+				        <span th:text="${inmueble.precio_noche}"></span> € / noche
+				    </p>
+
+				    <form th:action="@{/anadirFavorito}" method="post">
+				        <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
+				        <button type="submit">Añadir a favoritos</button>
+				    </form>
+
+				    <div th:each="disp : ${inmueble.disponibilidades}">
+
+				        <p>
+				            <strong>Disponible:</strong>
+				            <span th:text="${disp.fechaInicio}"></span>
+				            -
+				            <span th:text="${disp.fechaFin}"></span>
+				        </p>
+
+				        <p>
+				            <strong>Política:</strong>
+				            <span th:text="${disp.politicaCancelacion}"></span>
+				        </p>
+
+				        <form th:action="@{/reservarInmueble}" method="get">
+				            <input type="hidden" name="idDisponibilidad" th:value="${disp.id}">
+
+				            <button type="submit">
+				                <span th:if="${disp.directa}">Reservar ahora</span>
+				                <span th:unless="${disp.directa}">Solicitar reserva</span>
+				            </button>
+				        </form>
+
+				    </div>
+
+				</li>
             </ul>
         </div>
 
