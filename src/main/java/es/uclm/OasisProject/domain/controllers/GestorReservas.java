@@ -66,7 +66,7 @@ public class GestorReservas {
      * Se envia al propietario
     */    
     
-    public boolean crearSolicitud(int idInquilino, int idDisponibilidad) {
+    public boolean crearSolicitud(String login, int idDisponibilidad) {
     	
     	Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
     	
@@ -75,7 +75,12 @@ public class GestorReservas {
     		return false;
     	}
     	
-    	Usuario usuario = usuarioDAO.select(idInquilino);
+    	Usuario usuario = usuarioDAO.findByLogin(login);
+    	
+    	if (usuario == null) {
+    		log.warn("Usuario no encontrado");
+    		return false;
+    	}
     	
     	if (!(usuario instanceof Inquilino)) {
     	    return false;
@@ -96,5 +101,22 @@ public class GestorReservas {
 		return true;
     	
     }	
+    
+    public boolean directa(int idDisponibilidad) {
+    	
+    	Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
+		
+		if (disponibilidad == null) {
+		    log.warn("Disponibilidad no encontrada");
+		    return false;
+		}
+		
+		if(disponibilidad.isDirecta()) {
+        	return true;
+        } else { 
+        	return false;
+        }
+    	
+    }
 
 }

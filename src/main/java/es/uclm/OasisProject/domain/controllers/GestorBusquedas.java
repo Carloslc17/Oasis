@@ -54,7 +54,7 @@ public class GestorBusquedas {
 	 * El usuario anade el inmueble a su lista de deseos
 	 */
 	
-	public boolean anadirInmueble(String login, Inmueble inmueble) {
+	public boolean anadirInmueble(String login, int idInmueble) {
 		
 		Usuario usuario = usuarioDAO.findByLogin(login);
 		
@@ -68,6 +68,7 @@ public class GestorBusquedas {
 	        return false;
 	    }
 		
+		Inmueble inmueble = inmuebleDAO.select(idInmueble);
 		
 		if (inmueble == null) {
 	        log.warn("El inmueble no existe");
@@ -83,7 +84,7 @@ public class GestorBusquedas {
 		
 		inquilino.addListaDeseos(inmueble);
 		usuarioDAO.update(inquilino);
-		log.info("Inmueble correctamente añadido a la lista de deseos. Usuario: {}", inquilino.getLogin());
+		log.info("Inmueble correctamente anadido a la lista de deseos. Usuario: {}", inquilino.getLogin());
 		
 		return true;		
 		

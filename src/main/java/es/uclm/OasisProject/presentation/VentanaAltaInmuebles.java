@@ -3,6 +3,7 @@ package es.uclm.OasisProject.presentation;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class VentanaAltaInmuebles {
 	private GestorInmuebles gestorInmuebles;
 	
 	// Formulario para registrar inmueble
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/registrarInmueble")
 	public String mostrarFormularioInmueble(Model model) {
 		model.addAttribute("inmueble", new Inmueble());
@@ -24,6 +26,7 @@ public class VentanaAltaInmuebles {
 	
 	
 	// Registrar inmueble
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@PostMapping("/registrarInmueble")
 	public String registrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
@@ -36,6 +39,7 @@ public class VentanaAltaInmuebles {
 	}
 	
 	// Pagina para que el propietario pueda ver sus inmuebles
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/misInmuebles")
 	public String misInmuebles(Model model, Principal principal) {
 
@@ -49,6 +53,7 @@ public class VentanaAltaInmuebles {
 	}
 	
 	// Formulario para anadir disponibilidad al inmueble
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/anadirDisponibilidad/{id}")
 	public String mostrarFormularioDisponibilidad(@PathVariable int id, Model model) {
 
@@ -59,6 +64,7 @@ public class VentanaAltaInmuebles {
 	}
 	
 	// Anadir disponibilidad
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@PostMapping("/anadirDisponibilidad")
 	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam PoliticaCancelacion politica, Model model) {
 		
