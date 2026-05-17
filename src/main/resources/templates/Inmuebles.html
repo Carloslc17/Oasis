@@ -5,74 +5,77 @@
     <title>Mis inmuebles</title>
 
     <link rel="stylesheet" href="/css/formulario.css">
+	<link rel="stylesheet" href="/css/inmuebles.css">
 </head>
 
 <body class="fondo-estatico">
 
-    <!-- Barra superior -->
-    <header class="topbar">
-        <span class="empresa">Oasis</span>
-    </header>
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
 
-    <div class="container">
-        <h1>Mis inmuebles</h1>
-        <hr class="line">
+<div class="container">
 
-        <!-- Sin inmuebles -->
-        <div th:if="${#lists.isEmpty(inmuebles)}">
-            <p>No tienes inmuebles registrados.</p>
-        </div>
+    <h1>Mis inmuebles</h1>
+    <hr class="line">
 
-        <!-- Con inmuebles -->
-        <div th:if="${!#lists.isEmpty(inmuebles)}">
-            <ul class="lista-resultados">
+    <!-- Sin inmuebles -->
+    <div th:if="${#lists.isEmpty(inmuebles)}" class="empty-state">
+        <p>No tienes inmuebles registrados.</p>
+    </div>
 
-                <li th:each="inmueble : ${inmuebles}" class="resultado">
+    <!-- Con inmuebles -->
+    <div th:if="${!#lists.isEmpty(inmuebles)}" class="grid-inmuebles">
 
-                    <p>
-                        <strong>Dirección:</strong>
-                        <span th:text="${inmueble.direccion}"></span>
-                    </p>
+        <div th:each="inmueble : ${inmuebles}" class="card-inmueble">
 
-                    <p>
-                        <strong>Precio base:</strong>
-                        <span th:text="${inmueble.precio_noche}"></span> € / noche
-                    </p>
+            <!-- Imagen placeholder -->
+            <div class="card-imagen">
+                <img src="/img/inmueble-placeholder.jpg" alt="Imagen del inmueble">
+            </div>
 
-                    <!-- Acciones -->
-                    <div class="acciones">
+            <!-- Contenido -->
+            <div class="card-contenido">
 
-                        <!-- Añadir disponibilidad -->
-                        <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
-                            <button type="button">Añadir fechas</button>
-                        </a>
+                <h2 th:text="${inmueble.direccion}">Dirección</h2>
 
-                        <!-- Ver reservas -->
-                        <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
-                            <button type="button">Ver reservas</button>
-                        </a>
+                <p class="precio">
+                    <span th:text="${inmueble.precio_noche}"></span> € / noche
+                </p>
 
-                    </div>
+                <!-- Acciones -->
+                <div class="acciones">
 
-                </li>
+                    <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
+                        <button type="button">Añadir fechas</button>
+                    </a>
 
-            </ul>
-        </div>
+                    <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
+                        <button type="button">Ver reservas</button>
+                    </a>
 
-        <!-- Navegación -->
-        <div class="links">
+                </div>
 
-            <a th:href="@{/homePropietario}">
-                <button type="button">Volver</button>
-            </a>
-
-            <a th:href="@{/registrarInmueble}">
-                <button type="button">Registrar nuevo inmueble</button>
-            </a>
+            </div>
 
         </div>
 
     </div>
+
+    <!-- Navegacion -->
+    <div class="links">
+
+        <a th:href="@{/homePropietario}">
+            <button type="button">Volver</button>
+        </a>
+
+        <a th:href="@{/registrarInmueble}">
+            <button type="button">Registrar nuevo inmueble</button>
+        </a>
+
+    </div>
+
+</div>
 
 </body>
 </html>

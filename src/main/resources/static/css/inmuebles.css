@@ -1,0 +1,365 @@
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+
+.container {
+
+    position: relative;
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 120px auto 60px auto;
+
+    padding: 2.5rem;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    border: 1px solid rgba(255,255,255,0.16);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 14px 45px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    color: white;
+
+    z-index: 2;
+}
+
+/* =========================
+   TITULO
+========================= */
+
+h1 {
+
+    font-size: 2.1rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.5rem;
+
+    color: white;
+}
+
+.line {
+
+    border: none;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    margin-bottom: 20px;
+
+    background: linear-gradient(90deg, #e8a87c, #d4855a);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    color: rgba(255,255,255,0.75);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid-inmuebles {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 22px;
+
+    margin-top: 20px;
+}
+
+/* =========================
+   CARD INMUEBLE
+========================= */
+
+.card-inmueble {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+
+    transition: all 0.28s ease;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.card-inmueble:hover {
+
+    transform: translateY(-6px);
+
+    border-color: rgba(240,166,118,0.22);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.35),
+        0 0 24px rgba(240,166,118,0.12);
+}
+
+
+.card-inmueble::before {
+
+    content: '';
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.05),
+        transparent
+    );
+
+    transform: translateX(-100%);
+
+    transition: transform 0.7s ease;
+}
+
+.card-inmueble:hover::before {
+
+    transform: translateX(100%);
+}
+
+
+/* =========================
+   IMAGEN
+========================= */
+
+.card-imagen {
+
+    width: 100%;
+
+    height: 190px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.08);
+}
+
+.card-imagen img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.card-contenido {
+
+    padding: 16px;
+}
+
+.card-contenido h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+
+    color: #000000;
+
+    text-shadow: 0 3px 8px rgba(0,0,0,0.9);
+}
+
+.precio {
+
+    color: #f0a676;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+/* =========================
+   BOTONES ACCIONES 
+========================= */
+
+.acciones {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.acciones a {
+
+    flex: 1;
+
+    text-decoration: none;
+}
+
+.acciones button {
+
+    width: 100%;
+    padding: 0.85rem;
+
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.14);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.25)
+        );
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+
+    backdrop-filter: blur(12px);
+
+    transition: all 0.25s ease;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
+
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+.acciones button:hover {
+
+    transform: translateY(-2px);
+
+    border-color: rgba(240,166,118,0.4);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.45)
+        );
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.4),
+        0 0 18px rgba(240,166,118,0.25);
+}
+
+/* =========================
+   BOTONES INFERIORES
+========================= */
+
+.links {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 30px;
+
+    gap: 12px;
+}
+
+.links a {
+
+    flex: 1;
+
+    text-decoration: none;
+}
+
+.links button {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.25)
+        );
+
+    color: #fff;
+
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+.links button:hover {
+
+    transform: translateY(-2px);
+
+    border-color: rgba(240,166,118,0.28);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,0.25),
+        0 0 18px rgba(240,166,118,0.12);
+}
+
+/* =========================
+   TOPBAR 
+========================= */
+
+.topbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 36px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+
+    z-index: 9999;
+}
+
+.topbar .empresa {
+
+    color: white;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-shadow: 0 0 12px rgba(240,166,118,0.25);
+}
