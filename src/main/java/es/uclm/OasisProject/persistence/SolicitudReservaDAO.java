@@ -13,6 +13,7 @@ public class SolicitudReservaDAO extends EntityDAO<SolicitudReserva>{
 		super(SolicitudReserva.class);
 	}
 	
+	// Buscar solicitudes de reserva por propietario
 	public List<SolicitudReserva> findByPropietario(Propietario propietario) {
 
 	    return gestorBD.getEntityManager().createQuery(

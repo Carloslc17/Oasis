@@ -14,7 +14,7 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
 		super(Inmueble.class);
 	}
 	
-
+	// Encontrar inmuebles disponibles
 	public List<Inmueble> findDisponibles(LocalDate fechaInicio, LocalDate fechaFin) {
         return gestorBD.getEntityManager()
             .createQuery(
@@ -29,6 +29,7 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
             .getResultList();
     }
 	
+	// Encontrar inmueble por propietario
 	public List<Inmueble> findByPropietario(Propietario propietario) {
 	    return gestorBD.getEntityManager()
 	        .createQuery(

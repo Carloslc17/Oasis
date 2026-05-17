@@ -10,7 +10,7 @@ public class UsuarioDAO extends EntityDAO<Usuario> {
         super(Usuario.class);
     }
     
-    
+    // Buscar por nombre de usuario
     public Usuario findByLogin(String login) {
         return gestorBD.getEntityManager()
             .createQuery("SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class)

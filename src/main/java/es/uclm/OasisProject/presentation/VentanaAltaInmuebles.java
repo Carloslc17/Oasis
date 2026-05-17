@@ -2,14 +2,13 @@ package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import es.uclm.OasisProject.domain.controllers.GestorInmuebles;
 import es.uclm.OasisProject.domain.entities.*;
-import es.uclm.OasisProject.persistence.UsuarioDAO;
 
 @Controller
 public class VentanaAltaInmuebles {
@@ -17,33 +16,30 @@ public class VentanaAltaInmuebles {
 	@Autowired
 	private GestorInmuebles gestorInmuebles;
 	
-	@Autowired
-	private UsuarioDAO usuarioDAO;
-	
 	// Formulario para registrar inmueble
-	@GetMapping("registrarInmueble")
-	public String MostrarFormularioInmueble(Model model) {
+	@PreAuthorize("hasRole('PROPIETARIO')")
+	@GetMapping("/registrarInmueble")
+	public String mostrarFormularioInmueble(Model model) {
 		model.addAttribute("inmueble", new Inmueble());
 		return "FormularioInmueble"; // HTML
 	}
 	
 	
 	// Registrar inmueble
-	@PostMapping("registrarInmueble")
-	public String RegistrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
+	@PreAuthorize("hasRole('PROPIETARIO')")
+	@PostMapping("/registrarInmueble")
+	public String registrarInmueble(@ModelAttribute Inmueble inmueble, Model model, Principal principal) {
 		
 		String login = principal.getName();
 
-	    Propietario propietario = (Propietario) usuarioDAO.findByLogin(login);
-	    inmueble.setOwner(propietario);
-
-	    boolean exito = gestorInmuebles.registrarInmueble(inmueble);
+	    boolean exito = gestorInmuebles.registrarInmueble(inmueble, login);
 
 	    model.addAttribute("Exito", exito);
 		return "redirect:/misInmuebles"; // HTML
 	}
 	
 	// Pagina para que el propietario pueda ver sus inmuebles
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/misInmuebles")
 	public String misInmuebles(Model model, Principal principal) {
 
@@ -57,6 +53,7 @@ public class VentanaAltaInmuebles {
 	}
 	
 	// Formulario para anadir disponibilidad al inmueble
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/anadirDisponibilidad/{id}")
 	public String mostrarFormularioDisponibilidad(@PathVariable int id, Model model) {
 
@@ -67,14 +64,13 @@ public class VentanaAltaInmuebles {
 	}
 	
 	// Anadir disponibilidad
+	@PreAuthorize("hasRole('PROPIETARIO')")
 	@PostMapping("/anadirDisponibilidad")
-	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam String politica, Model model) {
-
-		PoliticaCancelacion pol = PoliticaCancelacion.valueOf(politica);
-        disponibilidad.setPoliticaCancelacion(pol);
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam PoliticaCancelacion politica, Model model) {
 		
 	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
 
+	    // Flash attribute aqui
 	    model.addAttribute("Exito", exito);
 
 	    return "redirect:/misInmuebles";

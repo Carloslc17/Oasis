@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.uclm.OasisProject.domain.entities.*;
 import es.uclm.OasisProject.persistence.*;
+import jakarta.transaction.Transactional;
 
 @Service
 public class GestorReservas {
@@ -24,18 +25,25 @@ public class GestorReservas {
     @Autowired
     private SolicitudReservaDAO solicitudDAO;
     
+    /*
+     * Crear la reserva de inmueble
+     * Esto se hace despues de haber realizado el pago
+     */
+    @Transactional
     public Reserva crearReserva(int idInquilino, int idDisponibilidad) {
     	
     	Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
     	
     	if (disp == null) {
     		log.warn("Disponibilidad no encontrada");
+    		return null;
     	}
     	
     	Usuario usuario = usuarioDAO.select(idInquilino);
     	
     	if (!(usuario instanceof Inquilino)) {
     	    log.warn("Usuario no encontrado");
+    	    return null;
     	}
     	
     	Inquilino inquilino = (Inquilino) usuario;
@@ -48,12 +56,17 @@ public class GestorReservas {
 	    reserva.setPoliticaCancelacion(disp.getPoliticaCancelacion());
 	    reservaDAO.insert(reserva);
 	    	
-	    log.info("Inmueble reservado correctamente. Paso a pago.");
+	    log.info("Inmueble reservado correctamente.");
 	        
 	    return reserva;
     }
     
-    public boolean crearSolicitud(int idInquilino, int idDisponibilidad) {
+    /*
+     * Crear solicitud de reserva
+     * Se envia al propietario
+    */    
+    
+    public boolean crearSolicitud(String login, int idDisponibilidad) {
     	
     	Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
     	
@@ -62,7 +75,12 @@ public class GestorReservas {
     		return false;
     	}
     	
-    	Usuario usuario = usuarioDAO.select(idInquilino);
+    	Usuario usuario = usuarioDAO.findByLogin(login);
+    	
+    	if (usuario == null) {
+    		log.warn("Usuario no encontrado");
+    		return false;
+    	}
     	
     	if (!(usuario instanceof Inquilino)) {
     	    return false;
@@ -83,5 +101,22 @@ public class GestorReservas {
 		return true;
     	
     }	
+    
+    public boolean directa(int idDisponibilidad) {
+    	
+    	Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
+		
+		if (disponibilidad == null) {
+		    log.warn("Disponibilidad no encontrada");
+		    return false;
+		}
+		
+		if(disponibilidad.isDirecta()) {
+        	return true;
+        } else { 
+        	return false;
+        }
+    	
+    }
 
 }
