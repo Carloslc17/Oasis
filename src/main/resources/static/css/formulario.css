@@ -1,172 +1,315 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-}
-
-/* ── Fondo estático (páginas interiores) ── */
-body.fondo-estatico {
-    background-image: url('/img/oasis-bg.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 70px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-body.fondo-estatico::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.30);
-    z-index: 0;
-    pointer-events: none;
-}
 
-/* ── Carrusel (login / registro) ── */
-.slideshow-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-}
-.slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
-.slide.active { opacity: 1; }
-.slideshow-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
-    z-index: 1;
-}
-
-/* ── Topbar ── */
-.topbar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 70px;
-    background: rgba(255,255,255,0.10);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: white;
-    padding: 0 28px;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    z-index: 10;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-/* ── Centrado de página ── */
-.page-wrapper {
-    position: relative;
-    z-index: 5;
-    width: 100%;
+body {
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
+}
+
+/* =========================
+   ESTRUCTURA GENERAL
+========================= */
+
+.page-wrapper {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    min-height: 100vh;
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
+
     justify-content: center;
+    align-items: center;
+
     padding: 90px 16px 24px;
 }
 
-/* ── Card ── */
+/* =========================
+   CARD BASE
+========================= */
+
 .container {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    padding: 2.5rem 2.8rem;
-    border-radius: 20px;
-    text-align: center;
+
     width: 100%;
-    max-width: 420px;
-    border: 1px solid rgba(255,255,255,0.35);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    max-width: 430px;
+
+    padding: 2.4rem;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.14);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.20);
 }
 
-h1 { font-size: 1.6rem; margin-bottom: 0.8rem; color: #fff; letter-spacing: 0.5px; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+/* =========================
+   FORMULARIOS
+========================= */
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+.input-group {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.45rem;
+}
+
+/* =========================
+   TITULOS
+========================= */
+
+h1 {
+
+    color: white;
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
 
 .line {
-    width: 100%; height: 2px;
-    background: linear-gradient(90deg, #e8a87c, #c9714a);
-    margin: 0.5rem 0 1.6rem;
-    border: none; border-radius: 2px;
-}
 
-/* ── Formulario ── */
-.form { display: flex; flex-direction: column; gap: 0.5rem; }
-
-label { text-align: left; font-weight: 600; font-size: 0.85rem; color: rgba(255,255,255,0.90); }
-
-input[type="text"], input[type="password"], input[type="date"],
-input[type="number"], select {
-    padding: 0.65rem 0.9rem;
-    border-radius: 10px;
-    border: 1.5px solid rgba(255,255,255,0.30);
-    background: rgba(255,255,255,0.20);
-    color: #fff;
-    font-size: 0.92rem;
-    outline: none;
-    transition: border 0.25s ease;
     width: 100%;
-}
-input::placeholder { color: rgba(255,255,255,0.60); }
-input:focus, select:focus { border-color: #e8a87c; background: rgba(255,255,255,0.28); }
-select option { background: #3d2b1f; color: #fff; }
 
-/* ── Botones ── */
-button, input[type="submit"] {
-    background: #e8a87c;
-    color: #3d1f0d;
+    height: 2px;
+
     border: none;
-    border-radius: 12px;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    margin-top: 0.4rem;
+
+    margin: 1.2rem 0 1.8rem;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #e8a87c,
+        #d4855a
+    );
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+
+    color: rgba(255,255,255,0.92);
+
+    font-size: 0.90rem;
+
+    font-weight: 600;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+select {
+
     width: 100%;
+
+    padding: 0.90rem 1rem;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    background: rgba(255,255,255,0.16);
+
+    color: white;
+
+    font-size: 0.95rem;
+
+    outline: none;
+
+    transition: all 0.25s ease;
+
+    backdrop-filter: blur(8px);
 }
-button:hover, input[type="submit"]:hover { background: #d4855a; transform: scale(1.03); }
 
-/* ── Links ── */
-.links { margin-top: 1.2rem; }
+input::placeholder {
 
-a {
-    display: inline-block;
-    text-decoration: none;
-    color: #3d1f0d;
-    background: #e8a87c;
-    padding: 0.65rem 1.6rem;
-    border-radius: 12px;
-    margin: 0.3rem 0;
+    color: rgba(255,255,255,0.55);
+}
+
+input:focus,
+select:focus {
+
+    border-color: #f0a676;
+
+    background: rgba(255,255,255,0.22);
+
+    box-shadow:
+        0 0 0 4px rgba(240,166,118,0.12),
+        0 0 20px rgba(240,166,118,0.12);
+}
+
+/* =========================
+   BOTONES BASE
+========================= */
+
+button,
+input[type="submit"] {
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 0.85rem 1rem;
+
+    font-size: 0.95rem;
+
     font-weight: 700;
-    font-size: 0.88rem;
+
+    cursor: pointer;
+
     transition: all 0.25s ease;
 }
-a:hover { background: #d4855a; }
 
-p { color: rgba(255,255,255,0.85); font-size: 0.88rem; margin-top: 0.8rem; }
-p a { background: none; padding: 0; color: #e8a87c; font-weight: 600; text-decoration: underline; }
-p a:hover { background: none; color: #f4c09a; }
+/* =========================
+   LINKS
+========================= */
 
-input[type="checkbox"] { width: auto; accent-color: #e8a87c; }
-label:has(input[type="checkbox"]) { color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; }
+.links {
+
+    margin-top: 1.5rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.9rem;
+}
+
+.links p {
+
+    color: rgba(255,255,255,0.82);
+
+    font-size: 0.92rem;
+
+    text-align: center;
+}
+
+/* LINK INLINE */
+
+.links p a {
+
+    color: #ffd2b3;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+.links p a:hover {
+
+    color: white;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.35);
+}
+
+/* BOTON SECUNDARIO */
+
+.secondary-link {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 0.9rem 1rem;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: rgba(255,255,255,0.92);
+
+    font-size: 0.94rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.16),
+            rgba(255,255,255,0.08)
+        );
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.14);
+
+    transition: all 0.28s ease;
+}
+
+/* HOVER */
+
+.secondary-link:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.22),
+            rgba(255,255,255,0.10)
+        );
+
+    border-color: rgba(255,255,255,0.22);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,0.22),
+        0 0 20px rgba(240,166,118,0.10);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 480px) {
-    .container { padding: 2rem 1.4rem; }
+
+    .container {
+
+        padding: 2rem 1.4rem;
+    }
+
+    h1 {
+
+        font-size: 1.7rem;
+    }
 }

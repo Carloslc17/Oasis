@@ -2,62 +2,120 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar sesion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
 
-	<div class="slideshow-bg">
-	        <div class="slide" style="background-image: url('/img/casa1.avif');"></div>
-	        <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
-	        <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
-	    </div>
+    <!-- Fondo slideshow -->
+    <div class="slideshow-bg">
+        <div class="slide active" style="background-image: url('/img/casa1.avif');"></div>
+        <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+        <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
+    </div>
 
-	    <header class="topbar">Oasis</header>
+    <!-- Topbar -->
+    <header class="login-topbar">
 
-	    <div class="page-wrapper">
-	        <div class="container">
+        <div class="logo-section">
+            <span class="logo-dot"></span>
+            <span class="logo-text">Oasis</span>
+        </div>
 
-	            <h1>Iniciar sesión</h1>
-	            <hr class="line">
+    </header>
 
-	            <form th:action="@{/doLogin}" method="post" class="form">
+    <!-- Contenido -->
+    <div class="page-wrapper">
 
-	                <label for="username">Login:</label>
-	                <input type="text" name="username" id="username" required>
+        <div class="container login-container">
 
-	                <label for="password">Contraseña:</label>
-	                <input type="password" name="password" id="password" required>
+            <div class="login-header">
+                <h1>Bienvenido</h1>
+                <p>Accede a la aplicacion</p>
+            </div>
 
-	                <button type="submit">Iniciar sesion</button>
+            <hr class="line">
 
-	                <div th:if="${param.error}">
-	                    <p style="color:#c0392b;font-size:0.88rem;margin-top:6px;">
-	                        Credenciales incorrectas
-	                    </p>
-	                </div>
+            <form th:action="@{/doLogin}" method="post" class="form">
 
-	            </form>
+                <div class="input-group">
 
-	            <div class="links">
-	                <p>
-	                    ¿No tienes cuenta?
-	                    <a th:href="@{/registro}">Registrarse</a>
-	                </p>
-	            </div>
+                    <label for="username">Usuario</label>
 
-	        </div>
-	    </div>
-		
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="johndoe@email.com"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">Contraseña</label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        required>
+
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Iniciar sesion
+                </button>
+
+                <div th:if="${param.error}" class="error-box">
+                    Credenciales incorrectas
+                </div>
+
+            </form>
+
+            <div class="links">
+
+                <p>
+                    ¿No tienes cuenta?
+                    <a th:href="@{/registro}">
+                        Crear cuenta
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <script>
+
         const slides = document.querySelectorAll('.slide');
+
         let current = 0;
-        slides[current].classList.add('active');
-        setInterval(function() {
+
+        setInterval(() => {
+
             slides[current].classList.remove('active');
+
             current = (current + 1) % slides.length;
+
             slides[current].classList.add('active');
+
         }, 5000);
+
     </script>
+
 </body>
 </html>

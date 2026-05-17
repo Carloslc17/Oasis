@@ -47,9 +47,7 @@
 					<span th:text= "${sol.fechaFin}"> </span>
                 </p>
 
-                <form th:action=
-                      "@{/aceptarReserva}"
-                      method="post">
+                <form th:action="@{/aceptarReserva}" method="post">
 
                     <input type="hidden" name="idSolicitud" th:value="${sol.id}">
 
