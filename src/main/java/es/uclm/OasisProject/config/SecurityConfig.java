@@ -23,8 +23,8 @@ public class SecurityConfig {
                     "/login",
                     "/doLogin",
                     "/registro",
-                    "/propietario",
-                    "/inquilino",
+                    "/registro/propietario",
+                    "/registro/inquilino",
                     "/css/**",
                     "/img/**"
                 ).permitAll()

@@ -16,7 +16,7 @@
         <div class="container">
             <h1>Nuevo inquilino</h1>
             <hr class="line">
-            <form th:action="@{/inquilino}" th:object="${usuario}" method="post" class="form">
+            <form th:action="@{/registro/inquilino}" th:object="${usuario}" method="post" class="form">
                 <label>Login:</label>
                 <input type="text" th:field="*{login}" required>
                 <label>Contraseña:</label>

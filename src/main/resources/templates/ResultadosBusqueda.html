@@ -17,6 +17,8 @@
     <div class="container">
         <h1>Resultados de la búsqueda</h1>
         <hr class="line">
+		
+		<input type="hidden" name="redirectTo" value="/buscarInmuebles">
 
         <!-- Sin resultados -->
         <div th:if="${#lists.isEmpty(resultados)}">
