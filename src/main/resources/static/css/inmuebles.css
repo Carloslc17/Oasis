@@ -225,102 +225,144 @@ h1 {
     text-decoration: none;
 }
 
-.acciones button {
+
+/* =========================
+   BOTONES PRINCIPALES
+========================= */
+
+.acciones button,
+.disponibilidad-card button {
 
     width: 100%;
-    padding: 0.85rem;
 
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.14);
+    padding: 0.95rem 1rem;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,0.12);
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,0,0,0.45),
-            rgba(0,0,0,0.25)
+            #e59b6d,
+            #d9824f
         );
 
-    color: #ffffff;
+    color: white;
+
+    font-size: 0.92rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
 
     cursor: pointer;
 
-    font-size: 0.9rem;
-    font-weight: 700;
-
-    letter-spacing: 0.4px;
-
-    backdrop-filter: blur(12px);
-
-    transition: all 0.25s ease;
+    transition: all 0.28s ease;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,0.35);
-
-    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+        0 10px 24px rgba(217,130,79,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
-.acciones button:hover {
+/* HOVER */
 
-    transform: translateY(-2px);
+.acciones button:hover,
+.disponibilidad-card button:hover {
 
-    border-color: rgba(240,166,118,0.4);
+    transform: translateY(-3px);
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,0,0,0.65),
-            rgba(0,0,0,0.45)
+            #f0a676,
+            #e08b58
         );
 
     box-shadow:
-        0 14px 30px rgba(0,0,0,0.4),
-        0 0 18px rgba(240,166,118,0.25);
+        0 18px 36px rgba(224,139,88,0.32);
+}
+
+/* CLICK */
+
+.acciones button:active,
+.disponibilidad-card button:active {
+
+    transform: scale(0.985);
 }
 
 /* =========================
-   BOTONES INFERIORES
+   BOTON NUEVA BUSQUEDA
 ========================= */
 
 .links {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content: flex-start;
 
-    margin-top: 30px;
-
-    gap: 12px;
+    margin-top: 34px;
 }
 
 .links a {
-
-    flex: 1;
 
     text-decoration: none;
 }
 
 .links button {
+
+    padding: 1rem 1.6rem;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
     background:
         linear-gradient(
             135deg,
-            rgba(0,0,0,0.45),
-            rgba(0,0,0,0.25)
+            #1f2937,
+            #111827
         );
 
-    color: #fff;
+    color: white;
 
-    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition: all 0.28s ease;
+
+    box-shadow:
+        0 12px 28px rgba(17,24,39,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.08);
 }
+
+/* HOVER */
 
 .links button:hover {
 
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 
-    border-color: rgba(240,166,118,0.28);
+    background:
+        linear-gradient(
+            135deg,
+            #2b3548,
+            #1a2233
+        );
 
     box-shadow:
-        0 14px 35px rgba(0,0,0,0.25),
-        0 0 18px rgba(240,166,118,0.12);
+        0 18px 38px rgba(17,24,39,0.36);
+}
+
+/* CLICK */
+
+.links button:active {
+
+    transform: scale(0.985);
 }
 
 /* =========================
@@ -362,4 +404,159 @@ h1 {
     letter-spacing: 1.5px;
 
     text-shadow: 0 0 12px rgba(240,166,118,0.25);
+}
+
+/* =========================
+   BOTON FAVORITOS
+========================= */
+
+.card-contenido .favorito-btn {
+
+    width: 100% !important;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+
+    padding: 0.95rem 1rem;
+
+    border-radius: 14px;
+
+    border: none !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6b81,
+            #ff477e
+        ) !important;
+
+    color: white !important;
+
+    font-size: 0.92rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition: all 0.28s ease;
+
+    box-shadow:
+        0 12px 28px rgba(255,71,126,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+/* HOVER */
+
+.card-contenido .favorito-btn:hover {
+
+    transform: translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff7d92,
+            #ff5a8d
+        ) !important;
+
+    box-shadow:
+        0 18px 36px rgba(255,71,126,0.36);
+}
+
+/* CLICK */
+
+.card-contenido .favorito-btn:active {
+
+    transform: scale(0.985);
+}
+
+/* =========================
+   DISPONIBILIDADES
+========================= */
+
+.disponibilidades {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.disponibilidad-card {
+
+    padding: 1rem;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(12px);
+}
+
+.disponibilidad-card p {
+
+    color: rgba(255,255,255,0.82);
+
+    margin-bottom: 8px;
+
+    font-size: 0.9rem;
+}
+
+.disponibilidad-card strong {
+
+    color: white;
+}
+
+.disponibilidad-card button {
+
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+
+/* =========================
+   HEADER RESULTADOS
+========================= */
+
+.results-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 1rem;
+}
+
+.results-header h1 {
+
+    font-size: 2.2rem;
+
+    font-weight: 800;
+
+    color: #1f2937;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 6px;
+}
+
+.results-header p {
+
+    color: #6b7280;
+
+    font-size: 0.95rem;
 }

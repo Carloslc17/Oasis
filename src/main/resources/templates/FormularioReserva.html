@@ -1,71 +1,202 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
+
     <title>Reservar inmueble</title>
 
     <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/login.css">
+
 </head>
 
-<body>
+<body class="fondo-estatico">
 
-    <!-- Barra superior -->
-    <header class="topbar">
-        <span class="empresa">Oasis</span>
-    </header>
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
+
+</div>
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <div class="logo-section">
+
+        <div class="logo-dot"></div>
+
+        <span class="logo-text">
+            Oasis
+        </span>
+
+    </div>
+
+</header>
+
+<!-- WRAPPER -->
+
+<div class="page-wrapper">
 
     <div class="container">
 
-        <h1>Confirmar reserva</h1>
-        <hr class="line">
+        <!-- HEADER -->
 
-        <form th:action="@{/reservarInmueble}" method="post" class="form">
+        <div class="login-header">
 
-            <!-- ID disponibilidad -->
-            <input type="hidden" name="idDisponibilidad" th:value="${disponibilidad.id}">
+            <h1>Confirmar reserva</h1>
 
-            <!-- Dirección -->
-            <label>Dirección:</label>
-            <input type="text" th:value="${disponibilidad.inmueble.direccion}" readonly>
+            <p>
+                Revisa los datos antes de continuar
+            </p>
 
-            <!-- Fecha inicio -->
-            <label>Fecha inicio:</label>
-            <input type="text" th:value="${disponibilidad.fechaInicio}" readonly>
+        </div>
 
-            <!-- Fecha fin -->
-            <label>Fecha fin:</label>
-            <input type="text" th:value="${disponibilidad.fechaFin}" readonly>
+        <!-- FORM -->
 
-            <!-- Precio -->
-            <label>Precio:</label>
-            <input type="text"
-                   th:value="${disponibilidad.precio}"
-                   readonly>
+        <form th:action="@{/reservarInmueble}"
+              method="post"
+              class="form">
 
-            <!-- Reserva inmediata -->
-            <label>Reserva inmediata:</label>
-            <input type="text" th:value="${disponibilidad.directa ? 'Sí' : 'No'}" readonly>
+            <!-- ID -->
 
-            <!-- Política -->
-            <label>Política cancelación:</label>
-            <input type="text" th:value="${disponibilidad.politicaCancelacion}" readonly>
+            <input type="hidden"
+                   name="idDisponibilidad"
+                   th:value="${disponibilidad.id}">
 
-            <button type="submit">
+            <!-- DIRECCION -->
+
+            <div class="input-group">
+
+                <label>Dirección</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.inmueble.direccion}"
+                       readonly>
+
+            </div>
+
+            <!-- FECHA INICIO -->
+
+            <div class="input-group">
+
+                <label>Fecha inicio</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.fechaInicio}"
+                       readonly>
+
+            </div>
+
+            <!-- FECHA FIN -->
+
+            <div class="input-group">
+
+                <label>Fecha fin</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.fechaFin}"
+                       readonly>
+
+            </div>
+
+            <!-- PRECIO -->
+
+            <div class="input-group">
+
+                <label>Precio</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.precio + ' €'}"
+                       readonly>
+
+            </div>
+
+            <!-- RESERVA INMEDIATA -->
+
+            <div class="input-group">
+
+                <label>Reserva inmediata</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.directa ? 'Sí' : 'No'}"
+                       readonly>
+
+            </div>
+
+            <!-- POLITICA -->
+
+            <div class="input-group">
+
+                <label>Política cancelación</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.politicaCancelacion}"
+                       readonly>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <button type="submit"
+                    class="login-btn">
+
                 Confirmar reserva
+
             </button>
 
         </form>
 
-        <!-- Navegación -->
+        <!-- LINKS -->
+
         <div class="links">
 
-            <a th:href="@{/busqueda}">
-                <button type="button"> Volver </button>
+            <a th:href="@{/busqueda}"
+               class="secondary-link">
+
+                Volver
+
             </a>
 
         </div>
 
     </div>
 
+</div>
+
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
 </body>
+
 </html>
