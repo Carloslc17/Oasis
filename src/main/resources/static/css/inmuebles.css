@@ -43,7 +43,9 @@ h1 {
 
     margin-bottom: 0.5rem;
 
-    color: white;
+    color: black;
+	
+	text-align: center;
 }
 
 .line {
@@ -292,24 +294,36 @@ h1 {
 }
 
 /* =========================
-   BOTON NUEVA BUSQUEDA
+   LINKS / BOTONES INFERIORES
 ========================= */
 
 .links {
 
     display: flex;
 
-    justify-content: flex-start;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
 
     margin-top: 34px;
+
+    flex-wrap: wrap;
 }
 
 .links a {
 
     text-decoration: none;
+
+    width: auto;
+	
+	width: 100%;
 }
 
 .links button {
+
+    width: 100%;
 
     padding: 1rem 1.6rem;
 
@@ -335,6 +349,8 @@ h1 {
     cursor: pointer;
 
     transition: all 0.28s ease;
+
+    white-space: nowrap;
 
     box-shadow:
         0 12px 28px rgba(17,24,39,0.28),

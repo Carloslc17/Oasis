@@ -9,6 +9,24 @@
 </head>
 
 <body class="fondo-estatico">
+	
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+	   <div class="slide active"
+	         style="background-image: url('/img/casa1.avif');">
+	   </div>
+
+	   <div class="slide"
+	         style="background-image: url('/img/casa2.avif');">
+	   </div>
+
+	   <div class="slide"
+	         style="background-image: url('/img/casa3.webp');">
+	   </div>
+
+</div>
 
 <header class="topbar">
     <span class="empresa">Oasis</span>
@@ -37,7 +55,7 @@
             <!-- Contenido -->
             <div class="card-contenido">
 
-                <h2 th:text="${inmueble.direccion}">Dirección</h2>
+                <h2 th:text="${inmueble.direccion}">Direccion</h2>
 
                 <p class="precio">
                     <span th:text="${inmueble.precio_noche}"></span> € / noche
@@ -76,6 +94,26 @@
     </div>
 
 </div>
+
+<!-- SCRIPT SLIDESHOW -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
 
 </body>
 </html>
