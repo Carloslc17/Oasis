@@ -1,53 +1,184 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
+
     <title>Completar pago</title>
 
     <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+
 </head>
 
-<body>
+<body class="fondo-estatico">
 
-<header class="topbar">
-    <span class="empresa">Oasis</span>
-</header>
+<!-- SLIDESHOW -->
 
-<div class="container">
+<div class="slideshow-bg">
 
-    <h1>Completar pago</h1>
-    <hr class="line">
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
 
-    <form th:action="@{/completarPago}" th:object="${pago}" method="post" class="form">
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
 
-      
-        <input type="hidden" name="idDisponibilidad" th:value="${disponibilidad.id}">
-
-        <label>Inmueble:</label>
-        <input type="text" th:value="${disponibilidad.inmueble.direccion}" readonly>
-
-        <label>Importe:</label>
-        <input type="text" th:value="${disponibilidad.precio}" readonly>
-
-        <label for="metodoPago">
-            Método de pago:
-        </label>
-
-        <select th:field="*{metodoPago}" id="metodoPago" required>
-
-            <option value="TARJETA_CREDITO"> Tarjeta Credito </option>
-
-            <option value="PAYPAL"> PayPal </option>
-
-            <option value="TARJETA_DEBITO"> Tarjeta Debito </option>
-
-        </select>
-
-        <button type="submit"> Pagar </button>
-
-    </form>
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
 
 </div>
 
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <div class="logo-section">
+
+        <div class="logo-dot"></div>
+
+        <span class="logo-text">
+            Oasis
+        </span>
+
+    </div>
+
+</header>
+
+<!-- WRAPPER -->
+
+<div class="page-wrapper">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="login-header">
+
+            <h1>Completar pago</h1>
+
+            <p>
+                Finaliza la reserva seleccionando un método de pago
+            </p>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form th:action="@{/completarPago}"
+              th:object="${pago}"
+              method="post"
+              class="form">
+
+            <!-- ID DISPONIBILIDAD -->
+
+            <input type="hidden"
+                   name="idDisponibilidad"
+                   th:value="${disponibilidad.id}">
+
+            <!-- INMUEBLE -->
+
+            <div class="input-group">
+
+                <label>Inmueble</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.inmueble.direccion}"
+                       readonly>
+
+            </div>
+
+            <!-- IMPORTE -->
+
+            <div class="input-group">
+
+                <label>Importe</label>
+
+                <input type="text"
+                       th:value="${disponibilidad.precio + ' €'}"
+                       readonly>
+
+            </div>
+
+            <!-- METODO PAGO -->
+
+            <div class="input-group">
+
+                <label for="metodoPago">
+                    Método de pago
+                </label>
+
+                <select th:field="*{metodoPago}"
+                        id="metodoPago"
+                        required>
+
+                    <option value="TARJETA_CREDITO">
+                        Tarjeta de crédito
+                    </option>
+
+                    <option value="PAYPAL">
+                        PayPal
+                    </option>
+
+                    <option value="TARJETA_DEBITO">
+                        Tarjeta de débito
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <button type="submit"
+                    class="login-btn">
+
+                Completar pago
+
+            </button>
+
+        </form>
+
+        <!-- LINKS -->
+
+        <div class="links">
+
+            <a th:href="@{/busqueda}"
+               class="secondary-link">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT SLIDESHOW -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
 </body>
+
 </html>
