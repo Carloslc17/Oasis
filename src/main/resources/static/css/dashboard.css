@@ -380,19 +380,19 @@ body.fondo-estatico::before {
 
     cursor: pointer;
 
-    color: white;
+    color: #000000;
 
-    font-size: 0.95rem;
+    font-size: 1.25rem;
 
-    font-weight: 600;
+    font-weight: 900;
 
     letter-spacing: 0.5px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,0.18),
-            rgba(255,255,255,0.08)
+            rgba(255,255,255,0.00),
+            rgba(255,255,255,0.00)
         );
 
     backdrop-filter: blur(16px);
