@@ -66,7 +66,7 @@ public class VentanaAltaInmuebles {
 	// Anadir disponibilidad
 	@PreAuthorize("hasRole('PROPIETARIO')")
 	@PostMapping("/anadirDisponibilidad")
-	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam PoliticaCancelacion politica, Model model) {
+	public String registrarDisponibilidad(@ModelAttribute Disponibilidad disponibilidad, @RequestParam int idInmueble, @RequestParam PoliticaCancelacion politicaCancelacion, Model model) {
 		
 	    boolean exito = gestorInmuebles.anadirDisponibilidad(disponibilidad, idInmueble);
 

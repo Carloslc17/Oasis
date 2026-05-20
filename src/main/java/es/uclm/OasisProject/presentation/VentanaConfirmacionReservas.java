@@ -17,7 +17,7 @@ public class VentanaConfirmacionReservas {
 	private GestorNotificaciones gestorNotificaciones;
 	
 	@PreAuthorize("hasRole('PROPIETARIO')")
-	@GetMapping("/solicitudReserva")
+	@GetMapping("/reservas/solicitud")
 	public String mostrarSolicitudReserva(Principal principal, Model model) {
 
 		if (principal == null) {

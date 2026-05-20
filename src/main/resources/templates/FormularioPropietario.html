@@ -1,49 +1,189 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Nuevo propietario</title>
-    <link rel="stylesheet" href="/css/formulario.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro propietario</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/base.css">
+
+    <link rel="stylesheet" href="/css/form.css">
+
 </head>
+
 <body>
+
+    <!-- FONDO -->
+
     <div class="slideshow-bg">
-        <div class="slide" style="background-image: url('/img/casa1.avif');"></div>
-        <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
-        <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
-    </div>
-    <header class="topbar">Oasis</header>
-    <div class="page-wrapper">
-        <div class="container">
-            <h1>Nuevo propietario</h1>
-            <hr class="line">
-            <form th:action="@{/registro/propietario}" th:object="${usuario}" method="post" class="form">
-                <label>Login:</label>
-                <input type="text" th:field="*{login}" required>
-                <label>Contraseña:</label>
-                <input type="password" th:field="*{password}" required>
-                <label>Nombre:</label>
-                <input type="text" th:field="*{nombre}" required>
-                <label>Apellidos:</label>
-                <input type="text" th:field="*{apellidos}" required>
-                <label>Dirección:</label>
-                <input type="text" th:field="*{direccion}" required>
-                <button type="submit">Registrar</button>
-            </form>
-            <div class="links">
-                <a th:href="@{/registro}">Volver</a>
-                <p>¿Ya tienes cuenta? <a th:href="@{/doLogin}">Iniciar sesión</a></p>
-            </div>
+
+        <div class="slide active"
+             style="background-image: url('/img/casa1.avif');">
         </div>
+
+        <div class="slide"
+             style="background-image: url('/img/casa2.avif');">
+        </div>
+
+        <div class="slide"
+             style="background-image: url('/img/casa3.webp');">
+        </div>
+
     </div>
+
+    <!-- TOPBAR -->
+
+    <header class="login-topbar">
+
+        <div class="logo-section">
+
+            <span class="logo-dot"></span>
+
+            <span class="logo-text">Oasis</span>
+
+        </div>
+
+    </header>
+
+    <!-- CONTENIDO -->
+
+    <div class="page-wrapper">
+
+        <div class="container login-container">
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <h1>Nuevo propietario</h1>
+
+                <p>
+                    Crea tu cuenta para gestionar propiedades
+                </p>
+
+            </div>
+
+            <hr class="line">
+
+            <!-- FORM -->
+
+            <form th:action="@{/registro/propietario}"
+                  th:object="${usuario}"
+                  method="post"
+                  class="form">
+
+                <div class="input-group">
+
+                    <label>Login</label>
+
+                    <input type="text"
+                           th:field="*{login}"
+                           placeholder="usuario@email.com"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Contraseña</label>
+
+                    <input type="password"
+                           th:field="*{password}"
+                           placeholder="••••••••"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Nombre</label>
+
+                    <input type="text"
+                           th:field="*{nombre}"
+                           placeholder="Dario"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Apellidos</label>
+
+                    <input type="text"
+                           th:field="*{apellidos}"
+                           placeholder="Gomez del Mazo"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Dirección</label>
+
+                    <input type="text"
+                           th:field="*{direccion}"
+                           placeholder="Avda Francisco Aguirre 300"
+                           required>
+
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Crear cuenta
+                </button>
+
+            </form>
+
+            <!-- LINKS -->
+
+            <div class="links">
+
+                <p>
+                    ¿Ya tienes cuenta?
+                    <a th:href="@{/doLogin}">
+                        Iniciar sesion
+                    </a>
+                </p>
+
+                <a th:href="@{/registro}" class="secondary-link">
+                    Volver
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SCRIPT -->
+
     <script>
+
         const slides = document.querySelectorAll('.slide');
+
         let current = 0;
-        slides[current].classList.add('active');
-        setInterval(function() {
+
+        setInterval(() => {
+
             slides[current].classList.remove('active');
+
             current = (current + 1) % slides.length;
+
             slides[current].classList.add('active');
+
         }, 5000);
+
     </script>
+
 </body>
+
 </html>

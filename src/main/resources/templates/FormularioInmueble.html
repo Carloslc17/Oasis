@@ -1,43 +1,122 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Registro inmueble</title>
 
-    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+
 </head>
 
-<body class="fondo-estatico">
-	
-	<!-- Barra superior -->
-	<header class="topbar">
-		<span class="empresa">Oasis</span>
-	</header>
-		
-    <div class="container">
-        <h1>Registrar inmueble</h1>
+<body>
+
+<!-- FONDO -->
+<div class="slideshow-bg">
+
+    <div class="slide active" style="background-image: url('/img/casa1.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
+
+</div>
+
+<!-- TOPBAR -->
+<header class="login-topbar">
+
+    <div class="logo-section">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Oasis</span>
+    </div>
+
+</header>
+
+<!-- CONTENIDO -->
+<div class="page-wrapper">
+
+    <div class="container login-container">
+
+        <!-- HEADER -->
+        <div class="login-header">
+
+            <h1>Registrar inmueble</h1>
+
+            <p>Introduce los datos del nuevo inmueble</p>
+
+        </div>
+
         <hr class="line">
 
-        <form th:action="@{/registrarInmueble}" th:object="${inmueble}" method="post" class="form">
-            <label for="_Direccion">Direccion del inmueble:</label>
-            <input type="text" th:field="*{direccion}" id="Direccion" required>
+        <!-- FORM -->
+        <form th:action="@{/registrarInmueble}"
+              th:object="${inmueble}"
+              method="post"
+              class="form">
 
-            <label for="_Precio_Noche">Precio por noche:</label>
-            <input type="number" step="0.01" th:field="*{precio_noche}" id="Precio_noche" required>
+            <div class="input-group">
 
-            <button type="submit">Registrar</button>
+                <label>Dirección del inmueble</label>
+
+                <input type="text"
+                       th:field="*{direccion}"
+                       placeholder="Calle ejemplo 123"
+                       required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Precio por noche</label>
+
+                <input type="number"
+                       step="0.01"
+                       th:field="*{precio_noche}"
+                       placeholder="0.00"
+                       required>
+
+            </div>
+
+            <button type="submit" class="login-btn">
+                Registrar inmueble
+            </button>
+
         </form>
-		
-		<!--Navegacion-->
-		    <div class="links">
-					
-			<!--Volver-->
-			<a th:href="@{/homePropietario}">
-			 	<button type="button">Volver</button>
-			</a>
-			
-		</div>
-		
+
+        <!-- LINKS -->
+        <div class="links">
+
+            <a th:href="@{/homePropietario}" class="secondary-link">
+                Volver
+            </a>
+
+        </div>
+
     </div>
+
+</div>
+
+<!-- SCRIPT SLIDES -->
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
 </body>
 </html>

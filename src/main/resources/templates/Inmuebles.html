@@ -4,75 +4,116 @@
     <meta charset="UTF-8">
     <title>Mis inmuebles</title>
 
-    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/base.css">
+	<link rel="stylesheet" href="/css/inmuebles.css">
 </head>
 
 <body class="fondo-estatico">
+	
+<!-- SLIDESHOW -->
 
-    <!-- Barra superior -->
-    <header class="topbar">
-        <span class="empresa">Oasis</span>
-    </header>
+<div class="slideshow-bg">
 
-    <div class="container">
-        <h1>Mis inmuebles</h1>
-        <hr class="line">
+	   <div class="slide active"
+	         style="background-image: url('/img/casa1.avif');">
+	   </div>
 
-        <!-- Sin inmuebles -->
-        <div th:if="${#lists.isEmpty(inmuebles)}">
-            <p>No tienes inmuebles registrados.</p>
-        </div>
+	   <div class="slide"
+	         style="background-image: url('/img/casa2.avif');">
+	   </div>
 
-        <!-- Con inmuebles -->
-        <div th:if="${!#lists.isEmpty(inmuebles)}">
-            <ul class="lista-resultados">
+	   <div class="slide"
+	         style="background-image: url('/img/casa3.webp');">
+	   </div>
 
-                <li th:each="inmueble : ${inmuebles}" class="resultado">
+</div>
 
-                    <p>
-                        <strong>Dirección:</strong>
-                        <span th:text="${inmueble.direccion}"></span>
-                    </p>
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
 
-                    <p>
-                        <strong>Precio base:</strong>
-                        <span th:text="${inmueble.precio_noche}"></span> € / noche
-                    </p>
+<div class="container">
 
-                    <!-- Acciones -->
-                    <div class="acciones">
+    <h1>Mis inmuebles</h1>
+    <hr class="line">
 
-                        <!-- Añadir disponibilidad -->
-                        <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
-                            <button type="button">Añadir fechas</button>
-                        </a>
+    <!-- Sin inmuebles -->
+    <div th:if="${#lists.isEmpty(inmuebles)}" class="empty-state">
+        <p>No tienes inmuebles registrados.</p>
+    </div>
 
-                        <!-- Ver reservas -->
-                        <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
-                            <button type="button">Ver reservas</button>
-                        </a>
+    <!-- Con inmuebles -->
+    <div th:if="${!#lists.isEmpty(inmuebles)}" class="grid-inmuebles">
 
-                    </div>
+        <div th:each="inmueble : ${inmuebles}" class="card-inmueble">
 
-                </li>
+            <!-- Imagen placeholder -->
+            <div class="card-imagen">
+                <img src="/img/inmueble-placeholder.jpg" alt="Imagen del inmueble">
+            </div>
 
-            </ul>
-        </div>
+            <!-- Contenido -->
+            <div class="card-contenido">
 
-        <!-- Navegación -->
-        <div class="links">
+                <h2 th:text="${inmueble.direccion}">Direccion</h2>
 
-            <a th:href="@{/homePropietario}">
-                <button type="button">Volver</button>
-            </a>
+                <p class="precio">
+                    <span th:text="${inmueble.precio_noche}"></span> € / noche
+                </p>
 
-            <a th:href="@{/registrarInmueble}">
-                <button type="button">Registrar nuevo inmueble</button>
-            </a>
+                <!-- Acciones -->
+                <div class="acciones">
+
+                    <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
+                        <button type="button">Añadir fechas</button>
+                    </a>
+
+                    <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
+                        <button type="button">Ver reservas</button>
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
+
+    <!-- Navegacion -->
+    <div class="links">
+
+        <a th:href="@{/homePropietario}">
+            <button type="button">Volver</button>
+        </a>
+
+        <a th:href="@{/registrarInmueble}">
+            <button type="button">Registrar nuevo inmueble</button>
+        </a>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT SLIDESHOW -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
 
 </body>
 </html>

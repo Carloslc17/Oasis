@@ -30,7 +30,7 @@ public class VentanaBusqueda {
 	// Buscar inmuebles
 
 	@PreAuthorize("hasRole('INQUILINO')")
-    @PostMapping("/buscarInmuebles")
+    @PostMapping("/busqueda/resultados")
     public String buscarInmuebles(@RequestParam LocalDate fechaInicio, @RequestParam LocalDate fechaFin,
                                  @RequestParam(required = false) Boolean directa,  @RequestParam(required = false) PoliticaCancelacion politica, Model model) {
     	

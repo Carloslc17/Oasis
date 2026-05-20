@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Reservas pendientes</title>
 
-    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/base.css">
 </head>
 
 <body>
@@ -47,9 +47,7 @@
 					<span th:text= "${sol.fechaFin}"> </span>
                 </p>
 
-                <form th:action=
-                      "@{/aceptarReserva}"
-                      method="post">
+                <form th:action="@{/aceptarReserva}" method="post">
 
                     <input type="hidden" name="idSolicitud" th:value="${sol.id}">
 

@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import es.uclm.OasisProject.domain.controllers.GestorPagos;
+import es.uclm.OasisProject.domain.entities.Disponibilidad;
 import es.uclm.OasisProject.domain.entities.MetodoPago;
+import es.uclm.OasisProject.domain.entities.Pago;
+import es.uclm.OasisProject.persistence.DisponibilidadDAO;
 
 @Controller
 public class VentanaPago {
@@ -17,11 +20,17 @@ public class VentanaPago {
 	@Autowired 
 	private GestorPagos gestorPagos;
 	
+	@Autowired 
+	private DisponibilidadDAO disponibilidadDAO;
+	
 	@PreAuthorize("hasRole('INQUILINO')")
 	@GetMapping("/completarPago")
     public String mostrarFormularioPago(@RequestParam int idDisponibilidad, Model model) {
+		
+		Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
 
-        model.addAttribute("idDisponibilidad", idDisponibilidad);
+        model.addAttribute("disponibilidad", disponibilidad);
+        model.addAttribute("pago", new Pago());
 
         return "FormularioPago";
     }
