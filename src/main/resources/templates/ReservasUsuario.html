@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Mis reservas</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/inmuebles.css">
+
+</head>
+
+<body class="fondo-estatico">
+
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
+
+</div>
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
+
+<!-- CONTENIDO -->
+
+<div class="container">
+
+    <h1>Mis reservas</h1>
+
+    <hr class="line">
+
+    <!-- VACIO -->
+
+    <div th:if="${#lists.isEmpty(reservas)}"
+         class="empty-state">
+
+        <p>No tienes reservas realizadas.</p>
+
+    </div>
+
+    <!-- RESERVAS -->
+
+    <div th:if="${!#lists.isEmpty(reservas)}"
+         class="grid-inmuebles">
+
+        <div th:each="reserva : ${reservas}"
+             class="card-inmueble">
+
+            <!-- IMAGEN -->
+
+            <div class="card-imagen">
+
+                <img src="/img/inmueble-placeholder.jpg"
+                     alt="Imagen inmueble">
+
+            </div>
+
+            <!-- CONTENIDO -->
+
+            <div class="card-contenido">
+
+                <!-- DIRECCION -->
+
+                <h2 th:text="${reserva.inmueble.direccion}">
+                    Direccion
+                </h2>
+
+                <!-- PRECIO -->
+
+				<p class="precio">
+
+				    <span th:text="${reserva.inmueble.precio_noche}">
+				    </span>
+
+				    €/noche
+
+				</p>
+
+                <!-- ESTANCIA -->
+
+                <p>
+
+                    <strong>Estancia:</strong>
+
+                    <span th:text="${reserva.fechaInicio}">
+                    </span>
+
+                    -
+
+                    <span th:text="${reserva.fechaFin}">
+                    </span>
+
+                </p>
+
+                <!-- PAGO -->
+
+                <p>
+
+                    <strong>Estado pago:</strong>
+
+                    <span th:if="${reserva.pago != null}">
+                        Pagado
+                    </span>
+
+                    <span th:if="${reserva.pago == null}">
+                        Pendiente
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LINKS -->
+
+    <div class="links">
+
+        <a th:href="@{/homeInquilino}">
+
+            <button type="button">
+                Volver
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.uclm.OasisProject.domain.controllers.GestorReservas;
 import es.uclm.OasisProject.domain.entities.Disponibilidad;
+import es.uclm.OasisProject.domain.entities.Reserva;
 import es.uclm.OasisProject.persistence.*;
 
 @Controller
@@ -60,4 +63,16 @@ public class VentanaReservas {
         return "redirect:/homeInquilino";
     }
 
+    @PreAuthorize("hasRole('INQUILINO')")
+    @GetMapping("/misReservas")
+    public String mostrarReservas(Model model, Principal principal) {
+
+        String login = principal.getName();
+
+        List<Reserva> reservas = gestorReservas.getReservas(login);
+
+        model.addAttribute("reservas", reservas);
+
+        return "ReservasUsuario";
+    }
 }
