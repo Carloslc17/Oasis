@@ -3,6 +3,7 @@ package es.uclm.OasisProject.presentation;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -67,5 +68,18 @@ public class VentanaBusqueda {
         }
 
         return "redirect:/busqueda";
+    }
+    
+    @PreAuthorize("hasRole('INQUILINO')")
+    @GetMapping("/favoritos")
+    public String verFavoritos(Principal principal, Model model) {
+    	
+    	String login = principal.getName();
+
+        Set <Inmueble> listaDeseos = gestorBusquedas.getLista(login);
+
+        model.addAttribute("favoritos", listaDeseos);
+
+        return "Favoritos";
     }
 }

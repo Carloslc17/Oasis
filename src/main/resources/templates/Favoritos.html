@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis favoritos</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/inmuebles.css">
+</head>
+
+<body class="fondo-estatico">
+
+<!-- TOPBAR -->
+<header class="topbar">
+
+    <div class="logo-section">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Oasis</span>
+    </div>
+
+</header>
+
+<!-- WRAPPER -->
+<div class="page-wrapper">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="results-header">
+
+            <div>
+                <h1>Mis favoritos</h1>
+
+                <p>
+                    Tus inmuebles guardados
+                </p>
+            </div>
+
+        </div>
+
+        <hr class="line">
+
+        <!-- EMPTY -->
+        <div th:if="${#lists.isEmpty(favoritos)}"
+             class="empty-state">
+
+            <p>
+                Todavía no tienes inmuebles favoritos.
+            </p>
+
+        </div>
+
+        <!-- GRID -->
+        <div th:if="${!#lists.isEmpty(favoritos)}"
+             class="grid-inmuebles">
+
+            <!-- CARD -->
+            <div th:each="inmueble : ${favoritos}"
+                 class="card-inmueble">
+
+                <!-- IMAGEN -->
+                <div class="card-imagen">
+
+                    <img src="/img/inmueble-placeholder.jpg"
+                         alt="Imagen inmueble">
+
+                </div>
+
+                <!-- CONTENIDO -->
+                <div class="card-contenido">
+
+                    <!-- DIRECCION -->
+                    <h2 th:text="${inmueble.direccion}">
+                        Direccion
+                    </h2>
+
+                    <!-- PRECIO -->
+                    <p class="precio">
+
+                        <span th:text="${inmueble.precio_noche}">
+                        </span>
+
+                        € / noche
+
+                    </p>
+
+                    <!-- DISPONIBILIDADES -->
+                    <div class="disponibilidades">
+
+                        <div th:each="disp : ${inmueble.disponibilidades}"
+                             class="disponibilidad-card">
+
+                            <p>
+
+                                <strong>Disponible:</strong>
+
+                                <span th:text="${disp.fechaInicio}">
+                                </span>
+
+                                -
+
+                                <span th:text="${disp.fechaFin}">
+                                </span>
+
+                            </p>
+
+                            <p>
+
+                                <strong>Politica:</strong>
+
+                                <span th:text="${disp.politicaCancelacion}">
+                                </span>
+
+                            </p>
+
+                            <!-- BOTON RESERVA -->
+                            <form th:action="@{/reservarInmueble}"
+                                  method="get">
+
+                                <input type="hidden"
+                                       name="idDisponibilidad"
+                                       th:value="${disp.id}">
+
+                                <button type="submit">
+
+                                    <span th:if="${disp.directa}">
+                                        Reservar ahora
+                                    </span>
+
+                                    <span th:unless="${disp.directa}">
+                                        Solicitar reserva
+                                    </span>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LINKS -->
+        <div class="links">
+
+            <a th:href="@{/homeInquilino}">
+                <button type="button">
+                    Volver
+                </button>
+            </a>
+
+            <a th:href="@{/busqueda}">
+                <button type="button">
+                    Buscar inmuebles
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
