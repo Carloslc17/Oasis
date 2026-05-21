@@ -77,4 +77,12 @@ public class VentanaAltaInmuebles {
 
 	}
 	
+	@PreAuthorize("hasRole('PROPIETARIO')")
+	@PostMapping("/eliminarInmueble")
+	public String eliminarInmueble(@RequestParam int idInmueble) {
+		
+	    gestorInmuebles.eliminarInmueble(idInmueble);
+	    return "redirect:/misInmuebles";
+	}
+	
 }

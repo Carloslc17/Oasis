@@ -94,5 +94,16 @@ public class GestorInmuebles {
 
 	    return true;
 	}
+	
+	// Eliminar inmuebles 
+	public void eliminarInmueble(int idInmueble) {
+
+	    // Las disponibilidades se eliminan automaticamente
+		
+		Inmueble inmueble = inmuebleDAO.select(idInmueble);
+		inmuebleDAO.delete(inmueble);
+	    log.info("Inmueble con id {} eliminado.", idInmueble);
+		
+	}
 
 }

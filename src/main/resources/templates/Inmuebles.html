@@ -62,17 +62,25 @@
                 </p>
 
                 <!-- Acciones -->
-                <div class="acciones">
+				<div class="acciones">
 
-                    <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
-                        <button type="button">Añadir fechas</button>
-                    </a>
+				    <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
+				        <button type="button">Añadir fechas</button>
+				    </a>
 
-                    <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
-                        <button type="button">Ver reservas</button>
-                    </a>
+				    <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
+				        <button type="button">Ver reservas</button>
+				    </a>
 
-                </div>
+				    <form th:action="@{/eliminarInmueble}" method="post">
+
+				        <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
+
+				        <button type="submit" class="btn-eliminar">Eliminar</button>
+
+				    </form>
+
+				</div>
 
             </div>
 
