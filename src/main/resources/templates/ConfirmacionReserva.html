@@ -1,63 +1,129 @@
 <!DOCTYPE html>
-<html lang="es" xmns:th="http://www.thymeleaf.org">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Reservas pendientes</title>
+
+    <title>Confirmar reserva</title>
 
     <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+
 </head>
 
-<body>
+<body class="fondo-estatico">
 
+<!-- TOPBAR -->
 <header class="topbar">
-    <span class="empresa">Oasis</span>
-</header>
 
-<div class="container">
+    <div class="logo-section">
 
-    <h1>Solicitudes pendientes</h1>
-    <hr class="line">
+        <div class="logo-dot"></div>
 
-    <div th:if="${#lists.isEmpty(solicitudes)}">
-        <p>No hay solicitudes pendientes.</p>
+        <span class="logo-text">
+            Oasis
+        </span>
+
     </div>
 
-    <div th:if="${!#lists.isEmpty(solicitudes)}">
+</header>
 
-        <ul class="lista-resultados">
+<!-- CONTENIDO -->
+<div class="page-wrapper">
 
-            <li th:each="sol : ${solicitudes}"
-                class="resultado">
+    <div class="container">
 
-                <p>
-                    <strong>Inmueble:</strong>
-					<span th:text= "${sol.inmueble.direccion}"> </span>
-                </p>
+        <!-- HEADER -->
+        <div class="login-header">
 
-                <p>
-                    <strong>Inquilino:</strong>
-					<span th:text= "${sol.inquilino.nombre}"> </span>
-                </p>
+            <h1>Confirmar solicitud</h1>
 
-                <p>
-                    <strong>Fechas:</strong>
-					<span th:text= "${sol.fechaInicio}"> </span>
-					-
-					<span th:text= "${sol.fechaFin}"> </span>
-                </p>
+            <p>
+                Revisa los datos antes de aceptar
+                la reserva
+            </p>
 
-                <form th:action="@{/aceptarReserva}" method="post">
+        </div>
 
-                    <input type="hidden" name="idSolicitud" th:value="${sol.id}">
+        <hr class="line">
 
-                    <button type="submit"> Aceptar </button>
+        <!-- FORM -->
+        <form th:action="@{/confirmarReserva}"
+              method="post"
+              class="form">
 
-                </form>
+            <!-- ID -->
+            <input type="hidden"
+                   name="idSolicitud"
+                   th:value="${solicitud.id}">
 
-            </li>
+            <!-- INMUEBLE -->
+            <div class="input-group">
 
-        </ul>
+                <label>Inmueble</label>
+
+                <input type="text"
+                       th:value="${solicitud.inmueble.direccion}"
+                       readonly>
+
+            </div>
+
+            <!-- INQUILINO -->
+            <div class="input-group">
+
+                <label>Inquilino</label>
+
+                <input type="text"
+                       th:value="${solicitud.inquilino.nombre}"
+                       readonly>
+
+            </div>
+
+            <!-- FECHA INICIO -->
+            <div class="input-group">
+
+                <label>Fecha inicio</label>
+
+                <input type="text"
+                       th:value="${solicitud.fechaInicio}"
+                       readonly>
+
+            </div>
+
+            <!-- FECHA FIN -->
+            <div class="input-group">
+
+                <label>Fecha fin</label>
+
+                <input type="text"
+                       th:value="${solicitud.fechaFin}"
+                       readonly>
+
+            </div>
+
+            <!-- BOTON -->
+            <button type="submit"
+                    class="login-btn">
+
+                Confirmar reserva
+
+            </button>
+
+        </form>
+
+        <!-- LINKS -->
+        <div class="links">
+
+            <a th:href="@{/reservas}"
+               class="secondary-link">
+
+                Volver
+
+            </a>
+
+        </div>
 
     </div>
 

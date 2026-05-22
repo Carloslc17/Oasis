@@ -1,7 +1,7 @@
 package es.uclm.OasisProject.domain.controllers;
 
+import java.util.Collections;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +33,12 @@ public class GestorNotificaciones {
 		
 		if (usuario == null) {
 	        log.warn("Usuario no encontrado");
-	        return null;
+	        return Collections.emptyList();
 	    }
 		
 		if (!(usuario instanceof Propietario)) {
 			log.warn("El usuario no es propietario");
-			return null;
+			return Collections.emptyList();
 		}
 		
 		Propietario propietario = (Propietario) usuario;
@@ -46,5 +46,9 @@ public class GestorNotificaciones {
 		return solicitudDAO.findByPropietario(propietario);
 	}
 	
+	public SolicitudReserva getSolicitud(int idSolicitud) {
+		SolicitudReserva solicitud = solicitudDAO.select(idSolicitud);
+		return solicitud;
+	}
 
 }

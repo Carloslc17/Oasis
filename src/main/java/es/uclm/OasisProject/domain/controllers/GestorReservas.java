@@ -126,7 +126,7 @@ public class GestorReservas {
     
     public List<Reserva> getReservas(String login) {
 
-        Usuario usuario = usuarioDAO.findByLogin(login);
+    	Usuario usuario = usuarioDAO.findByLogin(login);
 
         if (!(usuario instanceof Inquilino)) {
             return Collections.emptyList();
@@ -135,6 +135,8 @@ public class GestorReservas {
         Inquilino inquilino = (Inquilino) usuario;
 
         return reservaDAO.findByInquilino(inquilino);
+
+        
     }
 
 }
