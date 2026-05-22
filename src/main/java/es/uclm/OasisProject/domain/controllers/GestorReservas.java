@@ -1,5 +1,8 @@
 package es.uclm.OasisProject.domain.controllers;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +96,7 @@ public class GestorReservas {
 		solicitud.setFechaFin(disp.getFechaFin());
 		solicitud.setPoliticaCancelacion(disp.getPoliticaCancelacion());
 		solicitud.setInquilino(inquilino);
-		solicitud.setInmueble(disp.getInmueble());
+		solicitud.setInmueble(disp.getInmueble());;
 		solicitudDAO.insert(solicitud);
 		
 		log.info("Solicitud de reserva creada");
@@ -117,6 +120,23 @@ public class GestorReservas {
         	return false;
         }
     	
+    }
+    
+    // Obtener todas las reservas realizadas por un usuario
+    
+    public List<Reserva> getReservas(String login) {
+
+    	Usuario usuario = usuarioDAO.findByLogin(login);
+
+        if (!(usuario instanceof Inquilino)) {
+            return Collections.emptyList();
+        }
+
+        Inquilino inquilino = (Inquilino) usuario;
+
+        return reservaDAO.findByInquilino(inquilino);
+
+        
     }
 
 }

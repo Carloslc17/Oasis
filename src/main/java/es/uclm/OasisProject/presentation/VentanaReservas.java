@@ -1,6 +1,7 @@
 package es.uclm.OasisProject.presentation;
 
 import java.security.Principal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import es.uclm.OasisProject.domain.controllers.GestorNotificaciones;
 import es.uclm.OasisProject.domain.controllers.GestorReservas;
 import es.uclm.OasisProject.domain.entities.Disponibilidad;
+import es.uclm.OasisProject.domain.entities.Reserva;
+import es.uclm.OasisProject.domain.entities.SolicitudReserva;
 import es.uclm.OasisProject.persistence.*;
 
 @Controller
@@ -21,6 +25,9 @@ public class VentanaReservas {
 
     @Autowired
     private DisponibilidadDAO disponibilidadDAO;
+    
+    @Autowired
+    private GestorNotificaciones gestorNotificaciones;
     
     @PreAuthorize("hasRole('INQUILINO')")
     @GetMapping("/reservarInmueble")
@@ -60,4 +67,30 @@ public class VentanaReservas {
         return "redirect:/homeInquilino";
     }
 
+    @PreAuthorize("hasRole('INQUILINO')")
+    @GetMapping("/misReservas")
+    public String mostrarReservas(Model model, Principal principal) {
+
+        String login = principal.getName();
+
+        List<Reserva> reservas = gestorReservas.getReservas(login);
+
+        model.addAttribute("reservas", reservas);
+
+        return "ReservasUsuario";
+    }
+    
+    @PreAuthorize("hasRole('PROPIETARIO')")
+    @GetMapping("/reservas")
+    public String verSolicitudes(Principal principal, Model model) {
+
+        String login = principal.getName();
+
+        List<SolicitudReserva> solicitudes =  gestorNotificaciones.obtenerSolicitudes(login);
+
+        model.addAttribute("solicitudes", solicitudes);
+
+        return "Solicitudes";
+    }
+    
 }

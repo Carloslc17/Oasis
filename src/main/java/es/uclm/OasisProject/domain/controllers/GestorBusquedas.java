@@ -2,6 +2,8 @@ package es.uclm.OasisProject.domain.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +116,22 @@ public class GestorBusquedas {
 			return true;
 	}
 	
+	public Set<Inmueble> getLista(String login) {
+		
+		Usuario usuario = usuarioDAO.findByLogin(login);
+		
+		if (usuario == null) {
+	        log.warn("El usuario no existe");
+	    }
+		
+		if (!(usuario instanceof Inquilino)) {
+	        log.warn("El usuario no es un inquilino");
+	    }
+		
+		Inquilino inquilino = (Inquilino) usuario;
+		
+		return inquilino.getListaDeseos();
+	}
 	
 
 }

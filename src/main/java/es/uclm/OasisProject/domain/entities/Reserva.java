@@ -11,9 +11,9 @@ public class Reserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_inicio", nullable = false)
 	private LocalDate fechaInicio;
-	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_fin", nullable = false)
 	private LocalDate fechaFin;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "politica_cancelacion", nullable = false)

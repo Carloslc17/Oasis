@@ -19,7 +19,7 @@ public class Inmueble {
 	@JoinColumn(name = "id_propietario", nullable = false)
 	private Propietario Owner;
 	
-	@OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Disponibilidad> disponibilidades;
 
 	public Inmueble(String direccion, double precio_noche) {
