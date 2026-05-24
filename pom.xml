@@ -20,6 +20,7 @@
 
     <properties>
         <java.version>21</java.version>
+        <sonar.projectKey>Oasis</sonar.projectKey>
         <sonar.host.url>http://172.20.48.132:9000/</sonar.host.url>
     </properties>
     
