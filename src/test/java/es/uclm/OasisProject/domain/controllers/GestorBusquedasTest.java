@@ -42,14 +42,13 @@ class GestorBusquedasTest {
 
     @Test
     void buscarInmuebles_fechasInvalidas() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gestor.buscarInmuebles(
-                    LocalDate.of(2025, 1, 10),
-                    LocalDate.of(2025, 1, 1),
-                    true,
-                    null
-            );
-        });
+
+    	LocalDate inicio = LocalDate.of(2025, 1, 10);
+    	LocalDate fin = LocalDate.of(2025, 1, 1);
+
+        assertThrows(IllegalArgumentException.class, 
+        	() -> gestor.buscarInmuebles(inicio, fin, true, null)
+        );
     }
 
     @Test
