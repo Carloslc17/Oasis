@@ -28,7 +28,7 @@ public class GestorReservas {
     @Autowired
     private SolicitudReservaDAO solicitudDAO;
     
-    private final String NO_DISPONIBILIDAD = "Disponibilidad no encontrada";
+    private static final String NO_DISPONIBILIDAD = "Disponibilidad no encontrada";
     
     /*
      * Crear la reserva de inmueble
@@ -98,7 +98,7 @@ public class GestorReservas {
 		solicitud.setFechaFin(disp.getFechaFin());
 		solicitud.setPoliticaCancelacion(disp.getPoliticaCancelacion());
 		solicitud.setInquilino(inquilino);
-		solicitud.setInmueble(disp.getInmueble());;
+		solicitud.setInmueble(disp.getInmueble());
 		solicitudDAO.insert(solicitud);
 		
 		log.info("Solicitud de reserva creada");
@@ -116,11 +116,7 @@ public class GestorReservas {
 		    return false;
 		}
 		
-		if(disponibilidad.isDirecta()) {
-        	return true;
-        } else { 
-        	return false;
-        }
+		return disponibilidad.isDirecta();
     	
     }
     

@@ -32,7 +32,6 @@ public class Reserva {
 	
 
 	public Reserva(LocalDate fechaInicio, LocalDate fechaFin) {
-		// TODO Auto-generated constructor stub
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-public class InmuebleDAOTest {
+class InmuebleDAOTest {
 	
 
 @InjectMocks
@@ -45,8 +45,8 @@ public class InmuebleDAOTest {
         when(entityManager.createQuery(anyString(), eq(Inmueble.class)))
                 .thenReturn(query);
 
-        when(query.setParameter(eq("inicio"), any())).thenReturn(query);
-        when(query.setParameter(eq("fin"), any())).thenReturn(query);
+        when(query.setParameter("inicio", any())).thenReturn(query);
+        when(query.setParameter("fin", any())).thenReturn(query);
         when(query.getResultList()).thenReturn(List.of(new Inmueble()));
 
         List<Inmueble> result = dao.findDisponibles(
@@ -63,7 +63,7 @@ public class InmuebleDAOTest {
         when(entityManager.createQuery(anyString(), eq(Inmueble.class)))
                 .thenReturn(query);
 
-        when(query.setParameter(eq("prop"), eq(p))).thenReturn(query);
+        when(query.setParameter("prop", eq(p))).thenReturn(query);
         when(query.getResultList()).thenReturn(List.of(new Inmueble()));
 
         List<Inmueble> result = dao.findByPropietario(p);

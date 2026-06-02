@@ -16,7 +16,7 @@ public class VentanaAltaInmuebles {
 	@Autowired
 	private GestorInmuebles gestorInmuebles;
 	
-	private final String PAGINA_INMUEBLES = "redirect:/misInmuebles";
+	private static final String PAGINA_INMUEBLES = "redirect:/misInmuebles";
 	
 	// Formulario para registrar inmueble
 	@PreAuthorize("hasRole('PROPIETARIO')")

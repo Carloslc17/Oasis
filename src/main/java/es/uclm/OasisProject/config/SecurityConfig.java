@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	final String LOGIN = "/login";
+	final static String LOGIN = "/login";
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

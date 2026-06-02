@@ -105,14 +105,10 @@ public class GestorBusquedas {
 			if (!fechas) return false;
 			
 			// FILTRO RESERVA DIRECTA
-			if (directa != null && directa && !disp.isDirecta()) {
-				return false;
-			}
+			if (directa != null && directa && !disp.isDirecta()) return false;
 			
 			// FILTRO POLITICA
-			if (politica != null && disp.getPoliticaCancelacion() != politica) {
-				return false;
-			}
+			if (politica != null && disp.getPoliticaCancelacion() != politica) return false;
 			
 			return true;
 	}
