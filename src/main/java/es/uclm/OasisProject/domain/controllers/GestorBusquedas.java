@@ -2,6 +2,7 @@ package es.uclm.OasisProject.domain.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -122,15 +123,17 @@ public class GestorBusquedas {
 		
 		if (usuario == null) {
 	        log.warn("El usuario no existe");
+	        throw new IllegalArgumentException("Usuario no encontrado");
 	    }
 		
 		if (!(usuario instanceof Inquilino)) {
 	        log.warn("El usuario no es un inquilino");
+	        throw new IllegalArgumentException("El usuario no es inquilino");
 	    }
 		
 		Inquilino inquilino = (Inquilino) usuario;
 		
-		return inquilino.getListaDeseos();
+		return Objects.requireNonNull(inquilino.getListaDeseos());
 	}
 	
 
