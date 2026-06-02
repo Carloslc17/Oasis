@@ -1,4 +1,4 @@
-package es.uclm.OasisProjectpersistence;
+package es.uclm.OasisProject.persistence;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
