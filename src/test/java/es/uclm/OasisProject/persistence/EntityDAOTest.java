@@ -1,4 +1,4 @@
-package es.uclm.OasisProjectpersistence;
+package es.uclm.OasisProject.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

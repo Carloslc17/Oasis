@@ -1,4 +1,4 @@
-package es.uclm.OasisProjectpersistence;
+package es.uclm.OasisProject.persistence;
 
 import es.uclm.OasisProject.domain.entities.Usuario;
 import es.uclm.OasisProject.persistence.GestorBD;
@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 
 public class UsuarioDAOTest {
 	
