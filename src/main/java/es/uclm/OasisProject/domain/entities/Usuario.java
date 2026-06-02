@@ -55,6 +55,10 @@ public abstract class Usuario {
 	public String getDireccion() {
 		return this.direccion;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public void setLogin(String login) {
 		this.login = login;
