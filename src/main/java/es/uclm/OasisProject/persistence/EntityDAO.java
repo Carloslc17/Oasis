@@ -14,7 +14,7 @@ public abstract class EntityDAO<E> {
 
     private final Class<E> entityClass;
 
-    public EntityDAO(Class<E> entityClass) {
+    protected EntityDAO(Class<E> entityClass) {
         this.entityClass = entityClass;
     }
     

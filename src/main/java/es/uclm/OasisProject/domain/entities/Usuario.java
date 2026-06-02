@@ -22,7 +22,7 @@ public abstract class Usuario {
 	@Column(name = "direccion", nullable = false)
 	protected String direccion;
 
-	public Usuario(String login, String password, String nombre, String apellidos, String direccion) {
+	protected Usuario(String login, String password, String nombre, String apellidos, String direccion) {
 		this.login = login;
 		this.password = password;
 		this.nombre = nombre;
@@ -30,7 +30,7 @@ public abstract class Usuario {
 		this.direccion = direccion;
 	}
 	
-	public Usuario() {}
+	protected Usuario() {}
 	
 	public int getId() {
 		return this.id;
