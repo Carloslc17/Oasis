@@ -11,6 +11,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	final String LOGIN = "/login";
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -20,7 +22,7 @@ public class SecurityConfig {
                 // PÚBLICO
                 .requestMatchers(
                     "/",
-                    "/login",
+                    LOGIN,
                     "/doLogin",
                     "/registro",
                     "/registro/propietario",
@@ -47,7 +49,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
-                .loginPage("/login")              // GET 
+                .loginPage(LOGIN)              // GET 
                 .loginProcessingUrl("/doLogin")   // POST 
                 .successHandler((request, response, authentication) -> {
 
@@ -65,7 +67,7 @@ public class SecurityConfig {
             )
             .logout(logout -> logout
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login")
+                    .logoutSuccessUrl(LOGIN)
                     .permitAll()
             );
 
