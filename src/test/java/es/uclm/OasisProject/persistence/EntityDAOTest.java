@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-public class EntityDAOTest {
+class EntityDAOTest {
 	
 	    static class TestEntity {}
 

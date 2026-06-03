@@ -8,7 +8,6 @@ public class SolicitudReserva extends Reserva {
 	private boolean confirmada;
 
 	public SolicitudReserva() {
-		// TODO Auto-generated constructor stub
 		this.confirmada = false;
 	}
 	

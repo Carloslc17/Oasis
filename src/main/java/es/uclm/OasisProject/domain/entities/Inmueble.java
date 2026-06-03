@@ -23,7 +23,6 @@ public class Inmueble {
 	private List<Disponibilidad> disponibilidades;
 
 	public Inmueble(String direccion, double precio_noche) {
-		// TODO Auto-generated constructor stub
 		this.direccion = direccion;
 		this.precio_noche = precio_noche;
 	}
