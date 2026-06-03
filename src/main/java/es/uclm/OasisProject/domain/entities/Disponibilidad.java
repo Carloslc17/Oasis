@@ -27,7 +27,6 @@ public class Disponibilidad {
 	
 
 	public Disponibilidad(LocalDate fechaInicio, LocalDate fechaFin, double precio, boolean directa) {
-		// TODO Auto-generated constructor stub
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.precio = precio;

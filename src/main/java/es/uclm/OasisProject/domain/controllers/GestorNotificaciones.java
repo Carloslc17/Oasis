@@ -47,8 +47,7 @@ public class GestorNotificaciones {
 	}
 	
 	public SolicitudReserva getSolicitud(int idSolicitud) {
-		SolicitudReserva solicitud = solicitudDAO.select(idSolicitud);
-		return solicitud;
+		return solicitudDAO.select(idSolicitud);
 	}
 
 }

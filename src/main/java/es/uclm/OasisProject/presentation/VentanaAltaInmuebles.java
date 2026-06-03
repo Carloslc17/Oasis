@@ -16,6 +16,8 @@ public class VentanaAltaInmuebles {
 	@Autowired
 	private GestorInmuebles gestorInmuebles;
 	
+	private static final String PAGINA_INMUEBLES = "redirect:/misInmuebles";
+	
 	// Formulario para registrar inmueble
 	@PreAuthorize("hasRole('PROPIETARIO')")
 	@GetMapping("/registrarInmueble")
@@ -35,7 +37,7 @@ public class VentanaAltaInmuebles {
 	    boolean exito = gestorInmuebles.registrarInmueble(inmueble, login);
 
 	    model.addAttribute("Exito", exito);
-		return "redirect:/misInmuebles"; // HTML
+		return PAGINA_INMUEBLES; // HTML
 	}
 	
 	// Pagina para que el propietario pueda ver sus inmuebles
@@ -73,7 +75,7 @@ public class VentanaAltaInmuebles {
 	    // Flash attribute aqui
 	    model.addAttribute("Exito", exito);
 
-	    return "redirect:/misInmuebles";
+	    return PAGINA_INMUEBLES;
 
 	}
 	
@@ -82,7 +84,7 @@ public class VentanaAltaInmuebles {
 	public String eliminarInmueble(@RequestParam int idInmueble) {
 		
 	    gestorInmuebles.eliminarInmueble(idInmueble);
-	    return "redirect:/misInmuebles";
+	    return PAGINA_INMUEBLES;
 	}
 	
 }

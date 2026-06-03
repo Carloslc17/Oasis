@@ -17,7 +17,6 @@ public class Pago {
 	private Reserva reserva;
 
 	public Pago(UUID referencia, MetodoPago metodoPago) {
-		// TODO Auto-generated constructor stub
 		this.referencia = referencia;
 		this.metodoPago = metodoPago;
 	}

@@ -10,6 +10,7 @@ import es.uclm.OasisProject.domain.entities.MetodoPago;
 import es.uclm.OasisProject.domain.entities.Pago;
 import es.uclm.OasisProject.domain.entities.Reserva;
 import es.uclm.OasisProject.domain.entities.Usuario;
+import es.uclm.OasisProject.domain.exceptions.DisponibilidadNoEncontradaException;
 import es.uclm.OasisProject.persistence.DisponibilidadDAO;
 import es.uclm.OasisProject.persistence.PagoDAO;
 import es.uclm.OasisProject.persistence.UsuarioDAO;
@@ -40,7 +41,7 @@ public class GestorPagos {
 		Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
 		
 		if (disp == null) {
-		    throw new RuntimeException("Disponibilidad no existe");
+		    throw new DisponibilidadNoEncontradaException("No existe la disponibilidad con id: " + idDisponibilidad);
 		}
 		
 		Usuario usuario = usuarioDAO.findByLogin(login);
