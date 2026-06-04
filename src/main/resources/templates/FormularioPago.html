@@ -105,31 +105,55 @@
 
             <!-- METODO PAGO -->
 
-            <div class="input-group">
+			<div class="input-group">
 
-                <label for="metodoPago">
-                    Método de pago
-                </label>
+			    <label>Método de pago</label>
 
-                <select th:field="*{metodoPago}"
-                        id="metodoPago"
-                        required>
+			    <div class="payment-options">
 
-                    <option value="TARJETA_CREDITO">
-                        Tarjeta de crédito
-                    </option>
+			        <label class="payment-card">
 
-                    <option value="PAYPAL">
-                        PayPal
-                    </option>
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="TARJETA_CREDITO"
+			                   required>
 
-                    <option value="TARJETA_DEBITO">
-                        Tarjeta de débito
-                    </option>
+			            <img src="/img/credit-card.jpg"
+			                 alt="Tarjeta crédito">
 
-                </select>
+			            <span>Tarjeta crédito</span>
 
-            </div>
+			        </label>
+
+			        <label class="payment-card">
+
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="TARJETA_DEBITO">
+
+			            <img src="/img/debit-card.jpg"
+			                 alt="Tarjeta débito">
+
+			            <span>Tarjeta débito</span>
+
+			        </label>
+
+			        <label class="payment-card">
+
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="PAYPAL">
+
+			            <img src="/img/paypal.png"
+			                 alt="PayPal">
+
+			            <span>PayPal</span>
+
+			        </label>
+
+			    </div>
+
+			</div>
 
             <!-- BOTON -->
 
