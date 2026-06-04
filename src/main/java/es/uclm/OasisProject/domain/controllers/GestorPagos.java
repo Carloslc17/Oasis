@@ -4,15 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import es.uclm.OasisProject.domain.entities.Disponibilidad;
 import es.uclm.OasisProject.domain.entities.Inquilino;
 import es.uclm.OasisProject.domain.entities.MetodoPago;
 import es.uclm.OasisProject.domain.entities.Pago;
 import es.uclm.OasisProject.domain.entities.Reserva;
 import es.uclm.OasisProject.domain.entities.Usuario;
-import es.uclm.OasisProject.domain.exceptions.DisponibilidadNoEncontradaException;
-import es.uclm.OasisProject.persistence.DisponibilidadDAO;
 import es.uclm.OasisProject.persistence.PagoDAO;
+import es.uclm.OasisProject.persistence.ReservaDAO;
 import es.uclm.OasisProject.persistence.UsuarioDAO;
 import jakarta.transaction.Transactional;
 
@@ -23,26 +21,16 @@ public class GestorPagos {
 	
 	@Autowired
 	private PagoDAO pagoDAO;
-	
-	@Autowired
-	private GestorReservas gestorReservas;
-	
-	@Autowired
-	private DisponibilidadDAO disponibilidadDAO;
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
+	@Autowired
+	private ReservaDAO reservaDAO;
+	
 	// Realizar pago del inmueble
 	@Transactional
-	public Reserva realizarPago(String login, int idDisponibilidad, MetodoPago metodoPago) {
-		
-
-		Disponibilidad disp = disponibilidadDAO.select(idDisponibilidad);
-		
-		if (disp == null) {
-		    throw new DisponibilidadNoEncontradaException("No existe la disponibilidad con id: " + idDisponibilidad);
-		}
+	public Reserva realizarPago(String login, int idReserva, MetodoPago metodoPago) {
 		
 		Usuario usuario = usuarioDAO.findByLogin(login);
 		
@@ -52,17 +40,30 @@ public class GestorPagos {
 	    }
 		
 		if (!(usuario instanceof Inquilino)) {
-			log.warn("El usuario no es propietario");
+			log.warn("El usuario no es inquilino");
 			return null;
 		}
 		
 		Inquilino inquilino = (Inquilino) usuario;
-	    
-		// Crear reserva
-		Reserva reserva = gestorReservas.crearReserva(inquilino.getId(), idDisponibilidad);
 		
-    	Pago pago = new Pago();
-    	
+		Reserva reserva = reservaDAO.select(idReserva);
+		
+		if (reserva == null) {
+			log.warn("Reserva inexistente");
+			return null;
+		}
+		
+		if (reserva.isPagado() == true) {
+			log.warn("Reserva ya esta pagada");
+			return null;
+		}
+		
+		if(reserva.getInquilino() != inquilino) {
+			log.warn("La reserva no pertenece a ese inquilino");
+			return null;
+		}
+		
+    	Pago pago = new Pago();    	
     	pago.setMetodoPago(metodoPago);
     	pago.setReserva(reserva);
     	

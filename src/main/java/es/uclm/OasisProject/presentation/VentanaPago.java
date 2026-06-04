@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import es.uclm.OasisProject.domain.controllers.GestorPagos;
-import es.uclm.OasisProject.domain.entities.Disponibilidad;
 import es.uclm.OasisProject.domain.entities.MetodoPago;
 import es.uclm.OasisProject.domain.entities.Pago;
-import es.uclm.OasisProject.persistence.DisponibilidadDAO;
+import es.uclm.OasisProject.domain.entities.Reserva;
+import es.uclm.OasisProject.persistence.ReservaDAO;
 
 @Controller
 public class VentanaPago {
@@ -21,15 +21,15 @@ public class VentanaPago {
 	private GestorPagos gestorPagos;
 	
 	@Autowired 
-	private DisponibilidadDAO disponibilidadDAO;
+	private ReservaDAO reservaDAO;
 	
 	@PreAuthorize("hasRole('INQUILINO')")
 	@GetMapping("/completarPago")
-    public String mostrarFormularioPago(@RequestParam int idDisponibilidad, Model model) {
+    public String mostrarFormularioPago(@RequestParam int idReserva, Model model) {
 		
-		Disponibilidad disponibilidad = disponibilidadDAO.select(idDisponibilidad);
+		Reserva reserva = reservaDAO.select(idReserva);
 
-        model.addAttribute("disponibilidad", disponibilidad);
+        model.addAttribute("reserva", reserva);
         model.addAttribute("pago", new Pago());
 
         return "FormularioPago";
@@ -37,7 +37,7 @@ public class VentanaPago {
 	
 	@PreAuthorize("hasRole('INQUILINO')")
 	@PostMapping("/completarPago")
-	public String completarPago(@RequestParam int idDisponibilidad, @RequestParam MetodoPago metodoPago, Principal principal) {
+	public String completarPago(@RequestParam int idReserva, @RequestParam MetodoPago metodoPago, Principal principal) {
 	    
 	    if (principal == null) {
 		    return "redirect:/login";
@@ -45,7 +45,7 @@ public class VentanaPago {
 	    
 	    String login = principal.getName();
 
-	    gestorPagos.realizarPago(login, idDisponibilidad, metodoPago);
+	    gestorPagos.realizarPago(login, idReserva, metodoPago);
 
 	    return "redirect:/homeInquilino";
 	}

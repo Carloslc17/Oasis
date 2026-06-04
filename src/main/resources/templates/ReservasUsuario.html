@@ -124,6 +124,26 @@
                     </span>
 
                 </p>
+				
+
+
+				<div th:if="${reserva.pago == null and reserva.confirmada}">
+
+				    <form th:action="@{/completarPago}" method="get">
+
+				        <input type="hidden"
+				               name="idReserva"
+				               th:value="${reserva.id}" />
+
+				        <button type="submit" class="login-btn">
+				            Pagar
+				        </button>
+
+				    </form>
+
+				</div>
+
+
 
             </div>
 
