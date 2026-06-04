@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Añadir disponibilidad</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+
+</head>
+
+<body class="fondo-estatico">
+
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
+
+</div>
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <div class="logo-section">
+
+        <div class="logo-dot"></div>
+
+        <span class="logo-text">
+            Oasis
+        </span>
+
+    </div>
+
+</header>
+
+<!-- WRAPPER -->
+
+<div class="page-wrapper">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="login-header">
+
+            <h1>Añadir disponibilidad</h1>
+
+            <p>
+                Configura fechas, precio y condiciones
+            </p>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form th:action="@{/anadirDisponibilidad}"
+              method="post"
+              class="form">
+
+            <!-- ID -->
+
+            <input type="hidden"
+                   name="idInmueble"
+                   th:value="${idInmueble}">
+
+            <!-- FECHA INICIO -->
+
+            <div class="input-group">
+
+                <label>Fecha inicio</label>
+
+                <input type="date"
+                       name="fechaInicio"
+                       required>
+
+            </div>
+
+            <!-- FECHA FIN -->
+
+            <div class="input-group">
+
+                <label>Fecha fin</label>
+
+                <input type="date"
+                       name="fechaFin"
+                       required>
+
+            </div>
+
+            <!-- PRECIO -->
+
+            <div class="input-group">
+
+                <label>Precio</label>
+
+                <input type="number"
+                       step="0.01"
+                       name="precio"
+                       placeholder="Ej: 120"
+                       required>
+
+            </div>
+
+            <!-- CHECKBOX -->
+
+            <div class="input-group">
+
+                <label class="checkbox-label">
+
+                    <input type="checkbox"
+                           name="directa">
+
+                    Reserva inmediata
+
+                </label>
+
+            </div>
+
+            <!-- POLITICA -->
+
+            <div class="input-group">
+
+                <label>Política de cancelación</label>
+
+                <select name="politicaCancelacion">
+
+                    <option value="REEMBOLSABLE">
+                        Flexible
+                    </option>
+
+                    <option value="REEMBOLSABLE_50_PER">
+                        Moderada
+                    </option>
+
+                    <option value="NO_REEMBOLSABLE">
+                        Estricta
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <button type="submit"
+                    class="login-btn">
+
+                Guardar disponibilidad
+
+            </button>
+
+        </form>
+
+        <!-- LINKS -->
+
+        <div class="links">
+
+            <a th:href="@{/misInmuebles}"
+               class="secondary-link">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT SLIDESHOW -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
+</body>
+
+</html>

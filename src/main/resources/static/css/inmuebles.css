@@ -1,0 +1,554 @@
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+
+.container {
+
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.22),
+            rgba(255,255,255,0.12)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.30);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(28px);
+
+    -webkit-backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.28);
+
+    overflow: hidden;
+}
+
+
+
+/* =========================
+   TITULO
+========================= */
+
+h1 {
+
+    font-size: 2.1rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.5rem;
+
+    color: black;
+	
+	text-align: center;
+}
+
+.line {
+
+    border: none;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    margin-bottom: 20px;
+
+    background: linear-gradient(90deg, #e8a87c, #d4855a);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    color: rgba(255,255,255,0.75);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid-inmuebles {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 22px;
+
+    margin-top: 20px;
+}
+
+
+
+/* =========================
+   CARD INMUEBLE
+========================= */
+
+.card-inmueble {
+
+    overflow: hidden;
+
+    border-radius: 26px;
+
+    background: rgba(255,255,255,0.92);
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.08);
+
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+/* línea glow superior */
+
+.card-inmueble::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(240,166,118,0.9),
+            transparent
+        );
+}
+
+/* hover */
+
+.card-inmueble:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.14);
+}
+
+/* =========================
+   IMAGEN
+========================= */
+
+.card-imagen {
+
+    width: 100%;
+
+    height: 190px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.08);
+}
+
+.card-imagen img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.card-contenido {
+
+    padding: 16px;
+}
+
+.card-contenido h2 {
+
+    font-size: 1.15rem;
+
+    font-weight: 800;
+
+    color: #000000;
+
+    margin-bottom: 10px;
+
+    text-shadow: none;
+}
+
+.precio {
+
+    color: #d97706;
+
+    font-size: 1rem;
+
+    font-weight: 800;
+
+    margin-bottom: 18px;
+}
+
+/* =========================
+   BOTONES ACCIONES 
+========================= */
+
+.acciones {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.acciones a {
+
+    flex: 1;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   BOTONES PRINCIPALES
+========================= */
+
+.acciones button,
+.disponibilidad-card button {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f59e0b,
+            #ea580c
+        );
+
+    border: none;
+
+    color: white;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 24px rgba(234,88,12,0.22);
+}
+
+/* HOVER */
+
+.acciones button:hover,
+.disponibilidad-card button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 36px rgba(234,88,12,0.30);
+}
+
+/* CLICK */
+
+.acciones button:active,
+.disponibilidad-card button:active {
+
+    transform: scale(0.985);
+}
+
+/* =========================
+   LINKS / BOTONES INFERIORES
+========================= */
+
+.links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-top: 34px;
+
+    flex-wrap: wrap;
+}
+
+.links a {
+
+    text-decoration: none;
+
+    width: auto;
+	
+	width: 100%;
+}
+
+.links button {
+
+    width: 100%;
+
+    padding: 1rem 1.6rem;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    background:
+        linear-gradient(
+            135deg,
+            #1f2937,
+            #111827
+        );
+
+    color: white;
+
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition: all 0.28s ease;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 12px 28px rgba(17,24,39,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* HOVER */
+
+.links button:hover {
+
+    transform: translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2b3548,
+            #1a2233
+        );
+
+    box-shadow:
+        0 18px 38px rgba(17,24,39,0.36);
+}
+
+/* CLICK */
+
+.links button:active {
+
+    transform: scale(0.985);
+}
+
+/* =========================
+   TOPBAR 
+========================= */
+
+.topbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 78px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 42px;
+
+    background: rgba(255,255,255,0.72);
+
+    backdrop-filter: blur(24px);
+
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+
+    box-shadow:
+        0 4px 24px rgba(0,0,0,0.05);
+
+    z-index: 9999;
+}
+
+/* LOGO */
+
+.logo-section {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.logo-dot {
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: #f0a676;
+
+    box-shadow:
+        0 0 18px rgba(240,166,118,0.85),
+        0 0 40px rgba(240,166,118,0.45);
+}
+
+.logo-text {
+
+    color: #111827;
+
+    font-size: 1.45rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+/* =========================
+   BOTON FAVORITOS
+========================= */
+
+.card-contenido .favorito-btn {
+	
+	width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1f2937
+        ) !important;
+
+    color: white !important;
+
+    border: none !important;
+
+    box-shadow:
+        0 10px 24px rgba(17,24,39,0.22);
+}
+
+/* HOVER */
+
+.card-contenido .favorito-btn:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #1f2937,
+            #374151
+        ) !important;
+}
+
+/* CLICK */
+
+.card-contenido .favorito-btn:active {
+
+    transform: scale(0.985);
+}
+
+/* =========================
+   DISPONIBILIDADES
+========================= */
+
+.disponibilidades {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.disponibilidad-card {
+
+    padding: 1rem;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(12px);
+}
+
+.disponibilidad-card p {
+
+    color: rgba(255,255,255,0.82);
+
+    margin-bottom: 8px;
+
+    font-size: 0.9rem;
+}
+
+.disponibilidad-card strong {
+
+    color: white;
+}
+
+.disponibilidad-card button {
+
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+
+/* =========================
+   HEADER RESULTADOS
+========================= */
+
+.results-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 1rem;
+}
+
+.results-header h1 {
+
+    font-size: 2.2rem;
+
+    font-weight: 800;
+
+    color: #1f2937;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 6px;
+}
+
+.results-header p {
+
+    color: #6b7280;
+
+    font-size: 0.95rem;
+}

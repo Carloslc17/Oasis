@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Completar pago</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+
+</head>
+
+<body class="fondo-estatico">
+
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
+
+</div>
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+    <div class="logo-section">
+
+        <div class="logo-dot"></div>
+
+        <span class="logo-text">
+            Oasis
+        </span>
+
+    </div>
+
+</header>
+
+<!-- WRAPPER -->
+
+<div class="page-wrapper">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="login-header">
+
+            <h1>Completar pago</h1>
+
+            <p>
+                Finaliza la reserva seleccionando un método de pago
+            </p>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form th:action="@{/completarPago}"
+              th:object="${pago}"
+              method="post"
+              class="form">
+
+            <!-- ID RESERVA -->
+
+			<input type="hidden"
+			       name="idReserva"
+			       th:value="${reserva.id}">
+
+            <!-- INMUEBLE -->
+
+            <div class="input-group">
+
+                <label>Inmueble</label>
+
+                <input type="text"
+                       th:value="${reserva.inmueble.direccion}"
+                       readonly>
+
+            </div>
+
+			<!-- IMPORTE -->
+
+			<div class="input-group">
+
+			     <label>Precio por noche</label>
+
+			     <input type="text"
+			     	th:value="${reserva.inmueble.precio_noche + '€'}"
+			     	readonly>
+
+			</div>
+
+            <!-- METODO PAGO -->
+
+			<div class="input-group">
+
+			    <label>Método de pago</label>
+
+			    <div class="payment-options">
+
+			        <label class="payment-card">
+
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="TARJETA_CREDITO"
+			                   required>
+
+			            <img src="/img/credit-card.jpg"
+			                 alt="Tarjeta crédito">
+
+			            <span>Tarjeta crédito</span>
+
+			        </label>
+
+			        <label class="payment-card">
+
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="TARJETA_DEBITO">
+
+			            <img src="/img/debit-card.jpg"
+			                 alt="Tarjeta débito">
+
+			            <span>Tarjeta débito</span>
+
+			        </label>
+
+			        <label class="payment-card">
+
+			            <input type="radio"
+			                   name="metodoPago"
+			                   value="PAYPAL">
+
+			            <img src="/img/paypal.png"
+			                 alt="PayPal">
+
+			            <span>PayPal</span>
+
+			        </label>
+
+			    </div>
+
+			</div>
+
+            <!-- BOTON -->
+
+            <button type="submit"
+                    class="login-btn">
+
+                Completar pago
+
+            </button>
+
+        </form>
+
+        <!-- LINKS -->
+
+        <div class="links">
+
+            <a th:href="@{/busqueda}"
+               class="secondary-link">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT SLIDESHOW -->
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
+
+</body>
+
+</html>

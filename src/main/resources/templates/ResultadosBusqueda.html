@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Resultados de búsqueda</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+
+    <link rel="stylesheet" href="/css/inmuebles.css">
+
+</head>
+
+<body class="fondo-estatico">
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="logo-section">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Oasis</span>
+    </div>
+</header>
+
+<!-- CONTENEDOR -->
+
+<hr class="line">
+
+<div class="container">
+	
+	<div class="results-header">
+
+	    <div>
+
+	        <h1>Resultados</h1>
+
+	        <p>
+	            Alojamientos disponibles para tus fechas
+	        </p>
+
+	    </div>
+
+	</div>
+
+    <hr class="line">
+
+    <!-- SIN RESULTADOS -->
+
+    <div th:if="${#lists.isEmpty(resultados)}" class="empty-state">
+
+        <p>
+            No se han encontrado inmuebles disponibles.
+        </p>
+
+    </div>
+
+    <!-- RESULTADOS -->
+
+    <div th:if="${!#lists.isEmpty(resultados)}"
+         class="grid-inmuebles">
+
+        <div th:each="inmueble : ${resultados}"
+             class="card-inmueble">
+
+            <!-- IMAGEN -->
+
+            <div class="card-imagen">
+
+                <img src="/img/inmueble-placeholder.jpg"
+                     alt="Imagen inmueble">
+
+            </div>
+
+            <!-- CONTENIDO -->
+
+            <div class="card-contenido">
+
+                <h2 th:text="${inmueble.direccion}">
+                    Dirección
+                </h2>
+
+                <p class="precio">
+
+                    <span th:text="${inmueble.precio_noche}"></span>
+
+                    € / noche
+
+                </p>
+
+                <!-- FAVORITOS -->
+
+                <form th:action="@{/anadirFavorito}"
+                      method="post">
+
+                    <input type="hidden"
+                           name="idInmueble"
+                           th:value="${inmueble.id}">
+
+					<button type="submit" class="favorito-btn">
+
+                        ❤ Añadir a favoritos
+
+                    </button>
+
+                </form>
+
+                <!-- DISPONIBILIDADES -->
+
+                <div class="disponibilidades">
+
+                    <div th:each="disp : ${inmueble.disponibilidades}"
+                         class="disponibilidad-card">
+
+                        <p>
+
+                            <strong>Disponible:</strong>
+
+                            <span th:text="${disp.fechaInicio}"></span>
+
+                            -
+
+                            <span th:text="${disp.fechaFin}"></span>
+
+                        </p>
+
+                        <p>
+
+                            <strong>Política:</strong>
+
+                            <span th:text="${disp.politicaCancelacion}"></span>
+
+                        </p>
+
+                        <!-- RESERVAR -->
+
+                        <form th:action="@{/reservarInmueble}"
+                              method="get">
+
+                            <input type="hidden"
+                                   name="idDisponibilidad"
+                                   th:value="${disp.id}">
+
+                            <button type="submit">
+
+                                <span th:if="${disp.directa}">
+                                    Reservar ahora
+                                </span>
+
+                                <span th:unless="${disp.directa}">
+                                    Solicitar reserva
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NAVEGACION -->
+
+    <div class="links">
+
+        <a th:href="@{/busqueda}">
+
+            <button type="button">
+                Nueva búsqueda
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

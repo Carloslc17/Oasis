@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda de inmuebles</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+
+<body class="fondo-estatico">
+
+<!-- BACKGROUND SLIDESHOW -->
+<div class="slideshow-bg">
+
+    <div class="slide active" style="background-image: url('/img/casa1.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
+
+</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="logo-section">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Oasis</span>
+    </div>
+</header>
+
+<!-- WRAPPER -->
+<div class="page-wrapper">
+
+    <div class="container">
+
+        <div class="login-header">
+            <h1>Buscar inmuebles</h1>
+            <p>Introduce los filtros para encontrar alojamientos</p>
+        </div>
+
+        <form th:action="@{/busqueda/resultados}" method="post" class="form">
+
+            <div class="input-group">
+                <label>Fecha inicio</label>
+                <input type="date" name="fechaInicio" required>
+            </div>
+
+            <div class="input-group">
+                <label>Fecha fin</label>
+                <input type="date" name="fechaFin" required>
+            </div>
+
+            <div class="input-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="directa">
+                    Solo reserva inmediata
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Política de cancelación</label>
+                <select name="politica">
+                    <option value="">Cualquiera</option>
+                    <option value="REEMBOLSABLE">Reembolsable</option>
+                    <option value="REEMBOLSABLE_50_PER">Reembolsable a medias</option>
+                    <option value="NO_REEMBOLSABLE">No reembolsable</option>
+                </select>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Buscar
+            </button>
+
+        </form>
+
+        <div class="links">
+            <a th:href="@{/homeInquilino}" class="secondary-link">
+                Volver
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 5000);
+</script>
+
+</body>
+</html>
+

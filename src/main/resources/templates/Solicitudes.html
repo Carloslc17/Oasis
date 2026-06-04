@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/inmuebles.css">
+</head>
+
+<body class="fondo-estatico">
+
+<header class="topbar">
+    <span class="empresa">Oasis</span>
+</header>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="results-header">
+        <div>
+            <h1>Solicitudes y reservas</h1>
+            <p>
+                Gestiona las solicitudes realizadas por los inquilinos
+            </p>
+        </div>
+    </div>
+
+    <hr class="line">
+
+    <!-- SIN SOLICITUDES -->
+    <div th:if="${#lists.isEmpty(solicitudes)}"
+         class="empty-state">
+
+        <p>No hay solicitudes pendientes.</p>
+
+    </div>
+
+    <!-- CON SOLICITUDES -->
+    <div th:if="${!#lists.isEmpty(solicitudes)}"
+         class="grid-inmuebles">
+
+        <!-- CARD -->
+        <div th:each="sol : ${solicitudes}"
+             class="card-inmueble">
+
+            <!-- Imagen -->
+            <div class="card-imagen">
+                <img src="/img/inmueble-placeholder.jpg"
+                     alt="Inmueble">
+            </div>
+
+            <!-- CONTENIDO -->
+            <div class="card-contenido">
+
+                <h2 th:text="${sol.inmueble.direccion}">
+                    Dirección
+                </h2>
+
+                <p class="precio">
+                    <span th:text="${sol.inmueble.precio_noche}">
+                    </span>
+                    € / noche
+                </p>
+
+                <!-- INFO -->
+                <div class="disponibilidades">
+
+                    <div class="disponibilidad-card">
+
+                        <p>
+                            <strong>Inquilino:</strong>
+                            <span th:text="${sol.inquilino.login}">
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Fechas:</strong>
+                            <span th:text="${sol.fechaInicio}">
+                            </span>
+                            -
+                            <span th:text="${sol.fechaFin}">
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Estado:</strong>
+
+                            <span th:if="${sol.confirmada}">
+                                Confirmada
+                            </span>
+
+                            <span th:unless="${sol.confirmada}">
+                                Pendiente
+                            </span>
+                        </p>
+
+                        <!-- BOTON -->
+						<form th:action="@{/reservas/solicitud}" method="get">
+
+						    <input type="hidden"
+						           name="idSolicitud"
+						           th:value="${sol.id}">
+
+						    <button type="submit">
+						        Confirmar reserva
+						    </button>
+
+						</form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LINKS -->
+    <div class="links">
+
+        <a th:href="@{/homePropietario}">
+            <button type="button">
+                Volver 
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

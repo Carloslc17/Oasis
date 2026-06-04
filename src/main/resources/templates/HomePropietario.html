@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel Propietario</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/base.css">
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+</head>
+
+<body class="fondo-estatico">
+
+    <!-- TOPBAR -->
+
+    <header class="dashboard-topbar">
+
+        <div class="logo-section">
+
+            <span class="logo-dot"></span>
+
+            <span class="logo-text">Oasis</span>
+
+        </div>
+
+    </header>
+
+    <!-- CONTENIDO -->
+
+    <main class="dashboard-wrapper">
+
+        <section class="dashboard-card">
+
+            <div class="dashboard-header">
+
+                <h1>Bienvenido, Propietario</h1>
+
+                <p>
+                    Gestiona tus propiedades fácilmente
+                </p>
+
+            </div>
+
+            <hr class="line">
+
+            <!-- GRID -->
+
+            <div class="actions-grid">
+
+                <!-- Añadir inmueble -->
+
+                <a th:href="@{/registrarInmueble}" class="action-card">
+
+                    <div class="action-icon">
+                        ➕
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>Añadir inmueble</h3>
+
+                        <p>
+                            Publica una nueva propiedad
+                        </p>
+
+                    </div>
+
+                </a>
+
+                <!-- Mis inmuebles -->
+
+                <a th:href="@{/misInmuebles}" class="action-card">
+
+                    <div class="action-icon">
+                        🏠
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>Mis inmuebles</h3>
+
+                        <p>
+                            Administra tus propiedades
+                        </p>
+
+                    </div>
+
+                </a>
+
+                <!-- Reservas -->
+
+                <a th:href="@{/reservas}" class="action-card">
+
+                    <div class="action-icon">
+                        📅
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>Reservas</h3>
+
+                        <p>
+                            Consulta las reservas activas
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- LOGOUT -->
+
+            <form th:action="@{/logout}" method="post">
+
+                <button type="submit" class="logout-btn">
+                    Cerrar sesión
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
