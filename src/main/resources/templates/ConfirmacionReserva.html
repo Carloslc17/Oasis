@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html lang="es"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Confirmar reserva</title>
+    <title>Confirmar solicitud</title>
 
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/form.css">
-
 </head>
 
 <body class="fondo-estatico">
 
+<!-- SLIDESHOW -->
+
+<div class="slideshow-bg">
+
+    <div class="slide active"
+         style="background-image: url('/img/casa1.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa2.avif');">
+    </div>
+
+    <div class="slide"
+         style="background-image: url('/img/casa3.webp');">
+    </div>
+
+</div>
+
 <!-- TOPBAR -->
+
 <header class="topbar">
 
     <div class="logo-section">
@@ -30,36 +45,30 @@
 
 </header>
 
-<!-- CONTENIDO -->
+<!-- WRAPPER -->
+
 <div class="page-wrapper">
 
     <div class="container">
 
-        <!-- HEADER -->
         <div class="login-header">
 
             <h1>Confirmar solicitud</h1>
 
             <p>
-                Revisa los datos antes de aceptar
-                la reserva
+                Revisa los datos antes de aceptar la reserva
             </p>
 
         </div>
 
-        <hr class="line">
-
-        <!-- FORM -->
         <form th:action="@{/confirmarReserva}"
               method="post"
               class="form">
 
-            <!-- ID -->
             <input type="hidden"
                    name="idSolicitud"
                    th:value="${solicitud.id}">
 
-            <!-- INMUEBLE -->
             <div class="input-group">
 
                 <label>Inmueble</label>
@@ -70,7 +79,6 @@
 
             </div>
 
-            <!-- INQUILINO -->
             <div class="input-group">
 
                 <label>Inquilino</label>
@@ -81,7 +89,6 @@
 
             </div>
 
-            <!-- FECHA INICIO -->
             <div class="input-group">
 
                 <label>Fecha inicio</label>
@@ -92,7 +99,6 @@
 
             </div>
 
-            <!-- FECHA FIN -->
             <div class="input-group">
 
                 <label>Fecha fin</label>
@@ -103,7 +109,16 @@
 
             </div>
 
-            <!-- BOTON -->
+            <div class="input-group">
+
+                <label>Política de cancelación</label>
+
+                <input type="text"
+                       th:value="${solicitud.politicaCancelacion}"
+                       readonly>
+
+            </div>
+
             <button type="submit"
                     class="login-btn">
 
@@ -113,14 +128,14 @@
 
         </form>
 
-        <!-- LINKS -->
         <div class="links">
 
-            <a th:href="@{/reservas}"
-               class="secondary-link">
-
-                Volver
-
+            <a th:href="@{/reservas}">
+                <button type="button"
+                        class="login-btn"
+                        style="margin-top:10px;">
+                    Volver
+                </button>
             </a>
 
         </div>
@@ -128,6 +143,24 @@
     </div>
 
 </div>
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }, 5000);
+
+</script>
 
 </body>
 </html>

@@ -390,3 +390,56 @@ select:focus {
 select {
     cursor: pointer;
 }
+
+/* =========================
+   OPCIONES DE PAGO
+========================= */
+
+.payment-options {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.payment-card {
+    width: 150px;
+    padding: 15px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.payment-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.payment-card span {
+    display: block;
+    font-weight: 600;
+}
+
+.payment-card:hover {
+    transform: translateY(-3px);
+    border-color: #00c896;
+}
+
+.payment-card input {
+    display: none;
+}
+
+.payment-card input:checked + img {
+    filter: drop-shadow(0 0 8px #00c896);
+}
+
+.payment-card:has(input:checked) {
+    border-color: #00c896;
+    background: rgba(0,200,150,0.15);
+}
