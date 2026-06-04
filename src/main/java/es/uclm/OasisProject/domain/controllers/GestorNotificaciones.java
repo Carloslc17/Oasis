@@ -49,5 +49,19 @@ public class GestorNotificaciones {
 	public SolicitudReserva getSolicitud(int idSolicitud) {
 		return solicitudDAO.select(idSolicitud);
 	}
+	
+	public void confirmarReserva(int idSolicitud) {
+
+	    SolicitudReserva solicitud = solicitudDAO.select(idSolicitud);
+
+	    if (solicitud == null) {
+	        log.warn("Solicitud no encontrada");
+	        return;
+	    }
+
+	    solicitud.confirmarReserva();
+	    solicitudDAO.update(solicitud);
+	    log.info("Solicitud {} confirmada", idSolicitud);
+	}
 
 }

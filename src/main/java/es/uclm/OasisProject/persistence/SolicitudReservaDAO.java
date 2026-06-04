@@ -18,7 +18,8 @@ public class SolicitudReservaDAO extends EntityDAO<SolicitudReserva>{
 
 	    return gestorBD.getEntityManager().createQuery(
 	        "SELECT s FROM SolicitudReserva s " +
-	        "WHERE s.inmueble.Owner = :prop",
+	        "WHERE s.inmueble.Owner = :prop"
+	        +"AND s.confirmada = false",
 	        SolicitudReserva.class
 	    )
 	    .setParameter("prop", propietario)
