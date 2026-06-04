@@ -25,20 +25,27 @@ class GestorPagosTest {
 
     @Mock
     private UsuarioDAO usuarioDAO;
+    
+    @Mock 
+    private ReservaDAO reservaDAO;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void realizarPago_disponibilidadNoExiste() {
-        when(disponibilidadDAO.select(1)).thenReturn(null);
 
-        assertThrows(RuntimeException.class, () -> {
-            gestor.realizarPago("user", 1, MetodoPago.TARJETA_CREDITO);
-        });
-    }
+    @Test
+    void realizarPago_reservaNoExiste() {
+
+    	when(usuarioDAO.findByLogin("user")).thenReturn(new Inquilino());
+    	when(reservaDAO.select(1)).thenReturn(null);
+
+    	Reserva result = gestor.realizarPago("user", 1, MetodoPago.TARJETA_CREDITO);
+
+    	assertNull(result);
+    }	
+
 
     @Test
     void realizarPago_usuarioNoExiste() {
@@ -60,18 +67,21 @@ class GestorPagosTest {
         assertNull(result);
     }
 
-    @Test
-    void realizarPago_ok() {
-        Inquilino inq = new Inquilino();
-        inq.setId(1);
 
-        when(disponibilidadDAO.select(1)).thenReturn(new Disponibilidad());
-        when(usuarioDAO.findByLogin("user")).thenReturn(inq);
-        when(gestorReservas.crearReserva(1, 1)).thenReturn(new Reserva());
+	@Test
+	void realizarPago_ok() {
+	
+	    Inquilino inq = new Inquilino();
+	    Reserva reserva = new Reserva();
+	    reserva.setInquilino(inq);
+	
+	    when(usuarioDAO.findByLogin("user")).thenReturn(inq);
+	    when(reservaDAO.select(1)).thenReturn(reserva);
+	
+	    Reserva result = gestor.realizarPago("user", 1, MetodoPago.TARJETA_CREDITO);
+	
+	    assertNotNull(result);
+	    verify(pagoDAO).insert(any(Pago.class));
+	}
 
-        Reserva result = gestor.realizarPago("user", 1, MetodoPago.TARJETA_CREDITO);
-
-        assertNotNull(result);
-        verify(pagoDAO).insert(any());
-    }
 }
