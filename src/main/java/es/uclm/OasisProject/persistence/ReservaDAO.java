@@ -19,7 +19,8 @@ public class ReservaDAO extends EntityDAO<Reserva>{
 	public List<Reserva> findByInquilino(Inquilino inquilino) {
 
 	    TypedQuery<Reserva> query = gestorBD.getEntityManager().createQuery(
-	        "SELECT r FROM Reserva r WHERE r.inquilino = :inquilino",
+	        // DESPUÉS
+"SELECT r FROM Reserva r WHERE r.inquilino = :inquilino AND TYPE(r) = Reserva",
 	        Reserva.class
 	    );
 
