@@ -3,125 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Mis inmuebles</title>
-
     <link rel="stylesheet" href="/css/base.css">
-	<link rel="stylesheet" href="/css/inmuebles.css">
+    <link rel="stylesheet" href="/css/inmuebles.css">
 </head>
-
-<body class="fondo-estatico">
-	
-<!-- SLIDESHOW -->
+<body>
 
 <div class="slideshow-bg">
-
-	   <div class="slide active"
-	         style="background-image: url('/img/casa1.avif');">
-	   </div>
-
-	   <div class="slide"
-	         style="background-image: url('/img/casa2.avif');">
-	   </div>
-
-	   <div class="slide"
-	         style="background-image: url('/img/casa3.webp');">
-	   </div>
-
+    <div class="slide active" style="background-image: url('/img/casa1.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+    <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
 </div>
 
 <header class="topbar">
-    <span class="empresa">Oasis</span>
+    <div class="logo-section">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Oasis</span>
+    </div>
 </header>
 
-<div class="container">
+<div class="page-wrapper">
+    <div class="container container-ancho">
+        
+        <h1 style="color: white; text-shadow: none;">Mis inmuebles</h1>
+        <hr class="line">
 
-    <h1>Mis inmuebles</h1>
-    <hr class="line">
-
-    <!-- Sin inmuebles -->
-    <div th:if="${#lists.isEmpty(inmuebles)}" class="empty-state">
-        <p>No tienes inmuebles registrados.</p>
-    </div>
-
-    <!-- Con inmuebles -->
-    <div th:if="${!#lists.isEmpty(inmuebles)}" class="grid-inmuebles">
-
-        <div th:each="inmueble : ${inmuebles}" class="card-inmueble">
-
-            <!-- Imagen placeholder -->
-            <div class="card-imagen">
-                <img src="/img/inmueble-placeholder.jpg" alt="Imagen del inmueble">
-            </div>
-
-            <!-- Contenido -->
-            <div class="card-contenido">
-
-                <h2 th:text="${inmueble.direccion}">Direccion</h2>
-
-                <p class="precio">
-                    <span th:text="${inmueble.precio_noche}"></span> € / noche
-                </p>
-
-                <!-- Acciones -->
-				<div class="acciones">
-
-				    <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
-				        <button type="button">Añadir fechas</button>
-				    </a>
-
-				    <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
-				        <button type="button">Ver reservas</button>
-				    </a>
-
-				    <form th:action="@{/eliminarInmueble}" method="post">
-
-				        <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
-
-				        <button type="submit" class="btn-eliminar">Eliminar</button>
-
-				    </form>
-
-				</div>
-
-            </div>
-
+        <div th:if="${#lists.isEmpty(inmuebles)}" class="empty-state">
+            <p>No tienes inmuebles registrados.</p>
         </div>
 
+        <div th:if="${!#lists.isEmpty(inmuebles)}" class="grid-inmuebles">
+            <div th:each="inmueble : ${inmuebles}" class="card-inmueble">
+                <div class="card-imagen">
+                    <img src="/img/inmueble-placeholder.jpg" alt="Imagen del inmueble">
+                </div>
+                <div class="card-contenido">
+                    <h2 th:text="${inmueble.direccion}">Direccion</h2>
+                    <p class="precio"><span th:text="${inmueble.precio_noche}"></span> € / noche</p>
+                    
+                    <div class="acciones">
+                        <a th:href="@{/anadirDisponibilidad/{id}(id=${inmueble.id})}">
+                            <button type="button">Añadir fechas</button>
+                        </a>
+                        <a th:href="@{/reservas/{id}(id=${inmueble.id})}">
+                            <button type="button" style="margin-top: 8px;">Ver reservas</button>
+                        </a>
+                        <form th:action="@{/eliminarInmueble}" method="post">
+                            <input type="hidden" name="idInmueble" th:value="${inmueble.id}">
+                            <button type="submit" class="btn-eliminar" style="margin-top: 8px; background: #dc2626; box-shadow: 0 12px 24px rgba(220,38,38,0.22);">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="links" style="margin-top: 20px;">
+            <a th:href="@{/homePropietario}"><button type="button">Volver</button></a>
+            <a th:href="@{/registrarInmueble}"><button type="button">Registrar nuevo inmueble</button></a>
+        </div>
+        
     </div>
-
-    <!-- Navegacion -->
-    <div class="links">
-
-        <a th:href="@{/homePropietario}">
-            <button type="button">Volver</button>
-        </a>
-
-        <a th:href="@{/registrarInmueble}">
-            <button type="button">Registrar nuevo inmueble</button>
-        </a>
-
-    </div>
-
 </div>
 
-<!-- SCRIPT SLIDESHOW -->
-
 <script>
-
     const slides = document.querySelectorAll('.slide');
-
     let current = 0;
-
     setInterval(() => {
-
-        slides[current].classList.remove('active');
-
-        current = (current + 1) % slides.length;
-
-        slides[current].classList.add('active');
-
+        if(slides.length > 0) {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }
     }, 5000);
-
 </script>
-
 </body>
 </html>
