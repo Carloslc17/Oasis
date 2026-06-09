@@ -118,6 +118,10 @@
                     <span th:if="${reserva.pago != null}">
                         Pagado
                     </span>
+					
+					<span th:if="${reserva.pago == null}">
+					    Pendiente
+					</span>
 
                     
 
@@ -125,7 +129,7 @@
 				
 
 
-				<div th:if="${reserva.pago == null}"></div>
+				<div th:if="${reserva.pago == null and reserva.confirmada}">
 
 				    <form th:action="@{/completarPago}" method="get">
 
