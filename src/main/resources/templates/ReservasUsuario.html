@@ -118,10 +118,12 @@
                     <span th:if="${reserva.pago != null}">
                         Pagado
                     </span>
+					
+					<span th:if="${reserva.pago == null}">
+					    Pendiente
+					</span>
 
-                    <span th:if="${reserva.pago == null}">
-                        Pendiente
-                    </span>
+                    
 
                 </p>
 				

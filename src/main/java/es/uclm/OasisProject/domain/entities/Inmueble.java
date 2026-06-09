@@ -17,7 +17,7 @@ public class Inmueble {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_propietario", nullable = false)
-	private Propietario Owner;
+	private Propietario owner;
 	
 	@OneToMany(mappedBy = "inmueble", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Disponibilidad> disponibilidades;
@@ -55,11 +55,11 @@ public class Inmueble {
 	}
 	
 	public Propietario getOwner() {
-		return Owner;
+		return owner;
 	}
 	
 	public void setOwner(Propietario owner) {
-		this.Owner = owner;
+		this.owner = owner;
 	}
 	
 	public List<Disponibilidad> getDisponibilidades() {
