@@ -21,7 +21,24 @@
 
 </head>
 
-<body class="fondo-estatico">
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    setInterval(() => {
+        if(slides.length > 0) {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }
+    }, 5000);
+</script>
+
+<body>
+	<div class="slideshow-bg">
+	    <div class="slide active" style="background-image: url('/img/casa1.avif');"></div>
+	    <div class="slide" style="background-image: url('/img/casa2.avif');"></div>
+	    <div class="slide" style="background-image: url('/img/casa3.webp');"></div>
+	</div>
 
     <!-- TOPBAR -->
 
