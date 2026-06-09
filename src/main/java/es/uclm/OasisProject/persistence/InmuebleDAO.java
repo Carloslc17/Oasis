@@ -1,10 +1,10 @@
 package es.uclm.OasisProject.persistence;
 
+import es.uclm.OasisProject.domain.entities.Inmueble;
+import es.uclm.OasisProject.domain.entities.Propietario;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import es.uclm.OasisProject.domain.entities.Inmueble;
-import es.uclm.OasisProject.domain.entities.Propietario;
 
 @Repository
 public class InmuebleDAO extends EntityDAO<Inmueble>{
@@ -33,7 +33,7 @@ public class InmuebleDAO extends EntityDAO<Inmueble>{
 	public List<Inmueble> findByPropietario(Propietario propietario) {
 	    return gestorBD.getEntityManager()
 	        .createQuery(
-	            "SELECT i FROM Inmueble i WHERE i.Owner = :prop",
+	            "SELECT i FROM Inmueble i WHERE i.owner = :prop",
 	            Inmueble.class
 	        )
 	        .setParameter("prop", propietario)
